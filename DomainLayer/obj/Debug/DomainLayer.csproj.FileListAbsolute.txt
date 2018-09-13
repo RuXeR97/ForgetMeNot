@@ -1,0 +1,6 @@
+C:\Programowanie\ForgetMeNot\DomainLayer\bin\Debug\DomainLayer.dll
+C:\Programowanie\ForgetMeNot\DomainLayer\bin\Debug\DomainLayer.pdb
+C:\Programowanie\ForgetMeNot\DomainLayer\obj\Debug\DomainLayer.csprojAssemblyReference.cache
+C:\Programowanie\ForgetMeNot\DomainLayer\obj\Debug\DomainLayer.csproj.CoreCompileInputs.cache
+C:\Programowanie\ForgetMeNot\DomainLayer\obj\Debug\DomainLayer.dll
+C:\Programowanie\ForgetMeNot\DomainLayer\obj\Debug\DomainLayer.pdb

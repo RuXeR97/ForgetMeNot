@@ -1,0 +1,9 @@
+C:\Programowanie\ForgetMeNot\ServiceLayer\bin\Debug\ServiceLayer.dll
+C:\Programowanie\ForgetMeNot\ServiceLayer\bin\Debug\ServiceLayer.pdb
+C:\Programowanie\ForgetMeNot\ServiceLayer\bin\Debug\DomainLayer.dll
+C:\Programowanie\ForgetMeNot\ServiceLayer\bin\Debug\DomainLayer.pdb
+C:\Programowanie\ForgetMeNot\ServiceLayer\obj\Debug\ServiceLayer.csprojAssemblyReference.cache
+C:\Programowanie\ForgetMeNot\ServiceLayer\obj\Debug\ServiceLayer.csproj.CoreCompileInputs.cache
+C:\Programowanie\ForgetMeNot\ServiceLayer\obj\Debug\ServiceLayer.csproj.CopyComplete
+C:\Programowanie\ForgetMeNot\ServiceLayer\obj\Debug\ServiceLayer.dll
+C:\Programowanie\ForgetMeNot\ServiceLayer\obj\Debug\ServiceLayer.pdb
