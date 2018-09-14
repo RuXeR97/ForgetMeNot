@@ -57,6 +57,7 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
                                 taskModelList.Add(taskModel);
                             }
                         }
+                        sqLiteConnection.Close();
                     }
                 }
                 catch (SQLiteException e)
