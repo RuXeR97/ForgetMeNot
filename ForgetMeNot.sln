@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonComponents", "CommonC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfrastructureLayer", "InfrastructureLayer\InfrastructureLayer.csproj", "{5BC661AA-5CBF-47A2-A1CC-291FAE183836}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentationLayer", "PresentationLayer\PresentationLayer.csproj", "{079B628F-B2FA-4E31-AF83-2B9867BBCCD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{5BC661AA-5CBF-47A2-A1CC-291FAE183836}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BC661AA-5CBF-47A2-A1CC-291FAE183836}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BC661AA-5CBF-47A2-A1CC-291FAE183836}.Release|Any CPU.Build.0 = Release|Any CPU
+		{079B628F-B2FA-4E31-AF83-2B9867BBCCD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{079B628F-B2FA-4E31-AF83-2B9867BBCCD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{079B628F-B2FA-4E31-AF83-2B9867BBCCD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{079B628F-B2FA-4E31-AF83-2B9867BBCCD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaskServicesDataAccessTests.cs" />
     <Compile Include="TaskServicesValidationTests.cs" />
   </ItemGroup>
   <ItemGroup>

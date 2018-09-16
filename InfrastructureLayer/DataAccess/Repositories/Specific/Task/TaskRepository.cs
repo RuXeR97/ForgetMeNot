@@ -34,6 +34,7 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
         }
 
         public IEnumerable<ITaskModel> GetAll()
+
         {
             List<TaskModel> taskModelList = new List<TaskModel>();
 
@@ -57,6 +58,7 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
                                 taskModelList.Add(taskModel);
                             }
                         }
+
                         sqLiteConnection.Close();
                     }
                 }
