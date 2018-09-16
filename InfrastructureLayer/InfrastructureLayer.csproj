@@ -59,6 +59,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\Repositories\Specific\BaseSpecificRepository.cs" />
+    <Compile Include="DataAccess\Repositories\Specific\Task\ITaskRepository.cs" />
     <Compile Include="DataAccess\Repositories\Specific\Task\TaskRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
