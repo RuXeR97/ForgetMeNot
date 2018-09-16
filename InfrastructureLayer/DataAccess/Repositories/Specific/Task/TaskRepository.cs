@@ -1,28 +1,12 @@
 ﻿using DomainLayer.Models.Task;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 
 namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
 {
-    public class TaskRepository
+    public class TaskRepository : BaseSpecificRepository, ITaskRepository
     {
-        private string _connectionString;
-        enum TypeOfExistence
-        {
-            DoesExistInDb,
-            DOesNotExistInDb
-        }
-
-        enum RequestType
-        {
-            Add,
-            Update,
-            Read,
-            Delete,
-            ConfirmAdd,
-            ConfirmDelete
-        }
-
         public TaskRepository()
         {
 
@@ -71,5 +55,34 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
             return taskModelList;
         }
 
+        public void Add(ITaskModel taskModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(ITaskModel taskModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(ITaskModel taskModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteById(int taskModelId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TaskModel GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TaskModel GetByCreationDate(DateTime creationDate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
