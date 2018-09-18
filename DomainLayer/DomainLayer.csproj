@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\MonthTasks\IMonthTasksModel.cs" />
+    <Compile Include="Models\MonthTasks\MonthTasksModel.cs" />
     <Compile Include="Models\Task\ITaskModel.cs" />
     <Compile Include="Models\Task\TaskModel.cs" />
     <Compile Include="Models\User\IUserModel.cs" />

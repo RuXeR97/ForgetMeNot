@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PresentationLayer.Common;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -6,25 +7,29 @@ namespace PresentationLayer
 {
     public partial class MainView : Form, IMainView
     {
-        private DateTime _currentMonth;
+        public event MouseEventHandler MainViewMouseUpEventRaised;
+        public event MouseEventHandler MainViewMouseDownEventRaised;
+        public event MouseEventHandler MainViewMouseMoveEventRaised;
+        public event MouseEventHandler ButtonOfArrowRightMouseDownEventRaised;
+        public event MouseEventHandler ButtonOfArrowLeftMouseDownEventRaised;
 
-        private MouseEventHandler mouseUpEventRaised;
-        private MouseEventHandler mouseDownEventRaised;
-        private MouseEventHandler mouseMoveEventRaised;
-        private PaintEventHandler paintEventRaised;
-        private MouseEventHandler buttonOfArrowMouseDownEventRaised;
+        public event MouseEventHandler ButtonOfDayMouseUpEventRaised;
+        public event MouseEventHandler ButtonOfDayMouseDownEventRaised;
+        public event MouseEventHandler ButtonOfDayMouseMoveEventRaised;
+        public event PaintEventHandler ButtonOfDayPaintEventRaised;
 
-        private Button[] days;
+        private Button[] DayButtons;
+
+
+
         public MainView()
         {
             InitializeComponent();
             SetMenuProperties(true, AutoSizeMode.GrowAndShrink, Color.LimeGreen, Color.LimeGreen,
                DockStyle.Fill, FormBorderStyle.None, false);
-
-            _currentMonth = DateTime.Now;
+            //ButtonHelper.InitializeDayButtons()
 
         }
-
 
         public void ShowMainView()
         {
@@ -36,8 +41,6 @@ namespace PresentationLayer
         {
             this.AutoSize = autoSize;
             this.AutoSizeMode = autoSizeMode;
-            this.BackColor = backColor;
-            this.TransparencyKey = transparencyKeyColor;
             this.Dock = dock;
             this.ShowInTaskbar = showInTaskBar;
             FormBorderStyle = formBorderStyle;
@@ -45,10 +48,12 @@ namespace PresentationLayer
 
         public Button[] InitializeDays(DateTime currentDate, int width, int height, int sizeX, int sizeY)
         {
-            days = DaysInitializationAlgorithm(currentDate, width, height, sizeX, sizeY,
-                mouseUpEventRaised, mouseDownEventRaised, mouseMoveEventRaised, paintEventRaised);
-            Controls.AddRange(days);
-            return days;
+
+            DayButtons = DaysInitializationAlgorithm(currentDate, width, height, sizeX, sizeY,
+                    ButtonOfDayMouseUpEventRaised, ButtonOfDayMouseDownEventRaised, ButtonOfDayMouseMoveEventRaised,
+                    ButtonOfDayPaintEventRaised);
+            Controls.AddRange(DayButtons);
+            return DayButtons;
         }
 
         private Button[] DaysInitializationAlgorithm(DateTime currentDate, int width, int height, int sizeX, int sizeY,
@@ -86,6 +91,12 @@ namespace PresentationLayer
             return days;
         }
 
-
+        private void MainView_Load(object sender, EventArgs e)
+        {
+            foreach (Button button in DayButtons)
+            {
+                ButtonHelper.SetButtonOfDayMouseBehaviour(button);
+            }
+        }
     }
 }

@@ -74,6 +74,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ButtonHelper.cs" />
+    <Compile Include="Common\FormHelper.cs" />
+    <Compile Include="Common\MainFormHelper.cs" />
     <Compile Include="IMainView.cs" />
     <Compile Include="MainView.cs">
       <SubType>Form</SubType>
@@ -94,6 +97,9 @@
       <DependentUpon>ErrorMessageView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\IErrorMessageView.cs" />
+    <EmbeddedResource Include="MainView.resx">
+      <DependentUpon>MainView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -138,6 +144,10 @@
     <ProjectReference Include="..\CommonComponents\CommonComponents.csproj">
       <Project>{5cfc0db0-91c1-4130-ab28-ceee7f913a34}</Project>
       <Name>CommonComponents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DomainLayer\DomainLayer.csproj">
+      <Project>{65f3ccc7-bed5-4e71-957a-9f21a47e8993}</Project>
+      <Name>DomainLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

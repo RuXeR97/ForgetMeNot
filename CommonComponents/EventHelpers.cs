@@ -2,27 +2,23 @@
 
 namespace CommonComponents
 {
-    public class EventHelpers
+    public static class EventHelpers
     {
         public static void RaiseEvent(Object objectRaisingEvent,
-            EventHandler<AccessTypeEventArgs> eventHandlerRaised,
-            AccessTypeEventArgs accessTypeEventArgs)
+                                      EventHandler<AccessTypeEventArgs> eventHandlerRaised,
+                                      AccessTypeEventArgs accessTypeEventArgs)
         {
-            // we check if anyone subscribed for the event
-            if (eventHandlerRaised != null)
+            if (eventHandlerRaised != null) //Check if any subscribed to this event 
             {
-                eventHandlerRaised(objectRaisingEvent, accessTypeEventArgs); // notifies subscribers
+                eventHandlerRaised(objectRaisingEvent, accessTypeEventArgs); // Notify all subscribers 
             }
         }
 
-        public static void RaiseEvent(Object objectRaisingEvent,
-            EventHandler eventHandlerRaised,
-            EventArgs accessTypeEventArgs)
+        public static void RaiseEvent(Object objectRaisingEvent, EventHandler eventHandlerRaised, EventArgs eventArgs)
         {
-            // we check if anyone subscribed for the event
-            if (eventHandlerRaised != null)
+            if (eventHandlerRaised != null) //Check if any subscribed to this event 
             {
-                eventHandlerRaised(objectRaisingEvent, accessTypeEventArgs); // notifies subscribers
+                eventHandlerRaised(objectRaisingEvent, eventArgs); // Notify all subscribers
             }
         }
     }
