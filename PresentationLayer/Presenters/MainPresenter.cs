@@ -1,5 +1,6 @@
 ﻿using DomainLayer.Models.MonthTasks;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Presenters
@@ -17,14 +18,23 @@ namespace PresentationLayer.Presenters
         private readonly int sizeY = 30;
         private const int countOfDaysInWeek = 7;
 
+        private bool dragging = false;
+        private Point dragCursorPoint;
+        private Point dragFormPoint;
+
         public DateTime CurrentDate { get; set; }
 
         public MainPresenter(IMainView mainView)
         {
-            _mainView = mainView;
-            _mainView.InitializeDays(DateTime.Now, width, height + sizeY / 2, sizeX, sizeY);
-
             CurrentDate = DateTime.Now;
+            _mainView = mainView;
+
+            _mainView.InitializeDays(CurrentDate, width, height + sizeY / 2, sizeX, sizeY);
+            _mainView.InitializeLabelsOfDays(countOfDaysInWeek, width, height, sizeX);
+            _mainView.InitializeDateLabels(width, height, sizeX, sizeY, CurrentDate);
+            _mainView.InitializeLeftArrow(sizeX, sizeY);
+            _mainView.InitializeRightArrow(sizeX, sizeY);
+
         }
 
         public IMainView GetMainView()
@@ -34,9 +44,6 @@ namespace PresentationLayer.Presenters
 
         private void SubscribeToEventsSetup()
         {
-            _mainView.MainViewMouseDownEventRaised += new MouseEventHandler(OnMainViewMouseDownEventRaised);
-            _mainView.MainViewMouseUpEventRaised += new MouseEventHandler(OnMainViewMouseUpEventRaised);
-            _mainView.MainViewMouseMoveEventRaised += new MouseEventHandler(OnMainViewMouseMoveEventRaised);
             _mainView.ButtonOfArrowRightMouseDownEventRaised += new MouseEventHandler(OnButtonOfArrowRightMouseDownEventRaised);
             _mainView.ButtonOfArrowLeftMouseDownEventRaised += new MouseEventHandler(OnButtonOfArrowLeftMouseDownEventRaised);
             //_mainView.ButtonOfDayPaintEventRaised += new PaintEventHandler(OnButtonOfDayPaintEventRaised);
@@ -82,17 +89,53 @@ namespace PresentationLayer.Presenters
 
         private void OnMainViewMouseMoveEventRaised(object sender, MouseEventArgs e)
         {
-            throw new NotImplementedException();
+            Form form = sender as Form;
+            if (dragging)
+            {
+                Point dif = Point.Subtract(Cursor.Position, new Size(dragCursorPoint));
+                form.Location = Point.Add(dragFormPoint, new Size(dif));
+            }
         }
 
         private void OnMainViewMouseUpEventRaised(object sender, MouseEventArgs e)
         {
-            throw new NotImplementedException();
+            dragging = false;
         }
 
         private void OnMainViewMouseDownEventRaised(object sender, MouseEventArgs e)
         {
-            throw new NotImplementedException();
+            Form form = sender as Form;
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    {
+
+                        dragging = true;
+                        dragCursorPoint = Cursor.Position;
+                        dragFormPoint = form.Location;
+                    }
+                    break;
+
+                case MouseButtons.Right:
+                    {
+                        ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+
+                        ToolStripMenuItem menuItem = new ToolStripMenuItem("Add task");
+                        menuItem.Name = "Add task";
+                        contextMenuStrip.Items.Add(menuItem);
+                        Button button = sender as Button;
+                        Point screenPoint = button.PointToScreen(new Point(button.Left, button.Bottom));
+                        if (screenPoint.Y + contextMenuStrip.Size.Height > Screen.PrimaryScreen.WorkingArea.Height)
+                        {
+                            contextMenuStrip.Show(button, new Point(0, -contextMenuStrip.Size.Height));
+                        }
+                        else
+                        {
+                            contextMenuStrip.Show(button, new Point(0, button.Height));
+                        }
+                    }
+                    break;
+            }
         }
     }
 }

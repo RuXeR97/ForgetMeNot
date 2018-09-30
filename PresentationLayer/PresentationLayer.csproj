@@ -74,7 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\ButtonHelper.cs" />
+    <Compile Include="Common\MainViewButtonsHelper.cs" />
     <Compile Include="Common\FormHelper.cs" />
     <Compile Include="Common\MainFormHelper.cs" />
     <Compile Include="IMainView.cs" />

@@ -38,6 +38,9 @@
             this.Name = "MainView";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.MainView_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainView_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainView_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainView_MouseUp);
             this.ResumeLayout(false);
 
         }

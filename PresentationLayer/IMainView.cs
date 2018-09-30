@@ -5,12 +5,18 @@ namespace PresentationLayer
 {
     public interface IMainView
     {
-        event MouseEventHandler MainViewMouseUpEventRaised;
-        event MouseEventHandler MainViewMouseDownEventRaised;
-        event MouseEventHandler MainViewMouseMoveEventRaised;
-        event MouseEventHandler ButtonOfArrowRightMouseDownEventRaised;
         event MouseEventHandler ButtonOfArrowLeftMouseDownEventRaised;
+        event MouseEventHandler ButtonOfArrowRightMouseDownEventRaised;
+        event MouseEventHandler ButtonOfDayMouseDownEventRaised;
+        event MouseEventHandler ButtonOfDayMouseMoveEventRaised;
+        event MouseEventHandler ButtonOfDayMouseUpEventRaised;
+        event PaintEventHandler ButtonOfDayPaintEventRaised;
+
+        Label[] InitializeDateLabels(int width, int height, int sizeX, int sizeY, DateTime date);
         Button[] InitializeDays(DateTime currentDate, int width, int height, int sizeX, int sizeY);
+        Label[] InitializeLabelsOfDays(int countOfDaysInWeek, int width, int height, int sizeX);
+        Button InitializeLeftArrow(int sizeX, int sizeY);
+        Button InitializeRightArrow(int sizeX, int sizeY);
         void ShowMainView();
     }
 }
