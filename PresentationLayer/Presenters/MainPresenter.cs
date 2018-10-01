@@ -30,7 +30,6 @@ namespace PresentationLayer.Presenters
             _mainView.InitializeRightArrow(sizeX, sizeY);
 
             SubscribeToEventsSetup();
-
         }
 
         public IMainView GetMainView()
@@ -40,8 +39,8 @@ namespace PresentationLayer.Presenters
 
         private void SubscribeToEventsSetup()
         {
-            _mainView.ButtonOfArrowRightMouseDownEventRaised += new MouseEventHandler(OnButtonOfArrowRightMouseDownEventRaised);
-            //_mainView.ButtonOfArrowLeftMouseDownEventRaised += new EventHandler(OnButtonOfArrowLeftMouseDownEventRaised);
+            _mainView.ButtonOfArrowLeftMouseClickEventRaised += new MouseEventHandler(OnButtonOfArrowLeftMouseDownEventRaised);
+            _mainView.ButtonOfArrowRightMouseClickEventRaised += new MouseEventHandler(OnButtonOfArrowRightMouseDownEventRaised);
         }
 
         private void OnButtonOfDayPaintEventRaised(object sender, PaintEventArgs e)
@@ -51,35 +50,32 @@ namespace PresentationLayer.Presenters
 
         private void OnButtonOfArrowLeftMouseDownEventRaised(object sender, MouseEventArgs e)
         {
-            MonthTaskModel.CurrentDate.AddMonths(-1);
+            CurrentDate = CurrentDate.AddMonths(-1);
+            //MonthTaskModel.CurrentDate.AddMonths(-1);
 
             ReloadButtonOfDays();
-            ReloadYearLabel();
-            ReloadMonthLabel();
+            ReloadMonthAndYearLabels();
         }
 
-        private void ReloadMonthLabel()
-        {
-            throw new NotImplementedException();
-        }
 
-        private void ReloadYearLabel()
+        private void OnButtonOfArrowRightMouseDownEventRaised(object sender, MouseEventArgs e)
         {
-            throw new NotImplementedException();
+            CurrentDate = CurrentDate.AddMonths(1);
+            //MonthTaskModel.CurrentDate.AddMonths(1);
+
+            ReloadButtonOfDays();
+            ReloadMonthAndYearLabels();
+        }
+        private void ReloadMonthAndYearLabels()
+        {
+            // change CurrentDate
+            _mainView.InitializeDateLabels(width, height, sizeX, sizeY, CurrentDate);
         }
 
         private void ReloadButtonOfDays()
         {
-            throw new NotImplementedException();
-        }
-
-        private void OnButtonOfArrowRightMouseDownEventRaised(object sender, EventArgs e)
-        {
-            MonthTaskModel.CurrentDate.AddMonths(1);
-
-            ReloadButtonOfDays();
-            ReloadYearLabel();
-            ReloadMonthLabel();
+            // change CurrentDate
+            _mainView.InitializeDays(CurrentDate, width, height + sizeY / 2, sizeX, sizeY);
         }
     }
 }

@@ -5,8 +5,8 @@ namespace PresentationLayer
 {
     public interface IMainView
     {
-        event MouseEventHandler ButtonOfArrowLeftMouseDownEventRaised;
-        event MouseEventHandler ButtonOfArrowRightMouseDownEventRaised;
+        event MouseEventHandler ButtonOfArrowLeftMouseClickEventRaised;
+        event MouseEventHandler ButtonOfArrowRightMouseClickEventRaised;
 
         Label[] InitializeDateLabels(int width, int height, int sizeX, int sizeY, DateTime date);
         Button[] InitializeDays(DateTime currentDate, int width, int height, int sizeX, int sizeY);

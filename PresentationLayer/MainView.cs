@@ -1,4 +1,5 @@
-﻿using PresentationLayer.Common;
+﻿using CommonComponents;
+using PresentationLayer.Common;
 using System;
 using System.Drawing;
 using System.Globalization;
@@ -10,8 +11,8 @@ namespace PresentationLayer
     public partial class MainView : Form, IMainView
     {
 
-        public event MouseEventHandler ButtonOfArrowLeftMouseDownEventRaised;
-        public event MouseEventHandler ButtonOfArrowRightMouseDownEventRaised;
+        public event MouseEventHandler ButtonOfArrowLeftMouseClickEventRaised;
+        public event MouseEventHandler ButtonOfArrowRightMouseClickEventRaised;
 
         private Button[] DayButtons;
         private Label[] DaysLabels;
@@ -53,15 +54,33 @@ namespace PresentationLayer
 
         public Button[] InitializeDays(DateTime currentDate, int width, int height, int sizeX, int sizeY)
         {
+            // for refreshing purposes
+            if (DayButtons != null)
+            {
+                foreach (var dayButton in DayButtons)
+                {
+                    dayButton.Dispose();
+                }
+            }
 
             DayButtons = DaysInitializationAlgorithm(currentDate, width, height, sizeX, sizeY,
                 ButtonOfDay_MouseDown, ButtonOfDay_MouseUp, ButtonOfDay_MouseMove, ButtonOfDay_Paint);
+
             Controls.AddRange(DayButtons);
             return DayButtons;
         }
 
         public Label[] InitializeLabelsOfDays(int countOfDaysInWeek, int width, int height, int sizeX)
         {
+            // for refreshing purposes
+            if (DaysLabels != null)
+            {
+                foreach (var dayLabel in DaysLabels)
+                {
+                    dayLabel.Dispose();
+                }
+            }
+
             DaysLabels = new Label[countOfDaysInWeek];
             string[] daysOfWeek = new string[] { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
             for (int i = 0; i < countOfDaysInWeek; i++)
@@ -79,6 +98,15 @@ namespace PresentationLayer
 
         public Label[] InitializeDateLabels(int width, int height, int sizeX, int sizeY, DateTime date)
         {
+            // for refreshing purposes
+            if (DateLabels != null)
+            {
+                foreach (var dateLabel in DateLabels)
+                {
+                    dateLabel.Dispose();
+                }
+            }
+
             int amountOfLabels = 2;
             DateLabels = new Label[amountOfLabels];
 
@@ -106,34 +134,34 @@ namespace PresentationLayer
             string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             Bitmap bitmap = (Bitmap)Bitmap.FromFile(path + @"\Resources\leftArrow.png");
 
-            Button leftArrow = new Button
+            ArrowLeftButton = new Button
             {
                 AutoSize = true,
                 Image = bitmap,
                 Size = new Size(sizeX, sizeY / 3),
                 Location = new Point(Math.Abs(sizeX / 2), 10)
             };
-            leftArrow.MouseDown += ButtonOfArrowLeftMouseDownEventRaised;
+            ArrowLeftButton.MouseClick += ArrowLeftButton_Click;
 
-            Controls.Add(leftArrow);
-            return leftArrow;
+            Controls.Add(ArrowLeftButton);
+            return ArrowLeftButton;
         }
         public Button InitializeRightArrow(int sizeX, int sizeY)
         {
             string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             Bitmap bitmap = (Bitmap)Bitmap.FromFile(path + @"\Resources\rightArrow.png");
 
-            Button rightArrow = new Button
+            ArrowRightButton = new Button
             {
                 AutoSize = true,
                 Image = bitmap,
                 Size = new Size(sizeX, sizeY / 3),
-                Location = new Point(Math.Abs(5 * sizeX + sizeX / 2), 10)
+                Location = new Point(Math.Abs(5 * sizeX + sizeX / 2), 10),
             };
-            rightArrow.MouseDown += ButtonOfArrowRightMouseDownEventRaised;
+            ArrowRightButton.MouseClick += ArrowRightButton_Click;
 
-            Controls.Add(rightArrow);
-            return rightArrow;
+            Controls.Add(ArrowRightButton);
+            return ArrowRightButton;
         }
 
         #endregion
@@ -177,7 +205,7 @@ namespace PresentationLayer
 
         #endregion
 
-        #region MainView Events
+        #region MainView's Events
         private void MainView_Load(object sender, EventArgs e)
         {
             foreach (Button button in DayButtons)
@@ -209,7 +237,7 @@ namespace PresentationLayer
 
         #endregion
 
-        #region ButtonOfDay Events
+        #region ButtonOfDays' Events
         private void ButtonOfDay_MouseDown(object sender, MouseEventArgs e)
         {
             switch (e.Button)
@@ -269,6 +297,18 @@ namespace PresentationLayer
                 SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset);
         }
 
+        #endregion
+
+        #region Arrows' Events
+        private void ArrowLeftButton_Click(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseEvent(objectRaisingEvent: this, eventHandlerRaised: ButtonOfArrowLeftMouseClickEventRaised, eventArgs: e);
+        }
+
+        private void ArrowRightButton_Click(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseEvent(objectRaisingEvent: this, eventHandlerRaised: ButtonOfArrowRightMouseClickEventRaised, eventArgs: e);
+        }
         #endregion
     }
 }

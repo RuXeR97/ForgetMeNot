@@ -7,6 +7,8 @@ namespace DomainLayer.Models.MonthTasks
     {
         public DateTime CurrentDate { get; set; }
 
-        public List<Task.TaskModel> Tasks { get; set; }
+        public List<Task.TaskModel> PreviousMonthTasks { get; set; }
+        public List<Task.TaskModel> CurrentMonthTasks { get; set; }
+        public List<Task.TaskModel> NextMonthTasks { get; set; }
     }
 }
