@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace CommonComponents
 {
@@ -15,6 +16,14 @@ namespace CommonComponents
         }
 
         public static void RaiseEvent(Object objectRaisingEvent, EventHandler eventHandlerRaised, EventArgs eventArgs)
+        {
+            if (eventHandlerRaised != null) //Check if any subscribed to this event 
+            {
+                eventHandlerRaised(objectRaisingEvent, eventArgs); // Notify all subscribers
+            }
+        }
+
+        public static void RaiseEvent(Object objectRaisingEvent, MouseEventHandler eventHandlerRaised, MouseEventArgs eventArgs)
         {
             if (eventHandlerRaised != null) //Check if any subscribed to this event 
             {

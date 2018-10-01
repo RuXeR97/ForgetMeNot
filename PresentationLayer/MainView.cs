@@ -9,13 +9,9 @@ namespace PresentationLayer
 {
     public partial class MainView : Form, IMainView
     {
+
         public event MouseEventHandler ButtonOfArrowLeftMouseDownEventRaised;
         public event MouseEventHandler ButtonOfArrowRightMouseDownEventRaised;
-
-        public event MouseEventHandler ButtonOfDayMouseUpEventRaised;
-        public event MouseEventHandler ButtonOfDayMouseDownEventRaised;
-        public event MouseEventHandler ButtonOfDayMouseMoveEventRaised;
-        public event PaintEventHandler ButtonOfDayPaintEventRaised;
 
         private Button[] DayButtons;
         private Label[] DaysLabels;
@@ -59,8 +55,7 @@ namespace PresentationLayer
         {
 
             DayButtons = DaysInitializationAlgorithm(currentDate, width, height, sizeX, sizeY,
-                    ButtonOfDayMouseUpEventRaised, ButtonOfDayMouseDownEventRaised, ButtonOfDayMouseMoveEventRaised,
-                    ButtonOfDayPaintEventRaised);
+                ButtonOfDay_MouseDown, ButtonOfDay_MouseUp, ButtonOfDay_MouseMove, ButtonOfDay_Paint);
             Controls.AddRange(DayButtons);
             return DayButtons;
         }
@@ -146,8 +141,8 @@ namespace PresentationLayer
         #region Private initialization methods
 
         private Button[] DaysInitializationAlgorithm(DateTime currentDate, int width, int height, int sizeX, int sizeY,
-            MouseEventHandler mouseUpHandler, MouseEventHandler mouseDownHandler, MouseEventHandler mouseMoveHandler,
-            PaintEventHandler paintHandler)
+            MouseEventHandler mouseDownHandler, MouseEventHandler mouseUpHandler,
+            MouseEventHandler mouseMoveHandler, PaintEventHandler paintHandler)
         {
             int daysInRow = 7;
             DateTime firstDayDate = new DateTime(currentDate.Year, currentDate.Month, 1);
@@ -171,8 +166,8 @@ namespace PresentationLayer
                 days[i].Text = Convert.ToString(i + 1);
                 days[i].Location = new Point(width, height);
                 days[i].Size = new Size(sizeX, sizeY);
-                days[i].MouseUp += mouseUpHandler;
                 days[i].MouseDown += mouseDownHandler;
+                days[i].MouseUp += mouseUpHandler;
                 days[i].MouseMove += mouseMoveHandler;
                 days[i].Paint += paintHandler;
             }
@@ -180,8 +175,9 @@ namespace PresentationLayer
             return days;
         }
 
-        #endregion 
+        #endregion
 
+        #region MainView Events
         private void MainView_Load(object sender, EventArgs e)
         {
             foreach (Button button in DayButtons)
@@ -205,6 +201,16 @@ namespace PresentationLayer
         }
 
         private void MainView_MouseDown(object sender, MouseEventArgs e)
+        {
+            dragging = true;
+            dragCursorPoint = Cursor.Position;
+            dragFormPoint = this.Location;
+        }
+
+        #endregion
+
+        #region ButtonOfDay Events
+        private void ButtonOfDay_MouseDown(object sender, MouseEventArgs e)
         {
             switch (e.Button)
             {
@@ -238,5 +244,31 @@ namespace PresentationLayer
                     break;
             }
         }
+
+        private void ButtonOfDay_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (dragging)
+            {
+                Point dif = Point.Subtract(Cursor.Position, new Size(dragCursorPoint));
+                this.Location = Point.Add(dragFormPoint, new Size(dif));
+            }
+        }
+
+        private void ButtonOfDay_MouseUp(object sender, MouseEventArgs e)
+        {
+            dragging = false;
+        }
+
+        private void ButtonOfDay_Paint(object sender, PaintEventArgs e)
+        {
+            Button button = sender as Button;
+            ControlPaint.DrawBorder(e.Graphics, button.ClientRectangle,
+                SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+                SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+                SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+                SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset);
+        }
+
+        #endregion
     }
 }
