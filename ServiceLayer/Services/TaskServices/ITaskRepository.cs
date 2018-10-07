@@ -9,9 +9,11 @@ namespace ServiceLayer.Services.TaskServices
         void Add(ITaskModel taskModel);
         void Update(ITaskModel taskModel);
         void Delete(ITaskModel taskModel);
-        IEnumerable<TaskModel> GetAll();
-        TaskModel GetByTimeOfCreation(DateTime date);
-        TaskModel GetById(int id);
+        void DeleteById(int taskModelId);
+        SortedDictionary<DateTime, List<TaskModel>> GetAll();
+        SortedDictionary<DateTime, List<TaskModel>> GetByMonth(DateTime month);
+        ITaskModel GetById(int id);
+        SortedDictionary<DateTime, List<TaskModel>> GetByCreationDate(DateTime creationDate);
 
     }
 }

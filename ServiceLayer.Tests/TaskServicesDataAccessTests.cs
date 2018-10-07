@@ -7,7 +7,7 @@ namespace ServiceLayer.Tests
     public class TaskServicesDataAccessTests
     {
         private string _connectionString;
-        private TaskServices taskServices;
+        private TaskService taskServices;
 
     }
 }

@@ -21,3 +21,5 @@ C:\Programowanie\ForgetMeNot\InfrastructureLayer\obj\Debug\InfrastructureLayer.c
 C:\Programowanie\ForgetMeNot\InfrastructureLayer\obj\Debug\InfrastructureLayer.csproj.CopyComplete
 C:\Programowanie\ForgetMeNot\InfrastructureLayer\obj\Debug\InfrastructureLayer.dll
 C:\Programowanie\ForgetMeNot\InfrastructureLayer\obj\Debug\InfrastructureLayer.pdb
+C:\Programowanie\ForgetMeNot\InfrastructureLayer\bin\Debug\Newtonsoft.Json.dll
+C:\Programowanie\ForgetMeNot\InfrastructureLayer\bin\Debug\Newtonsoft.Json.xml

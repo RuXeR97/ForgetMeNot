@@ -90,6 +90,9 @@
     <Compile Include="Presenters\MainPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\CustomControls\CustomToolTip.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Views\ErrorMessageView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,7 +131,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Presenters\UserControls\" />
     <Folder Include="Views\UserControls\" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +150,14 @@
     <ProjectReference Include="..\DomainLayer\DomainLayer.csproj">
       <Project>{65f3ccc7-bed5-4e71-957a-9f21a47e8993}</Project>
       <Name>DomainLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InfrastructureLayer\InfrastructureLayer.csproj">
+      <Project>{5BC661AA-5CBF-47A2-A1CC-291FAE183836}</Project>
+      <Name>InfrastructureLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj">
+      <Project>{93D1F652-393C-42C6-B617-D460C9C90B95}</Project>
+      <Name>ServiceLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

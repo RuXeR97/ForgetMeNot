@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 namespace ServiceLayer.Services.TaskServices
 {
-    public class TaskServices : ITaskService, ITaskRepository
+    public class TaskService : ITaskService
     {
         private ITaskRepository _taskRepository;
         private IModelDataAnnotationCheck _modelDataAnnotationCheck;
 
-        public TaskServices(ITaskRepository taskRepository, IModelDataAnnotationCheck modelDataAnnotationCheck)
+        public TaskService(ITaskRepository taskRepository, IModelDataAnnotationCheck modelDataAnnotationCheck)
         {
             _taskRepository = taskRepository;
             _modelDataAnnotationCheck = modelDataAnnotationCheck;
@@ -18,32 +18,45 @@ namespace ServiceLayer.Services.TaskServices
 
         public void Add(ITaskModel taskModel)
         {
-            throw new NotImplementedException();
+            // method to validate model
+            _taskRepository.Add(taskModel);
         }
 
         public void Delete(ITaskModel taskModel)
         {
-            throw new NotImplementedException();
+            // method to validate model
+            _taskRepository.Delete(taskModel);
         }
 
-        public IEnumerable<TaskModel> GetAll()
+        public void DeleteById(int taskModelId)
         {
-            throw new NotImplementedException();
+            _taskRepository.DeleteById(taskModelId);
         }
 
-        public TaskModel GetById(int id)
+        public SortedDictionary<DateTime, List<TaskModel>> GetAll()
         {
-            throw new NotImplementedException();
+            return _taskRepository.GetAll();
         }
 
-        public TaskModel GetByTimeOfCreation(DateTime date)
+        public SortedDictionary<DateTime, List<TaskModel>> GetByCreationDate(DateTime creationDate)
         {
-            throw new NotImplementedException();
+            return _taskRepository.GetByCreationDate(creationDate);
+        }
+
+        public ITaskModel GetById(int id)
+        {
+            return _taskRepository.GetById(id);
+        }
+
+        public SortedDictionary<DateTime, List<TaskModel>> GetByMonth(DateTime month)
+        {
+            var taskModels = _taskRepository.GetByMonth(month);
+            return taskModels;
         }
 
         public void Update(ITaskModel taskModel)
         {
-            throw new NotImplementedException();
+            _taskRepository.Update(taskModel);
         }
 
         public void ValidateModel(ITaskModel taskModel)

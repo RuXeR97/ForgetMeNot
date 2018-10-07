@@ -1,6 +1,8 @@
 ﻿using CommonComponents;
 using PresentationLayer.Common;
+using PresentationLayer.Views.CustomControls;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -19,6 +21,7 @@ namespace PresentationLayer
         private Button ArrowLeftButton;
         private Button ArrowRightButton;
         private Label[] DateLabels;
+        private List<string> TasksStrings;
 
         private bool dragging = false;
         private Point dragCursorPoint;
@@ -31,8 +34,6 @@ namespace PresentationLayer
             InitializeComponent();
             SetMenuProperties(true, AutoSizeMode.GrowAndShrink, Color.LimeGreen, Color.LimeGreen,
                DockStyle.Fill, FormBorderStyle.None, false);
-            //ButtonHelper.InitializeDayButtons()
-
         }
 
         public void ShowMainView()
@@ -70,7 +71,7 @@ namespace PresentationLayer
             return DayButtons;
         }
 
-        public Label[] InitializeLabelsOfDays(int countOfDaysInWeek, int width, int height, int sizeX)
+        public Label[] InitializeLabelsOWeekfDays(int countOfDaysInWeek, int width, int height, int sizeX)
         {
             // for refreshing purposes
             if (DaysLabels != null)
@@ -164,6 +165,29 @@ namespace PresentationLayer
             return ArrowRightButton;
         }
 
+        public void InitializeToolTips(string[] text, int height, int width)
+        {
+            if (text == null)
+                return;
+            for (int i = 0; i < text.Length; i++)
+            {
+                ToolTip toolTip = new CustomToolTip(height, width);
+                toolTip.SetToolTip(DayButtons[i], text[i]);
+            }
+        }
+
+        public void HighlightDaysButtonsWithTasks(string[] text)
+        {
+            if (text == null)
+                return;
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (text[i] != null)
+                {
+                    DayButtons[i].BackColor = Color.LightYellow;
+                }
+            }
+        }
         #endregion
 
         #region Private initialization methods
@@ -309,6 +333,7 @@ namespace PresentationLayer
         {
             EventHelpers.RaiseEvent(objectRaisingEvent: this, eventHandlerRaised: ButtonOfArrowRightMouseClickEventRaised, eventArgs: e);
         }
+
         #endregion
     }
 }
