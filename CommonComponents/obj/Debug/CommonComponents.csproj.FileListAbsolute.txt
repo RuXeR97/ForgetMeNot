@@ -3,4 +3,3 @@ C:\Programowanie\ForgetMeNot\CommonComponents\bin\Debug\CommonComponents.pdb
 C:\Programowanie\ForgetMeNot\CommonComponents\obj\Debug\CommonComponents.csproj.CoreCompileInputs.cache
 C:\Programowanie\ForgetMeNot\CommonComponents\obj\Debug\CommonComponents.dll
 C:\Programowanie\ForgetMeNot\CommonComponents\obj\Debug\CommonComponents.pdb
-C:\Programowanie\ForgetMeNot\CommonComponents\obj\Debug\CommonComponents.csprojAssemblyReference.cache
