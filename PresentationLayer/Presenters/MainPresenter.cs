@@ -32,7 +32,7 @@ namespace PresentationLayer.Presenters
             _taskService = new TaskService(new TaskLocalRepository("ruxer"), null);
 
             _monthTaskModel = GetDataFromLocalRepository();
-            tasksArray = GetCurrentMonthTasksToArray();
+            LoadTasksArray();
 
             _mainView.InitializeDays(CurrentDate, width, height + sizeY / 2, sizeX, sizeY);
             _mainView.InitializeLabelsOWeekfDays(countOfDaysInWeek, width, height, sizeX);
@@ -53,41 +53,6 @@ namespace PresentationLayer.Presenters
         {
             _mainView.ButtonOfArrowLeftMouseClickEventRaised += new MouseEventHandler(OnButtonOfArrowLeftMouseDownEventRaised);
             _mainView.ButtonOfArrowRightMouseClickEventRaised += new MouseEventHandler(OnButtonOfArrowRightMouseDownEventRaised);
-        }
-
-        private void OnButtonOfDayPaintEventRaised(object sender, PaintEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void OnButtonOfArrowLeftMouseDownEventRaised(object sender, MouseEventArgs e)
-        {
-            CurrentDate = CurrentDate.AddMonths(-1);
-            //MonthTaskModel.CurrentDate.AddMonths(-1);
-
-            ReloadButtonOfDays();
-            ReloadMonthAndYearLabels();
-        }
-
-
-        private void OnButtonOfArrowRightMouseDownEventRaised(object sender, MouseEventArgs e)
-        {
-            CurrentDate = CurrentDate.AddMonths(1);
-            //MonthTaskModel.CurrentDate.AddMonths(1);
-
-            ReloadButtonOfDays();
-            ReloadMonthAndYearLabels();
-        }
-        private void ReloadMonthAndYearLabels()
-        {
-            // change CurrentDate
-            _mainView.InitializeDateLabels(width, height, sizeX, sizeY, CurrentDate);
-        }
-
-        private void ReloadButtonOfDays()
-        {
-            // change CurrentDate
-            _mainView.InitializeDays(CurrentDate, width, height + sizeY / 2, sizeX, sizeY);
         }
 
         private IMonthTasksModel GetDataFromLocalRepository()
@@ -124,6 +89,63 @@ namespace PresentationLayer.Presenters
             }
             return arrayOfTasks;
         }
+
+        #region Loading methods
+        private void LoadMonthAndYearLabels()
+        {
+            _mainView.InitializeDateLabels(width, height, sizeX, sizeY, _monthTaskModel.CurrentDate);
+        }
+
+        private void LoadButtonsOfDays()
+        {
+            _mainView.InitializeDays(_monthTaskModel.CurrentDate, width, height + sizeY / 2, sizeX, sizeY);
+        }
+
+        private void LoadToolTips()
+        {
+            _mainView.InitializeToolTips(tasksArray);
+        }
+
+        private void LoadTasksArray()
+        {
+            tasksArray = GetCurrentMonthTasksToArray();
+        }
+
+        private void HighlightButtons()
+        {
+            _mainView.HighlightDaysButtonsWithTasks(tasksArray);
+        }
+
+        #endregion
+
+        #region Events
+        private void OnButtonOfDayPaintEventRaised(object sender, PaintEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnButtonOfArrowLeftMouseDownEventRaised(object sender, MouseEventArgs e)
+        {
+            _monthTaskModel.CurrentDate = _monthTaskModel.CurrentDate.AddMonths(-1);
+
+            LoadTasksArray();
+            LoadButtonsOfDays();
+            LoadMonthAndYearLabels();
+            LoadToolTips();
+            HighlightButtons();
+        }
+
+        private void OnButtonOfArrowRightMouseDownEventRaised(object sender, MouseEventArgs e)
+        {
+            _monthTaskModel.CurrentDate = _monthTaskModel.CurrentDate.AddMonths(1);
+
+            LoadTasksArray();
+            LoadButtonsOfDays();
+            LoadMonthAndYearLabels();
+            LoadToolTips();
+            HighlightButtons();
+        }
+        #endregion
     }
 
 }

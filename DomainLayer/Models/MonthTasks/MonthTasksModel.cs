@@ -84,7 +84,7 @@ namespace DomainLayer.Models.MonthTasks
         public Dictionary<DateTime, List<TaskModel>> GetCurrentMonthTasks()
         {
             var currentMonthsTasks = MonthTasks.Select(i => i).
-                Where(j => j.Key.Date.ToShortDateString() == DateTime.Now.ToShortDateString()).
+                Where(j => j.Key.Date.ToShortDateString() == CurrentDate.ToShortDateString()).
                 ToDictionary(i => i.Key, j => j.Value);
             return currentMonthsTasks;
         }
