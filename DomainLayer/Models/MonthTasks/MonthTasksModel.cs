@@ -28,7 +28,22 @@ namespace DomainLayer.Models.MonthTasks
             }
             else
             {
-                //MonthTasks.
+                if (MonthTasks.Any(i => i.Key.ToShortDateString() == task.StartTime.ToShortDateString()))
+                {
+                    foreach (var item in MonthTasks)
+                    {
+                        if (item.Key.ToShortDateString() == task.StartTime.ToShortDateString())
+                        {
+                            item.Value.Add((TaskModel)task);
+                        }
+                    }
+                }
+                else
+                {
+                    MonthTasks.Add(task.StartTime, new List<TaskModel>() { (TaskModel)task });
+                }
+
+
             }
         }
 

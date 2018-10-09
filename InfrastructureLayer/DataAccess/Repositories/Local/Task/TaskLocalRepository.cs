@@ -73,7 +73,8 @@ namespace InfrastructureLayer.DataAccess.Repositories.Local.Task
         public Dictionary<DateTime, List<TaskModel>> GetAll()
         {
             string input = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<Dictionary<DateTime, List<TaskModel>>>(input);
+            var taskModels = JsonConvert.DeserializeObject<Dictionary<DateTime, List<TaskModel>>>(input);
+            return taskModels;
         }
 
         public Dictionary<DateTime, List<TaskModel>> GetByCreationDate(DateTime creationDate)
