@@ -50,8 +50,7 @@ namespace ServiceLayer.Services.TaskServices
 
         public SortedDictionary<DateTime, List<TaskModel>> GetByMonth(DateTime month)
         {
-            var taskModels = _taskRepository.GetByMonth(month);
-            return taskModels;
+            return _taskRepository.GetByMonth(month);
         }
 
         public void Update(ITaskModel taskModel)

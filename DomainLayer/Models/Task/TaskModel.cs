@@ -19,5 +19,18 @@ namespace DomainLayer.Models.Task
         [Required(AllowEmptyStrings = true)]
         [StringLength(100, ErrorMessage = "Task title must be below 100 characters")]
         public string Description { get; set; }
+
+
+
+        public bool Equals(ITaskModel other)
+        {
+            var taskModel = other as TaskModel;
+            return (taskModel.TaskId == this.TaskId &&
+                taskModel.StartTime == this.StartTime &&
+                taskModel.EndTime == this.EndTime &&
+                taskModel.Description == this.Description &&
+                taskModel.Title == this.Title &&
+                taskModel.TimeOfCreation == this.TimeOfCreation);
+        }
     }
 }

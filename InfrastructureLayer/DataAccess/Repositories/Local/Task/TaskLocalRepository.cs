@@ -20,20 +20,43 @@ namespace InfrastructureLayer.DataAccess.Repositories.Local.Task
             path = fileName;
 
 
-            DomainLayer.Models.MonthTasks.IMonthTasksModel mod = new DomainLayer.Models.MonthTasks.MonthTasksModel();
+            //DomainLayer.Models.MonthTasks.IMonthTasksModel mod = new DomainLayer.Models.MonthTasks.MonthTasksModel();
 
-            List<TaskModel> lol = new List<TaskModel>();
-            lol.Add(new TaskModel()
-            {
-                TaskId = 1,
-                Description = "asd",
-                StartTime = DateTime.Now.AddHours(-3),
-                EndTime = DateTime.Now.AddHours(1),
-                Title = "LOLEK"
-            });
-            mod.PreviousMonthTasks = new SortedDictionary<DateTime, List<TaskModel>>();
-            mod.PreviousMonthTasks.Add(DateTime.Now, lol);
-            File.WriteAllText(path, JsonConvert.SerializeObject(mod.PreviousMonthTasks));
+            //List<TaskModel> lol = new List<TaskModel>();
+            //lol.Add(new TaskModel()
+            //{
+            //    TaskId = 1,
+            //    Description = "asd",
+            //    StartTime = DateTime.Now.AddHours(-3),
+            //    EndTime = DateTime.Now.AddHours(1),
+            //    Title = "LOLEK"
+            //});
+            //List<TaskModel> lol2 = new List<TaskModel>();
+            //TaskModel taskModel2 = new TaskModel()
+            //{
+            //    TaskId = 2,
+            //    Description = "Test Description 2",
+            //    StartTime = DateTime.Now.AddHours(-5),
+            //    EndTime = DateTime.Now.AddHours(0),
+            //    Title = "Test Task 2"
+            //};
+
+            //TaskModel taskModel3 = new TaskModel()
+            //{
+            //    TaskId = 3,
+            //    Description = "Test Description 3",
+            //    StartTime = DateTime.Now.AddHours(-3),
+            //    EndTime = DateTime.Now.AddHours(1),
+            //    Title = "Test Task 3"
+            //};
+            //mod.PreviousMonthTasks = new SortedDictionary<DateTime, List<TaskModel>>();
+
+            //if (lol2.)
+            //    mod.PreviousMonthTasks.Add(DateTime.Now, lol);
+            //mod.PreviousMonthTasks.Add(DateTime.Now, lol2);
+            //mod.PreviousMonthTasks.Add(DateTime.Now, lol3);
+
+            //File.WriteAllText(path, JsonConvert.SerializeObject(mod.PreviousMonthTasks, Formatting.Indented));
         }
 
         public void Add(ITaskModel taskModel)

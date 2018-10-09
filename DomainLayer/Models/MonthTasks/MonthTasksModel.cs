@@ -1,6 +1,7 @@
 ﻿using DomainLayer.Models.Task;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DomainLayer.Models.MonthTasks
 {
@@ -8,9 +9,78 @@ namespace DomainLayer.Models.MonthTasks
     {
         public DateTime CurrentDate { get; set; }
 
-        public SortedDictionary<DateTime, List<TaskModel>> PreviousMonthTasks { get; set; }
-        public SortedDictionary<DateTime, List<TaskModel>> CurrentMonthTasks { get; set; }
-        public SortedDictionary<DateTime, List<TaskModel>> NextMonthTasks { get; set; }
+        private SortedDictionary<DateTime, List<TaskModel>> PreviousMonthTasks { get; set; }
+        private SortedDictionary<DateTime, List<TaskModel>> CurrentMonthTasks { get; set; }
+        private SortedDictionary<DateTime, List<TaskModel>> NextMonthTasks { get; set; }
+
+        private SortedDictionary<DateTime, List<TaskModel>> MonthTasks;
+
+        public MonthTasksModel()
+        {
+            MonthTasks = new SortedDictionary<DateTime, List<TaskModel>>();
+        }
+
+        public void Add(ITaskModel task)
+        {
+            if (MonthTasks.Any(i => i.Value.Any(j => j == task)))
+            {
+                // throw new ExistingItemException();
+            }
+            else
+            {
+                //MonthTasks.
+            }
+        }
+
+
+        public void AddRange(SortedDictionary<DateTime, List<TaskModel>> tasksSortedDictionaryOfLists)
+        {
+            foreach (var item in tasksSortedDictionaryOfLists)
+            {
+                MonthTasks.Add(item.Key, item.Value);
+            }
+        }
+
+        public void Delete(ITaskModel task)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int idTask)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteRange(SortedDictionary<DateTime, List<TaskModel>> tasksSortedDictionaryOfLists)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Edit(int idTask, ITaskModel newTask)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Edit(ITaskModel oldTask, ITaskModel newTask)
+        {
+            throw new NotImplementedException();
+        }
+
+        public SortedDictionary<DateTime, List<TaskModel>> GetCurrentMonthTasks()
+        {
+            var currentMonthTasks = MonthTasks.Select(i => i).Where(j => j.Key.Date.ToShortDateString() == DateTime.Now.ToShortDateString());
+            return (SortedDictionary<DateTime, List<TaskModel>>)currentMonthTasks;
+        }
+
+        public SortedDictionary<DateTime, List<TaskModel>> GetNextMonthTasks()
+        {
+            throw new NotImplementedException();
+        }
+
+        public SortedDictionary<DateTime, List<TaskModel>> GetPreviousMonthTasks()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 

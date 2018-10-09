@@ -90,6 +90,19 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
             throw new NotImplementedException();
         }
 
+        SortedDictionary<DateTime, List<TaskModel>> ITaskRepository.GetAll()
+        {
+            throw new NotImplementedException();
+        }
 
+        SortedDictionary<DateTime, List<TaskModel>> ITaskRepository.GetByMonth(DateTime month)
+        {
+            throw new NotImplementedException();
+        }
+
+        SortedDictionary<DateTime, List<TaskModel>> ITaskRepository.GetByCreationDate(DateTime creationDate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

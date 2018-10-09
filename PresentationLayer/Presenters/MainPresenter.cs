@@ -95,9 +95,9 @@ namespace PresentationLayer.Presenters
             IMonthTasksModel _monthTaskModel = new MonthTasksModel();
 
             _monthTaskModel.CurrentDate = CurrentDate;
-            _monthTaskModel.PreviousMonthTasks = _taskService.GetByMonth(_monthTaskModel.CurrentDate.AddMonths(-1));
-            _monthTaskModel.CurrentMonthTasks = _taskService.GetByMonth(_monthTaskModel.CurrentDate);
-            _monthTaskModel.NextMonthTasks = _taskService.GetByMonth(_monthTaskModel.CurrentDate.AddMonths(1));
+
+            SortedDictionary<DateTime, List<TaskModel>> allTasks2 = _taskService.GetAll();
+            _monthTaskModel.AddRange(allTasks2);
 
             return _monthTaskModel;
         }
@@ -110,7 +110,7 @@ namespace PresentationLayer.Presenters
             string finalTask = null;
             for (int i = 0; i < arrayOfTasks.Length; i++)
             {
-                List<TaskModel> taskModelsPerDay = _monthTaskModel.CurrentMonthTasks.
+                List<TaskModel> taskModelsPerDay = _monthTaskModel.GetCurrentMonthTasks().
                     SelectMany(x => x.Value).Where(y => y.EndTime.Day == i).ToList();
                 foreach (var taskModel in taskModelsPerDay)
                 {
