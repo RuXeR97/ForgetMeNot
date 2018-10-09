@@ -32,6 +32,24 @@ namespace PresentationLayer.Presenters
             _taskService = new TaskService(new TaskLocalRepository("ruxer"), null);
 
             _monthTaskModel = GetDataFromLocalRepository();
+
+            //TaskModel taskModel2 = new TaskModel()
+            //{
+            //    TaskId = 2,
+            //    Description = "Test Description 2",
+            //    StartTime = DateTime.Now.AddHours(-5),
+            //    EndTime = DateTime.Now.AddHours(0),
+            //    Title = "Test Task 2"
+            //};
+            //TaskModel taskModel3 = new TaskModel()
+            //{
+            //    TaskId = 3,
+            //    Description = "Test Description 10",
+            //    StartTime = DateTime.Now.AddHours(-5),
+            //    EndTime = DateTime.Now.AddHours(0),
+            //    Title = "Test Task 2"
+            //};
+            //_monthTaskModel.Edit(taskModel2, taskModel3);
             LoadTasksArray();
 
             _mainView.InitializeDays(CurrentDate, width, height + sizeY / 2, sizeX, sizeY);

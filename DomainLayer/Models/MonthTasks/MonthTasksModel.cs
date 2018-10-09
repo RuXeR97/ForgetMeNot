@@ -19,7 +19,7 @@ namespace DomainLayer.Models.MonthTasks
         {
             MonthTasks = new Dictionary<DateTime, List<TaskModel>>();
         }
-
+        // done
         public void Add(ITaskModel task)
         {
             if (MonthTasks.Any(i => i.Value.Any(j => j == task)))
@@ -42,33 +42,15 @@ namespace DomainLayer.Models.MonthTasks
                 {
                     MonthTasks.Add(task.StartTime, new List<TaskModel>() { (TaskModel)task });
                 }
-
-
             }
         }
-
-
+        // done
         public void AddRange(Dictionary<DateTime, List<TaskModel>> tasksDictionaryOfLists)
         {
             foreach (var item in tasksDictionaryOfLists)
             {
                 MonthTasks.Add(item.Key, item.Value);
             }
-        }
-
-        public void Delete(ITaskModel task)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int idTask)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteRange(Dictionary<DateTime, List<TaskModel>> tasksDictionaryOfLists)
-        {
-            throw new NotImplementedException();
         }
 
         public void Edit(int idTask, ITaskModel newTask)
@@ -78,9 +60,83 @@ namespace DomainLayer.Models.MonthTasks
 
         public void Edit(ITaskModel oldTask, ITaskModel newTask)
         {
-            throw new NotImplementedException();
-        }
+            var taskModels = MonthTasks.FirstOrDefault(i => i.Value.Any(j => j.Equals(oldTask)));
+            if (taskModels.Equals(default(KeyValuePair<DateTime, List<TaskModel>>)))
+            {
+                // throw NotExistingException
+            }
+            else
+            {
+                var taskModel = taskModels.Value.FirstOrDefault(j => j.Equals(oldTask));
+                var oldItem = taskModels.Value.FirstOrDefault(i => i.Equals((TaskModel)oldTask));
 
+                if (oldItem == null)
+                {
+                    // throw NotExistingException
+                }
+                else
+                {
+                    oldItem = (TaskModel)newTask;
+                }
+            }
+        }
+        // done
+        public void Delete(ITaskModel task)
+        {
+            var taskModels = MonthTasks.FirstOrDefault(i => i.Value.Any(j => j.Equals(task)));
+            if (!taskModels.Value.Remove((TaskModel)task))
+            {
+                // throw NotExistingException
+            }
+
+            //if (MonthTasks.Any(i => i.Value.Any(j => j == task)))
+            //{
+            //    if (MonthTasks.Any(i => i.Key.ToShortDateString() == task.StartTime.ToShortDateString()))
+            //    {
+            //        foreach (var item in MonthTasks)
+            //        {
+            //            if (item.Key.ToShortDateString() == task.StartTime.ToShortDateString())
+            //            {
+            //                item.Value.Remove((TaskModel)task);
+            //            }
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    // throw NotExistingException
+            //}
+        }
+        // done
+        public void Delete(int taskId)
+        {
+            var taskModels = MonthTasks.FirstOrDefault(i => i.Value.Any(j => j.TaskId == taskId));
+            var taskModel2 = taskModels.Value.FirstOrDefault(j => j.TaskId == taskId);
+            if (!taskModels.Value.Remove(taskModel2))
+            {
+                // throw NotExistingException
+            }
+        }
+        // done
+        public void DeleteRange(Dictionary<DateTime, List<TaskModel>> tasksDictionaryOfLists)
+        {
+            foreach (var item in tasksDictionaryOfLists)
+            {
+                if (!MonthTasks.Remove(item.Key))
+                {
+                    // throw NotExistingException
+                }
+            }
+        }
+        // done
+        public Dictionary<DateTime, List<TaskModel>> GetPreviousMonthTasks()
+        {
+            var currentMonthsTasks = MonthTasks.Select(i => i).
+                Where(j => j.Key.Date.ToShortDateString() == CurrentDate.AddMonths(-1).ToShortDateString()).
+                ToDictionary(i => i.Key, j => j.Value);
+            return currentMonthsTasks;
+        }
+        // done
         public Dictionary<DateTime, List<TaskModel>> GetCurrentMonthTasks()
         {
             var currentMonthsTasks = MonthTasks.Select(i => i).
@@ -88,53 +144,19 @@ namespace DomainLayer.Models.MonthTasks
                 ToDictionary(i => i.Key, j => j.Value);
             return currentMonthsTasks;
         }
-
+        // done
         public Dictionary<DateTime, List<TaskModel>> GetNextMonthTasks()
         {
-            throw new NotImplementedException();
+            var currentMonthsTasks = MonthTasks.Select(i => i).
+                Where(j => j.Key.Date.ToShortDateString() == CurrentDate.AddMonths(1).ToShortDateString()).
+                ToDictionary(i => i.Key, j => j.Value);
+            return currentMonthsTasks;
         }
-
-        public Dictionary<DateTime, List<TaskModel>> GetPreviousMonthTasks()
-        {
-            throw new NotImplementedException();
-        }
-
+        // done
         public Dictionary<DateTime, List<TaskModel>> GetAll()
         {
             return MonthTasks;
         }
 
     }
-
-
-
-    //public string[] GetArrayOfCurrentTasks(DateTime date)
-    //{
-    //    string[] arrayOfStringTasks = null;
-    //    int counter = 0;
-    //    List<Task.TaskModel> Tasks = (List<Task.TaskModel>)CurrentMonthTasks.FindAll(i => i.TimeOfCreation.Month == date.Month).OrderBy(i => i.TimeOfCreation);
-    //    DateTime previousDate = DateTime.MinValue;
-    //    string finalString = null;
-
-    //    foreach (var task in Tasks)
-    //    {
-    //        if (previousDate != task.TimeOfCreation && previousDate != DateTime.MinValue)
-    //        {
-    //            arrayOfStringTasks[counter] += Tasks;
-    //            previousDate = task.TimeOfCreation;
-    //            finalString = null;
-    //        }
-    //        else
-    //        {
-    //            finalString += task.Title;
-    //        }
-    //        counter++;
-    //    }
-    //    if (arrayOfStringTasks == null && counter == 1)
-    //    {
-    //        arrayOfStringTasks[0] = Tasks.First().Title;
-    //    }
-
-    //    return arrayOfStringTasks;
-    //}
 }
