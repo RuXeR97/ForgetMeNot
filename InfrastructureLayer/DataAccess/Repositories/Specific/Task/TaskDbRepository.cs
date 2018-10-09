@@ -18,7 +18,7 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
             _connectionString = connectionString;
         }
 
-        public SortedDictionary<DateTime, List<TaskModel>> GetAll()
+        public Dictionary<DateTime, List<TaskModel>> GetAll()
 
         {
             List<TaskModel> taskModelList = new List<TaskModel>();
@@ -80,27 +80,27 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
             throw new NotImplementedException();
         }
 
-        public SortedDictionary<DateTime, List<TaskModel>> GetByMonth(DateTime month)
+        public Dictionary<DateTime, List<TaskModel>> GetByMonth(DateTime month)
         {
             throw new NotImplementedException();
         }
 
-        public SortedDictionary<DateTime, List<TaskModel>> GetByCreationDate(DateTime creationDate)
+        public Dictionary<DateTime, List<TaskModel>> GetByCreationDate(DateTime creationDate)
         {
             throw new NotImplementedException();
         }
 
-        SortedDictionary<DateTime, List<TaskModel>> ITaskRepository.GetAll()
+        Dictionary<DateTime, List<TaskModel>> ITaskRepository.GetAll()
         {
             throw new NotImplementedException();
         }
 
-        SortedDictionary<DateTime, List<TaskModel>> ITaskRepository.GetByMonth(DateTime month)
+        Dictionary<DateTime, List<TaskModel>> ITaskRepository.GetByMonth(DateTime month)
         {
             throw new NotImplementedException();
         }
 
-        SortedDictionary<DateTime, List<TaskModel>> ITaskRepository.GetByCreationDate(DateTime creationDate)
+        Dictionary<DateTime, List<TaskModel>> ITaskRepository.GetByCreationDate(DateTime creationDate)
         {
             throw new NotImplementedException();
         }

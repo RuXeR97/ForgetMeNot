@@ -20,43 +20,39 @@ namespace InfrastructureLayer.DataAccess.Repositories.Local.Task
             path = fileName;
 
 
-            //DomainLayer.Models.MonthTasks.IMonthTasksModel mod = new DomainLayer.Models.MonthTasks.MonthTasksModel();
+            DomainLayer.Models.MonthTasks.IMonthTasksModel mod = new DomainLayer.Models.MonthTasks.MonthTasksModel();
 
-            //List<TaskModel> lol = new List<TaskModel>();
-            //lol.Add(new TaskModel()
-            //{
-            //    TaskId = 1,
-            //    Description = "asd",
-            //    StartTime = DateTime.Now.AddHours(-3),
-            //    EndTime = DateTime.Now.AddHours(1),
-            //    Title = "LOLEK"
-            //});
-            //List<TaskModel> lol2 = new List<TaskModel>();
-            //TaskModel taskModel2 = new TaskModel()
-            //{
-            //    TaskId = 2,
-            //    Description = "Test Description 2",
-            //    StartTime = DateTime.Now.AddHours(-5),
-            //    EndTime = DateTime.Now.AddHours(0),
-            //    Title = "Test Task 2"
-            //};
+            List<TaskModel> lol = new List<TaskModel>();
+            lol.Add(new TaskModel()
+            {
+                TaskId = 1,
+                Description = "asd",
+                StartTime = DateTime.Now.AddHours(-3),
+                EndTime = DateTime.Now.AddHours(1),
+                Title = "LOLEK"
+            });
+            List<TaskModel> lol2 = new List<TaskModel>();
+            TaskModel taskModel2 = new TaskModel()
+            {
+                TaskId = 2,
+                Description = "Test Description 2",
+                StartTime = DateTime.Now.AddHours(-5),
+                EndTime = DateTime.Now.AddHours(0),
+                Title = "Test Task 2"
+            };
 
-            //TaskModel taskModel3 = new TaskModel()
-            //{
-            //    TaskId = 3,
-            //    Description = "Test Description 3",
-            //    StartTime = DateTime.Now.AddHours(-3),
-            //    EndTime = DateTime.Now.AddHours(1),
-            //    Title = "Test Task 3"
-            //};
-            //mod.PreviousMonthTasks = new SortedDictionary<DateTime, List<TaskModel>>();
+            TaskModel taskModel3 = new TaskModel()
+            {
+                TaskId = 3,
+                Description = "Test Description 3",
+                StartTime = DateTime.Now.AddHours(-3),
+                EndTime = DateTime.Now.AddHours(1),
+                Title = "Test Task 3"
+            };
+            mod.Add(taskModel2);
+            mod.Add(taskModel3);
 
-            //if (lol2.)
-            //    mod.PreviousMonthTasks.Add(DateTime.Now, lol);
-            //mod.PreviousMonthTasks.Add(DateTime.Now, lol2);
-            //mod.PreviousMonthTasks.Add(DateTime.Now, lol3);
-
-            //File.WriteAllText(path, JsonConvert.SerializeObject(mod.PreviousMonthTasks, Formatting.Indented));
+            File.WriteAllText(path, JsonConvert.SerializeObject(mod.GetAll(), Formatting.Indented));
         }
 
         public void Add(ITaskModel taskModel)
@@ -74,18 +70,18 @@ namespace InfrastructureLayer.DataAccess.Repositories.Local.Task
             throw new NotImplementedException();
         }
 
-        public SortedDictionary<DateTime, List<TaskModel>> GetAll()
+        public Dictionary<DateTime, List<TaskModel>> GetAll()
         {
             string input = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<SortedDictionary<DateTime, List<TaskModel>>>(input);
+            return JsonConvert.DeserializeObject<Dictionary<DateTime, List<TaskModel>>>(input);
         }
 
-        public SortedDictionary<DateTime, List<TaskModel>> GetByCreationDate(DateTime creationDate)
+        public Dictionary<DateTime, List<TaskModel>> GetByCreationDate(DateTime creationDate)
         {
             var taskModels = GetAll().Where(i => i.Key.Day == creationDate.Day &&
             i.Key.Month == creationDate.Month &&
             i.Key.Year == creationDate.Year);
-            return (SortedDictionary<DateTime, List<TaskModel>>)taskModels;
+            return (Dictionary<DateTime, List<TaskModel>>)taskModels;
         }
 
         public ITaskModel GetById(int id)
@@ -93,11 +89,11 @@ namespace InfrastructureLayer.DataAccess.Repositories.Local.Task
             return (TaskModel)GetAll().Select(i => i.Value.First(j => j.TaskId == id));
         }
 
-        public SortedDictionary<DateTime, List<TaskModel>> GetByMonth(DateTime date)
+        public Dictionary<DateTime, List<TaskModel>> GetByMonth(DateTime date)
         {
             var taskModels = GetAll();
 
-            var taskModelsReturned = new SortedDictionary<DateTime, List<TaskModel>>();
+            var taskModelsReturned = new Dictionary<DateTime, List<TaskModel>>();
             foreach (var lol in taskModels)
             {
                 taskModelsReturned.Add(lol.Key, lol.Value);

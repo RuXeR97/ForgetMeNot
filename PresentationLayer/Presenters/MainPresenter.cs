@@ -96,7 +96,7 @@ namespace PresentationLayer.Presenters
 
             _monthTaskModel.CurrentDate = CurrentDate;
 
-            SortedDictionary<DateTime, List<TaskModel>> allTasks2 = _taskService.GetAll();
+            Dictionary<DateTime, List<TaskModel>> allTasks2 = _taskService.GetAll();
             _monthTaskModel.AddRange(allTasks2);
 
             return _monthTaskModel;
@@ -112,6 +112,7 @@ namespace PresentationLayer.Presenters
             {
                 List<TaskModel> taskModelsPerDay = _monthTaskModel.GetCurrentMonthTasks().
                     SelectMany(x => x.Value).Where(y => y.EndTime.Day == i).ToList();
+
                 foreach (var taskModel in taskModelsPerDay)
                 {
                     finalTask += taskModel.Title + Environment.NewLine;

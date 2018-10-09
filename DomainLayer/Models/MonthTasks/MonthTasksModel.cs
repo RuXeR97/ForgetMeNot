@@ -9,15 +9,15 @@ namespace DomainLayer.Models.MonthTasks
     {
         public DateTime CurrentDate { get; set; }
 
-        private SortedDictionary<DateTime, List<TaskModel>> PreviousMonthTasks { get; set; }
-        private SortedDictionary<DateTime, List<TaskModel>> CurrentMonthTasks { get; set; }
-        private SortedDictionary<DateTime, List<TaskModel>> NextMonthTasks { get; set; }
+        private Dictionary<DateTime, List<TaskModel>> PreviousMonthTasks { get; set; }
+        private Dictionary<DateTime, List<TaskModel>> CurrentMonthTasks { get; set; }
+        private Dictionary<DateTime, List<TaskModel>> NextMonthTasks { get; set; }
 
-        private SortedDictionary<DateTime, List<TaskModel>> MonthTasks;
+        private Dictionary<DateTime, List<TaskModel>> MonthTasks;
 
         public MonthTasksModel()
         {
-            MonthTasks = new SortedDictionary<DateTime, List<TaskModel>>();
+            MonthTasks = new Dictionary<DateTime, List<TaskModel>>();
         }
 
         public void Add(ITaskModel task)
@@ -33,9 +33,9 @@ namespace DomainLayer.Models.MonthTasks
         }
 
 
-        public void AddRange(SortedDictionary<DateTime, List<TaskModel>> tasksSortedDictionaryOfLists)
+        public void AddRange(Dictionary<DateTime, List<TaskModel>> tasksDictionaryOfLists)
         {
-            foreach (var item in tasksSortedDictionaryOfLists)
+            foreach (var item in tasksDictionaryOfLists)
             {
                 MonthTasks.Add(item.Key, item.Value);
             }
@@ -51,7 +51,7 @@ namespace DomainLayer.Models.MonthTasks
             throw new NotImplementedException();
         }
 
-        public void DeleteRange(SortedDictionary<DateTime, List<TaskModel>> tasksSortedDictionaryOfLists)
+        public void DeleteRange(Dictionary<DateTime, List<TaskModel>> tasksDictionaryOfLists)
         {
             throw new NotImplementedException();
         }
@@ -66,21 +66,29 @@ namespace DomainLayer.Models.MonthTasks
             throw new NotImplementedException();
         }
 
-        public SortedDictionary<DateTime, List<TaskModel>> GetCurrentMonthTasks()
+        public Dictionary<DateTime, List<TaskModel>> GetCurrentMonthTasks()
         {
-            var currentMonthTasks = MonthTasks.Select(i => i).Where(j => j.Key.Date.ToShortDateString() == DateTime.Now.ToShortDateString());
-            return (SortedDictionary<DateTime, List<TaskModel>>)currentMonthTasks;
+            var currentMonthsTasks = MonthTasks.Select(i => i).
+                Where(j => j.Key.Date.ToShortDateString() == DateTime.Now.ToShortDateString()).
+                ToDictionary(i => i.Key, j => j.Value);
+            return currentMonthsTasks;
         }
 
-        public SortedDictionary<DateTime, List<TaskModel>> GetNextMonthTasks()
+        public Dictionary<DateTime, List<TaskModel>> GetNextMonthTasks()
         {
             throw new NotImplementedException();
         }
 
-        public SortedDictionary<DateTime, List<TaskModel>> GetPreviousMonthTasks()
+        public Dictionary<DateTime, List<TaskModel>> GetPreviousMonthTasks()
         {
             throw new NotImplementedException();
         }
+
+        public Dictionary<DateTime, List<TaskModel>> GetAll()
+        {
+            return MonthTasks;
+        }
+
     }
 
 

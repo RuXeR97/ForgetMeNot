@@ -10,10 +10,10 @@ namespace ServiceLayer.Services.TaskServices
         void Update(ITaskModel taskModel);
         void Delete(ITaskModel taskModel);
         void DeleteById(int taskModelId);
-        SortedDictionary<DateTime, List<TaskModel>> GetAll();
-        SortedDictionary<DateTime, List<TaskModel>> GetByMonth(DateTime month);
+        Dictionary<DateTime, List<TaskModel>> GetAll();
+        Dictionary<DateTime, List<TaskModel>> GetByMonth(DateTime month);
         ITaskModel GetById(int id);
-        SortedDictionary<DateTime, List<TaskModel>> GetByCreationDate(DateTime creationDate);
+        Dictionary<DateTime, List<TaskModel>> GetByCreationDate(DateTime creationDate);
 
     }
 }

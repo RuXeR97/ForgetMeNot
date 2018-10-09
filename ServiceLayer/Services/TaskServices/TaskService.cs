@@ -33,12 +33,12 @@ namespace ServiceLayer.Services.TaskServices
             _taskRepository.DeleteById(taskModelId);
         }
 
-        public SortedDictionary<DateTime, List<TaskModel>> GetAll()
+        public Dictionary<DateTime, List<TaskModel>> GetAll()
         {
             return _taskRepository.GetAll();
         }
 
-        public SortedDictionary<DateTime, List<TaskModel>> GetByCreationDate(DateTime creationDate)
+        public Dictionary<DateTime, List<TaskModel>> GetByCreationDate(DateTime creationDate)
         {
             return _taskRepository.GetByCreationDate(creationDate);
         }
@@ -48,7 +48,7 @@ namespace ServiceLayer.Services.TaskServices
             return _taskRepository.GetById(id);
         }
 
-        public SortedDictionary<DateTime, List<TaskModel>> GetByMonth(DateTime month)
+        public Dictionary<DateTime, List<TaskModel>> GetByMonth(DateTime month)
         {
             return _taskRepository.GetByMonth(month);
         }
