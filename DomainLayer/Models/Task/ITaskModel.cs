@@ -2,7 +2,7 @@
 
 namespace DomainLayer.Models.Task
 {
-    public interface ITaskModel : IEquatable<ITaskModel>
+    public interface ITaskModel
     {
         string Description { get; set; }
         DateTime EndTime { get; set; }

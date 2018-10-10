@@ -1,24 +1,20 @@
-﻿using DomainLayer.Models.Task;
-using System;
-using System.Collections.Generic;
-
-namespace DomainLayer.Models.MonthTasks
+﻿namespace DomainLayer.Models.MonthTasks
 {
     public interface IMonthTasksModel
     {
-        DateTime CurrentDate { get; set; }
+        //DateTime CurrentDate { get; set; }
 
-        Dictionary<DateTime, List<TaskModel>> GetPreviousMonthTasks();
-        Dictionary<DateTime, List<TaskModel>> GetCurrentMonthTasks();
-        Dictionary<DateTime, List<TaskModel>> GetNextMonthTasks();
-        Dictionary<DateTime, List<TaskModel>> GetAll();
+        //IUniqueComponentList<CalendarEvent> GetPreviousMonthTasks();
+        //IUniqueComponentList<CalendarEvent> GetCurrentMonthTasks();
+        //IUniqueComponentList<CalendarEvent> GetNextMonthTasks();
+        //IUniqueComponentList<CalendarEvent> GetAll();
 
-        void Add(ITaskModel task);
-        void AddRange(Dictionary<DateTime, List<TaskModel>> tasksDictionaryOfLists);
-        void Edit(int idTask, ITaskModel newTask);
-        void Edit(ITaskModel oldTask, ITaskModel newTask);
-        void Delete(ITaskModel task);
-        void Delete(int idTask);
-        void DeleteRange(Dictionary<DateTime, List<TaskModel>> tasks);
+        //void Add(Ical.Net.CalendarComponents.RecurringComponent task);
+        //void AddRange(IUniqueComponentList<CalendarEvent> tasksDictionaryOfLists);
+        //void Edit(int idTask, Ical.Net.CalendarComponents.RecurringComponent newTask);
+        //void Edit(Ical.Net.CalendarComponents.RecurringComponent oldTask, Ical.Net.CalendarComponents.RecurringComponent newTask);
+        //void Delete(Ical.Net.CalendarComponents.RecurringComponent task);
+        //void Delete(int idTask);
+        //void DeleteRange(IUniqueComponentList<CalendarEvent> tasks);
     }
 }

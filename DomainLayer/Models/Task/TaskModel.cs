@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DomainLayer.Models.Task
 {
-    public class TaskModel : ITaskModel
+    public class TaskModel
     {
         public int TaskId { get; set; }
 
@@ -22,15 +22,15 @@ namespace DomainLayer.Models.Task
 
 
 
-        public bool Equals(ITaskModel other)
-        {
-            var taskModel = other as TaskModel;
-            return (taskModel.TaskId == this.TaskId &&
-                taskModel.StartTime == this.StartTime &&
-                taskModel.EndTime == this.EndTime &&
-                taskModel.Description == this.Description &&
-                taskModel.Title == this.Title &&
-                taskModel.TimeOfCreation == this.TimeOfCreation);
-        }
+        //public bool Equals(Ical.Net.CalendarComponents.RecurringComponent other)
+        //{
+        //    var taskModel = other as TaskModel;
+        //    return (taskModel.TaskId == this.TaskId &&
+        //        taskModel.StartTime == this.StartTime &&
+        //        taskModel.EndTime == this.EndTime &&
+        //        taskModel.Description == this.Description &&
+        //        taskModel.Title == this.Title &&
+        //        taskModel.TimeOfCreation == this.TimeOfCreation);
+        //}
     }
 }

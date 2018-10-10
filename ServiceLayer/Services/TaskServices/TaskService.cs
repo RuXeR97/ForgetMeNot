@@ -1,7 +1,7 @@
-﻿using DomainLayer.Models.Task;
+﻿using Ical.Net.CalendarComponents;
+using Ical.Net.Proxies;
 using ServiceLayer.CommonServices;
 using System;
-using System.Collections.Generic;
 
 namespace ServiceLayer.Services.TaskServices
 {
@@ -16,13 +16,13 @@ namespace ServiceLayer.Services.TaskServices
             _modelDataAnnotationCheck = modelDataAnnotationCheck;
         }
 
-        public void Add(ITaskModel taskModel)
+        public void Add(RecurringComponent taskModel)
         {
             // method to validate model
             _taskRepository.Add(taskModel);
         }
 
-        public void Delete(ITaskModel taskModel)
+        public void Delete(RecurringComponent taskModel)
         {
             // method to validate model
             _taskRepository.Delete(taskModel);
@@ -33,43 +33,33 @@ namespace ServiceLayer.Services.TaskServices
             _taskRepository.DeleteById(taskModelId);
         }
 
-        public Dictionary<DateTime, List<TaskModel>> GetAll()
+        public IUniqueComponentList<CalendarEvent> GetAll()
         {
             return _taskRepository.GetAll();
         }
 
-        public Dictionary<DateTime, List<TaskModel>> GetByCreationDate(DateTime creationDate)
-        {
-            return _taskRepository.GetByCreationDate(creationDate);
-        }
-
-        public ITaskModel GetById(int id)
-        {
-            return _taskRepository.GetById(id);
-        }
-
-        public Dictionary<DateTime, List<TaskModel>> GetByMonth(DateTime month)
+        public IUniqueComponentList<CalendarEvent> GetByMonth(DateTime month)
         {
             return _taskRepository.GetByMonth(month);
         }
 
-        public void Update(ITaskModel taskModel)
+        public void Update(RecurringComponent taskModel)
         {
             _taskRepository.Update(taskModel);
         }
 
-        public void ValidateModel(ITaskModel taskModel)
+        public void ValidateModel(RecurringComponent taskModel)
         {
             _modelDataAnnotationCheck.ValidateModelDataAnnotations(taskModel);
             ValidateTaskTimeOfCreation(taskModel);
         }
 
-        public void ValidateModelDataAnnotations(ITaskModel taskModel)
+        public void ValidateModelDataAnnotations(RecurringComponent taskModel)
         {
             _modelDataAnnotationCheck.ValidateModelDataAnnotations(taskModel);
         }
 
-        public void ValidateTaskTimeOfCreation(ITaskModel taskModel)
+        public void ValidateTaskTimeOfCreation(RecurringComponent taskModel)
         {
             // some code to validate timeofcreation
         }

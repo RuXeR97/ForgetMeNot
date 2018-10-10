@@ -52,7 +52,6 @@ namespace PresentationLayer
         }
 
         #region Public initialization methods
-
         public Button[] InitializeDays(DateTime currentDate, int width, int height, int sizeX, int sizeY)
         {
             // for refreshing purposes
@@ -70,7 +69,6 @@ namespace PresentationLayer
             Controls.AddRange(DayButtons);
             return DayButtons;
         }
-
         public Label[] InitializeLabelsOWeekfDays(int countOfDaysInWeek, int width, int height, int sizeX)
         {
             // for refreshing purposes
@@ -96,7 +94,6 @@ namespace PresentationLayer
             Controls.AddRange(DaysLabels);
             return DaysLabels;
         }
-
         public Label[] InitializeDateLabels(int width, int height, int sizeX, int sizeY, DateTime date)
         {
             // for refreshing purposes
@@ -129,7 +126,6 @@ namespace PresentationLayer
             Controls.AddRange(DateLabels);
             return DateLabels;
         }
-
         public Button InitializeLeftArrow(int sizeX, int sizeY)
         {
             string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
@@ -164,7 +160,6 @@ namespace PresentationLayer
             Controls.Add(ArrowRightButton);
             return ArrowRightButton;
         }
-
         public void InitializeToolTips(string[] text, int height, int width)
         {
             if (text == null)
@@ -175,7 +170,6 @@ namespace PresentationLayer
                 toolTip.SetToolTip(DayButtons[i], text[i]);
             }
         }
-
         public void HighlightDaysButtonsWithTasks(string[] text)
         {
             if (text == null)
@@ -237,7 +231,6 @@ namespace PresentationLayer
                 MainViewButtonsHelper.SetButtonOfDayMouseBehaviour(button);
             }
         }
-
         private void MainView_MouseMove(object sender, MouseEventArgs e)
         {
             if (dragging)
@@ -246,12 +239,10 @@ namespace PresentationLayer
                 this.Location = Point.Add(dragFormPoint, new Size(dif));
             }
         }
-
         private void MainView_MouseUp(object sender, MouseEventArgs e)
         {
             dragging = false;
         }
-
         private void MainView_MouseDown(object sender, MouseEventArgs e)
         {
             dragging = true;
@@ -296,7 +287,6 @@ namespace PresentationLayer
                     break;
             }
         }
-
         private void ButtonOfDay_MouseMove(object sender, MouseEventArgs e)
         {
             if (dragging)
@@ -305,12 +295,10 @@ namespace PresentationLayer
                 this.Location = Point.Add(dragFormPoint, new Size(dif));
             }
         }
-
         private void ButtonOfDay_MouseUp(object sender, MouseEventArgs e)
         {
             dragging = false;
         }
-
         private void ButtonOfDay_Paint(object sender, PaintEventArgs e)
         {
             Button button = sender as Button;

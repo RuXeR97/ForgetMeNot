@@ -1,65 +1,86 @@
-﻿using DomainLayer.Models.Task;
-using Newtonsoft.Json;
-using ServiceLayer.Services.TaskServices;
+﻿using Ical.Net;
+using Ical.Net.CalendarComponents;
+using Ical.Net.Proxies;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 namespace InfrastructureLayer.DataAccess.Repositories.Local.Task
 {
-    public class TaskLocalRepository : ITaskRepository
+    public class TaskLocalRepository : ServiceLayer.Services.TaskServices.ITaskRepository
     {
         private string path;
         private string fileName;
 
         public TaskLocalRepository(string userLogin)
         {
-            fileName = userLogin + "Tasks.txt";
+            fileName = userLogin + "Tasks.ics";
 
             // change later
             path = fileName;
 
-            DomainLayer.Models.MonthTasks.IMonthTasksModel mod = new DomainLayer.Models.MonthTasks.MonthTasksModel();
+            //DomainLayer.Models.MonthTasks.IMonthTasksModel mod = new DomainLayer.Models.MonthTasks.MonthTasksModel();
 
-            List<TaskModel> lol = new List<TaskModel>();
-            lol.Add(new TaskModel()
-            {
-                TaskId = 1,
-                Description = "asd",
-                StartTime = DateTime.Now.AddHours(-3),
-                EndTime = DateTime.Now.AddHours(1),
-                Title = "LOLEK"
-            });
-            List<TaskModel> lol2 = new List<TaskModel>();
-            TaskModel taskModel2 = new TaskModel()
-            {
-                TaskId = 2,
-                Description = "Test Description 2",
-                StartTime = DateTime.Parse(DateTime.Now.AddDays(-1).ToShortDateString()),
-                EndTime = DateTime.Parse(DateTime.Now.AddDays(-1).AddHours(1).ToShortDateString()),
-                Title = "Test Task 2"
-            };
+            //List<TaskModel> lol = new List<TaskModel>();
+            //lol.Add(new TaskModel()
+            //{
+            //    TaskId = 1,
+            //    Description = "asd",
+            //    StartTime = DateTime.Now.AddHours(-3),
+            //    EndTime = DateTime.Now.AddHours(1),
+            //    Title = "LOLEK"
+            //});
+            //List<TaskModel> lol2 = new List<TaskModel>();
+            //TaskModel taskModel2 = new TaskModel()
+            //{
+            //    TaskId = 2,
+            //    Description = "Test Description 2",
+            //    StartTime = DateTime.Parse(DateTime.Now.AddDays(-1).ToShortDateString()),
+            //    EndTime = DateTime.Parse(DateTime.Now.AddDays(-1).AddHours(1).ToShortDateString()),
+            //    Title = "Test Task 2"
+            //};
 
-            TaskModel taskModel3 = new TaskModel()
-            {
-                TaskId = 3,
-                Description = "Test Description 3",
-                StartTime = DateTime.Parse(DateTime.Now.ToShortDateString()),
-                EndTime = DateTime.Parse(DateTime.Now.AddDays(1).ToShortDateString()),
-                Title = "Test Task 3"
-            };
-            mod.Add(taskModel2);
-            mod.Add(taskModel3);
+            //TaskModel taskModel3 = new TaskModel()
+            //{
+            //    TaskId = 3,
+            //    Description = "Test Description 3",
+            //    StartTime = DateTime.Parse(DateTime.Now.ToShortDateString()),
+            //    EndTime = DateTime.Parse(DateTime.Now.AddDays(1).ToShortDateString()),
+            //    Title = "Test Task 3"
+            //};
+            //mod.Add(taskModel2);
+            //mod.Add(taskModel3);
 
-            File.WriteAllText(path, JsonConvert.SerializeObject(mod.GetAll(), Formatting.Indented));
+            //File.WriteAllText(path, JsonConvert.SerializeObject(mod.GetAll(), Formatting.Indented));
         }
 
-        public void Add(ITaskModel taskModel)
+        public void Add(Ical.Net.CalendarComponents.RecurringComponent taskModel)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(ITaskModel taskModel)
+        public void AddRange()
+        {
+            //var now = DateTime.Now;
+            //var later = now.AddHours(1);
+
+            ////Repeat daily for 5 days
+            //var rrule = new RecurrencePattern(FrequencyType.Daily, 1) { Count = 5 };
+
+            //var e = new CalendarEvent
+            //{
+            //    Start = new CalDateTime(now),
+            //    End = new CalDateTime(later),
+            //    RecurrenceRules = new List<RecurrencePattern> { rrule },
+            //};
+
+            //var calendar = new Calendar();
+            //calendar.Events.Add(e);
+
+            //var serializer = new CalendarSerializer();
+            //var serializedCalendar = serializer.SerializeToString(calendar);
+        }
+
+        public void Delete(RecurringComponent taskModel)
         {
             throw new NotImplementedException();
         }
@@ -69,40 +90,23 @@ namespace InfrastructureLayer.DataAccess.Repositories.Local.Task
             throw new NotImplementedException();
         }
 
-        public Dictionary<DateTime, List<TaskModel>> GetAll()
+        public IUniqueComponentList<CalendarEvent> GetAll()
         {
-            string input = File.ReadAllText(path);
-            var taskModels = JsonConvert.DeserializeObject<Dictionary<DateTime, List<TaskModel>>>(input);
-            return taskModels;
+            var veventTest = File.ReadAllText(path);
+            var calendar = Calendar.Load(veventTest);
+            var calendarEvents = calendar.Events;
+
+            return calendarEvents;
         }
 
-        public Dictionary<DateTime, List<TaskModel>> GetByCreationDate(DateTime creationDate)
+        public IUniqueComponentList<CalendarEvent> GetByMonth(DateTime date)
         {
-            var taskModels = GetAll().Where(i => i.Key.Day == creationDate.Day &&
-            i.Key.Month == creationDate.Month &&
-            i.Key.Year == creationDate.Year);
-            return (Dictionary<DateTime, List<TaskModel>>)taskModels;
+            var taskModels = GetAll().Where(i => i.DtStart.Month == date.Month);
+
+            return (UniqueComponentListProxy<CalendarEvent>)taskModels;
         }
 
-        public ITaskModel GetById(int id)
-        {
-            return (TaskModel)GetAll().Select(i => i.Value.First(j => j.TaskId == id));
-        }
-
-        public Dictionary<DateTime, List<TaskModel>> GetByMonth(DateTime date)
-        {
-            var taskModels = GetAll();
-
-            var taskModelsReturned = new Dictionary<DateTime, List<TaskModel>>();
-            foreach (var lol in taskModels)
-            {
-                taskModelsReturned.Add(lol.Key, lol.Value);
-            }
-
-            return taskModels;
-        }
-
-        public void Update(ITaskModel taskModel)
+        public void Update(RecurringComponent taskModel)
         {
             throw new NotImplementedException();
         }

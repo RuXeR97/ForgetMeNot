@@ -1,9 +1,9 @@
-﻿using DomainLayer.Models.MonthTasks;
-using DomainLayer.Models.Task;
+﻿using Ical.Net;
+using Ical.Net.CalendarComponents;
+using Ical.Net.Proxies;
 using InfrastructureLayer.DataAccess.Repositories.Local.Task;
 using ServiceLayer.Services.TaskServices;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -14,8 +14,10 @@ namespace PresentationLayer.Presenters
         private IMainView _mainView;
         public event EventHandler TaskDetailViewBindingDoneEventRaised;
 
-        private IMonthTasksModel _monthTaskModel;
+        private IUniqueComponentList<CalendarEvent> calendarEvents;
         private ITaskService _taskService;
+        private DateTime currentDate;
+
 
         private readonly int width = -30;
         private readonly int height = 45;
@@ -30,26 +32,9 @@ namespace PresentationLayer.Presenters
             CurrentDate = DateTime.Now;
             _mainView = mainView;
             _taskService = new TaskService(new TaskLocalRepository("ruxer"), null);
+            currentDate = DateTime.Now;
+            calendarEvents = GetDataFromLocalRepository();
 
-            _monthTaskModel = GetDataFromLocalRepository();
-
-            //TaskModel taskModel2 = new TaskModel()
-            //{
-            //    TaskId = 2,
-            //    Description = "Test Description 2",
-            //    StartTime = DateTime.Now.AddHours(-5),
-            //    EndTime = DateTime.Now.AddHours(0),
-            //    Title = "Test Task 2"
-            //};
-            //TaskModel taskModel3 = ()
-            //{
-            //    TaskId = 3,
-            //    Description = "Test Description 10",
-            //    StartTime = DateTime.Now.AddHours(-5),
-            //    EndTime = DateTime.Now.AddHours(0),
-            //    Title = "Test Task 2"
-            //};
-            //_monthTaskModel.Edit(taskModel2, taskModel3);
             LoadTasksArray();
 
             _mainView.InitializeDays(CurrentDate, width, height + sizeY / 2, sizeX, sizeY);
@@ -73,42 +58,36 @@ namespace PresentationLayer.Presenters
             _mainView.ButtonOfArrowRightMouseClickEventRaised += new MouseEventHandler(OnButtonOfArrowRightMouseDownEventRaised);
         }
 
-        private IMonthTasksModel GetDataFromLocalRepository()
+        private IUniqueComponentList<CalendarEvent> GetDataFromLocalRepository()
         {
-            IMonthTasksModel _monthTaskModel = new MonthTasksModel();
+            ICalendarComponent _calendar = new Calendar();
+            IUniqueComponentList<CalendarEvent> calendarEvents = _taskService.GetAll();
 
-            _monthTaskModel.CurrentDate = CurrentDate;
-
-            Dictionary<DateTime, List<TaskModel>> allTasks2 = _taskService.GetAll();
-            _monthTaskModel.AddRange(allTasks2);
-
-            return _monthTaskModel;
+            return calendarEvents;
         }
 
         private string[] GetCurrentMonthTasksToArray()
         {
-            int daysInMonth = DateTime.DaysInMonth(_monthTaskModel.CurrentDate.Year, _monthTaskModel.CurrentDate.Month);
+            int daysInMonth = DateTime.DaysInMonth(currentDate.Year, currentDate.Month);
             string[] arrayOfTasks = new string[daysInMonth];
-
+            DateTime dateCounter = new DateTime(currentDate.Year, currentDate.Month, 1);
             string finalTask = null;
-            var taskModels = _monthTaskModel.GetCurrentMonthTasks();
+            var eventModels = calendarEvents.Where(i => i.DtStart.Month == currentDate.Month);
 
             for (int i = 0; i < arrayOfTasks.Length; i++)
             {
-                List<TaskModel> taskModelsPerDay = taskModels.
-                    FirstOrDefault(y => y.Key.Day == (i + 1)).
-                    Value;
-
-                if (taskModelsPerDay != null)
+                var dayEventModels = eventModels.Where(j => j.DtStart.Day == dateCounter.Day);
+                if (dayEventModels != null)
                 {
-                    foreach (var taskModel in taskModelsPerDay)
+                    foreach (var taskModel in dayEventModels)
                     {
-                        finalTask += taskModel.Title + Environment.NewLine;
+                        finalTask += taskModel.Summary + Environment.NewLine;
                     }
 
                     arrayOfTasks[i] = finalTask;
                     finalTask = null;
                 }
+                dateCounter = dateCounter.AddDays(1);
             }
             return arrayOfTasks;
         }
@@ -116,12 +95,12 @@ namespace PresentationLayer.Presenters
         #region Loading methods
         private void LoadMonthAndYearLabels()
         {
-            _mainView.InitializeDateLabels(width, height, sizeX, sizeY, _monthTaskModel.CurrentDate);
+            _mainView.InitializeDateLabels(width, height, sizeX, sizeY, currentDate);
         }
 
         private void LoadButtonsOfDays()
         {
-            _mainView.InitializeDays(_monthTaskModel.CurrentDate, width, height + sizeY / 2, sizeX, sizeY);
+            _mainView.InitializeDays(currentDate, width, height + sizeY / 2, sizeX, sizeY);
         }
 
         private void LoadToolTips()
@@ -149,7 +128,7 @@ namespace PresentationLayer.Presenters
 
         private void OnButtonOfArrowLeftMouseDownEventRaised(object sender, MouseEventArgs e)
         {
-            _monthTaskModel.CurrentDate = _monthTaskModel.CurrentDate.AddMonths(-1);
+            currentDate = currentDate.AddMonths(-1);
 
             LoadTasksArray();
             LoadButtonsOfDays();
@@ -160,7 +139,7 @@ namespace PresentationLayer.Presenters
 
         private void OnButtonOfArrowRightMouseDownEventRaised(object sender, MouseEventArgs e)
         {
-            _monthTaskModel.CurrentDate = _monthTaskModel.CurrentDate.AddMonths(1);
+            currentDate = currentDate.AddMonths(1);
 
             LoadTasksArray();
             LoadButtonsOfDays();

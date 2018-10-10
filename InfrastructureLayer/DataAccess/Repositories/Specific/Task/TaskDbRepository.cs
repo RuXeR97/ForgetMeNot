@@ -1,4 +1,6 @@
 ﻿using DomainLayer.Models.Task;
+using Ical.Net.CalendarComponents;
+using Ical.Net.Proxies;
 using ServiceLayer.Services.TaskServices;
 using System;
 using System.Collections.Generic;
@@ -18,7 +20,7 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
             _connectionString = connectionString;
         }
 
-        public Dictionary<DateTime, List<TaskModel>> GetAll()
+        public IUniqueComponentList<CalendarEvent> GetAll()
 
         {
             List<TaskModel> taskModelList = new List<TaskModel>();
@@ -56,17 +58,17 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
             return null;
         }
 
-        public void Add(ITaskModel taskModel)
+        public void Add(Ical.Net.CalendarComponents.RecurringComponent taskModel)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(ITaskModel taskModel)
+        public void Update(Ical.Net.CalendarComponents.RecurringComponent taskModel)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(ITaskModel taskModel)
+        public void Delete(Ical.Net.CalendarComponents.RecurringComponent taskModel)
         {
             throw new NotImplementedException();
         }
@@ -75,32 +77,22 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
         {
             throw new NotImplementedException();
         }
-        ITaskModel ITaskRepository.GetById(int id)
+        public IUniqueComponentList<CalendarEvent> GetByMonth(DateTime month)
         {
             throw new NotImplementedException();
         }
 
-        public Dictionary<DateTime, List<TaskModel>> GetByMonth(DateTime month)
+        public IUniqueComponentList<CalendarEvent> GetByCreationDate(DateTime creationDate)
         {
             throw new NotImplementedException();
         }
 
-        public Dictionary<DateTime, List<TaskModel>> GetByCreationDate(DateTime creationDate)
+        IUniqueComponentList<CalendarEvent> ITaskRepository.GetAll()
         {
             throw new NotImplementedException();
         }
 
-        Dictionary<DateTime, List<TaskModel>> ITaskRepository.GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        Dictionary<DateTime, List<TaskModel>> ITaskRepository.GetByMonth(DateTime month)
-        {
-            throw new NotImplementedException();
-        }
-
-        Dictionary<DateTime, List<TaskModel>> ITaskRepository.GetByCreationDate(DateTime creationDate)
+        IUniqueComponentList<CalendarEvent> ITaskRepository.GetByMonth(DateTime month)
         {
             throw new NotImplementedException();
         }
