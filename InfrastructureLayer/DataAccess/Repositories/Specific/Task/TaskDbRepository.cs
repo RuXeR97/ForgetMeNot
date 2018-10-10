@@ -93,5 +93,10 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
         {
             throw new NotImplementedException();
         }
+
+        public void Update(IRecurringComponent calendarEvent, IRecurringComponent newCalendarEvent)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

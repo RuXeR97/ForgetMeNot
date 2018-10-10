@@ -45,7 +45,7 @@ namespace ServiceLayer.Services.TaskServices
 
         public void Update(IRecurringComponent taskModel)
         {
-            _taskRepository.Update(taskModel);
+            //_taskRepository.Update(taskModel);
         }
 
         public void ValidateModel(IRecurringComponent taskModel)
