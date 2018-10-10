@@ -2,21 +2,22 @@
 using Ical.Net.CalendarComponents;
 using Ical.Net.Proxies;
 using InfrastructureLayer.DataAccess.Repositories.Local.Task;
+using PresentationLayer.Other;
 using ServiceLayer.Services.TaskServices;
 using System;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Presenters
 {
     public class MainPresenter : IMainPresenter
     {
+        #region Data
         private IMainView _mainView;
         public event EventHandler TaskDetailViewBindingDoneEventRaised;
 
-        private IUniqueComponentList<CalendarEvent> calendarEvents;
+        private IUniqueComponentList<CalendarEvent> _calendarEvents;
         private ITaskService _taskService;
-        private DateTime currentDate;
+        private ICalendarEventsParser _calendarEventsParser;
 
 
         private readonly int width = -30;
@@ -26,15 +27,17 @@ namespace PresentationLayer.Presenters
         private const int countOfDaysInWeek = 7;
         string[] tasksArray;
         public DateTime CurrentDate { get; set; }
+        #endregion
 
         public MainPresenter(IMainView mainView)
         {
             CurrentDate = DateTime.Now;
             _mainView = mainView;
             _taskService = new TaskService(new TaskLocalRepository("ruxer"), null);
-            currentDate = DateTime.Now;
-            calendarEvents = GetDataFromLocalRepository();
+            _calendarEventsParser = new CalendarEventsParser();
+            CurrentDate = DateTime.Now;
 
+            _calendarEvents = GetDataFromLocalRepository();
             LoadTasksArray();
 
             _mainView.InitializeDays(CurrentDate, width, height + sizeY / 2, sizeX, sizeY);
@@ -51,13 +54,11 @@ namespace PresentationLayer.Presenters
         {
             return _mainView;
         }
-
         private void SubscribeToEventsSetup()
         {
             _mainView.ButtonOfArrowLeftMouseClickEventRaised += new MouseEventHandler(OnButtonOfArrowLeftMouseDownEventRaised);
             _mainView.ButtonOfArrowRightMouseClickEventRaised += new MouseEventHandler(OnButtonOfArrowRightMouseDownEventRaised);
         }
-
         private IUniqueComponentList<CalendarEvent> GetDataFromLocalRepository()
         {
             ICalendarComponent _calendar = new Calendar();
@@ -66,41 +67,15 @@ namespace PresentationLayer.Presenters
             return calendarEvents;
         }
 
-        private string[] GetCurrentMonthTasksToArray()
-        {
-            int daysInMonth = DateTime.DaysInMonth(currentDate.Year, currentDate.Month);
-            string[] arrayOfTasks = new string[daysInMonth];
-            DateTime dateCounter = new DateTime(currentDate.Year, currentDate.Month, 1);
-            string finalTask = null;
-            var eventModels = calendarEvents.Where(i => i.DtStart.Month == currentDate.Month);
-
-            for (int i = 0; i < arrayOfTasks.Length; i++)
-            {
-                var dayEventModels = eventModels.Where(j => j.DtStart.Day == dateCounter.Day);
-                if (dayEventModels != null)
-                {
-                    foreach (var taskModel in dayEventModels)
-                    {
-                        finalTask += taskModel.Summary + Environment.NewLine;
-                    }
-
-                    arrayOfTasks[i] = finalTask;
-                    finalTask = null;
-                }
-                dateCounter = dateCounter.AddDays(1);
-            }
-            return arrayOfTasks;
-        }
-
         #region Loading methods
         private void LoadMonthAndYearLabels()
         {
-            _mainView.InitializeDateLabels(width, height, sizeX, sizeY, currentDate);
+            _mainView.InitializeDateLabels(width, height, sizeX, sizeY, CurrentDate);
         }
 
         private void LoadButtonsOfDays()
         {
-            _mainView.InitializeDays(currentDate, width, height + sizeY / 2, sizeX, sizeY);
+            _mainView.InitializeDays(CurrentDate, width, height + sizeY / 2, sizeX, sizeY);
         }
 
         private void LoadToolTips()
@@ -110,7 +85,7 @@ namespace PresentationLayer.Presenters
 
         private void LoadTasksArray()
         {
-            tasksArray = GetCurrentMonthTasksToArray();
+            tasksArray = _calendarEventsParser.ConvertCalendarEventsToArray(CurrentDate, _calendarEvents);
         }
 
         private void HighlightButtons()
@@ -128,7 +103,7 @@ namespace PresentationLayer.Presenters
 
         private void OnButtonOfArrowLeftMouseDownEventRaised(object sender, MouseEventArgs e)
         {
-            currentDate = currentDate.AddMonths(-1);
+            CurrentDate = CurrentDate.AddMonths(-1);
 
             LoadTasksArray();
             LoadButtonsOfDays();
@@ -139,7 +114,7 @@ namespace PresentationLayer.Presenters
 
         private void OnButtonOfArrowRightMouseDownEventRaised(object sender, MouseEventArgs e)
         {
-            currentDate = currentDate.AddMonths(1);
+            CurrentDate = CurrentDate.AddMonths(1);
 
             LoadTasksArray();
             LoadButtonsOfDays();
