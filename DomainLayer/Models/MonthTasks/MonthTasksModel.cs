@@ -1,4 +1,5 @@
-﻿using DomainLayer.Models.Task;
+﻿using CommonComponents.Extensions;
+using DomainLayer.Models.Task;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,27 +23,59 @@ namespace DomainLayer.Models.MonthTasks
         // done
         public void Add(ITaskModel task)
         {
-            if (MonthTasks.Any(i => i.Value.Any(j => j == task)))
+            DateTime[] dateTimes = task.EndTime.GetDatesBetween(task.StartTime);
+            foreach (var date in dateTimes)
             {
-                // throw new ExistingItemException();
-            }
-            else
-            {
-                if (MonthTasks.Any(i => i.Key.ToShortDateString() == task.StartTime.ToShortDateString()))
+                if (MonthTasks.Any(i => i.Key.ToShortDateString() == date.ToShortDateString()))
                 {
-                    foreach (var item in MonthTasks)
-                    {
-                        if (item.Key.ToShortDateString() == task.StartTime.ToShortDateString())
-                        {
-                            item.Value.Add((TaskModel)task);
-                        }
-                    }
+                    var selectedMonthTaskList = MonthTasks.
+                        First(i => i.Key.ToShortDateString() == date.ToShortDateString()).
+                        Value.
+                        Where(j => date.IsInOrBetween(task.StartTime, task.EndTime)).ToList();
+
+                    selectedMonthTaskList.Add((TaskModel)task);
+                    //selectedMonthTaskList.Add((TaskModel)task);
                 }
                 else
                 {
-                    MonthTasks.Add(task.StartTime, new List<TaskModel>() { (TaskModel)task });
+                    MonthTasks.
+                        Add(new DateTime(date.Year, date.Month, date.Day), new List<TaskModel>() { (TaskModel)task });
                 }
             }
+
+
+
+
+            //if (MonthTasks.Any(i => i.Value.Any(j => j == task)))
+            //{
+            //    // throw new ExistingItemException();
+            //}
+            //else
+            //{
+            //    DateTime[] dateTimes = task.EndTime.GetDatesBetween(task.StartTime);
+            //    foreach (var date in dateTimes)
+            //    {
+            //        if (MonthTasks.Any(i => i.Key.IsInOrBetween(task.StartTime, task.EndTime)))
+            //        {
+            //            foreach (var item in MonthTasks)
+            //            {
+            //                //if (item.Key.ToShortDateString() == date.ToShortDateString())
+            //                //{
+
+            //                if (item.Key.IsInOrBetween(date, item.Key) && !item.Value.Contains(task))
+            //                {
+            //                    item.Value.Add((TaskModel)task);
+            //                }
+
+            //                //}
+            //            }
+            //        }
+            //        else
+            //        {
+            //            MonthTasks.Add(new DateTime(date.Year, date.Month, date.Day), new List<TaskModel>() { (TaskModel)task });
+            //        }
+            //    }
+            //}
         }
         // done
         public void AddRange(Dictionary<DateTime, List<TaskModel>> tasksDictionaryOfLists)
@@ -140,7 +173,7 @@ namespace DomainLayer.Models.MonthTasks
         public Dictionary<DateTime, List<TaskModel>> GetCurrentMonthTasks()
         {
             var currentMonthsTasks = MonthTasks.Select(i => i).
-                Where(j => j.Key.Date.ToShortDateString() == CurrentDate.ToShortDateString()).
+                Where(j => j.Key.Date.Year == CurrentDate.Year && j.Key.Date.Month == CurrentDate.Month).
                 ToDictionary(i => i.Key, j => j.Value);
             return currentMonthsTasks;
         }

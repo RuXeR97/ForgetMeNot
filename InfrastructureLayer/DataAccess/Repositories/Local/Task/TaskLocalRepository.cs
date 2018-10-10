@@ -19,7 +19,6 @@ namespace InfrastructureLayer.DataAccess.Repositories.Local.Task
             // change later
             path = fileName;
 
-
             DomainLayer.Models.MonthTasks.IMonthTasksModel mod = new DomainLayer.Models.MonthTasks.MonthTasksModel();
 
             List<TaskModel> lol = new List<TaskModel>();
@@ -36,8 +35,8 @@ namespace InfrastructureLayer.DataAccess.Repositories.Local.Task
             {
                 TaskId = 2,
                 Description = "Test Description 2",
-                StartTime = DateTime.Now.AddHours(-5),
-                EndTime = DateTime.Now.AddHours(0),
+                StartTime = DateTime.Parse(DateTime.Now.AddDays(-1).ToShortDateString()),
+                EndTime = DateTime.Parse(DateTime.Now.AddDays(-1).AddHours(1).ToShortDateString()),
                 Title = "Test Task 2"
             };
 
@@ -45,8 +44,8 @@ namespace InfrastructureLayer.DataAccess.Repositories.Local.Task
             {
                 TaskId = 3,
                 Description = "Test Description 3",
-                StartTime = DateTime.Now.AddHours(-3),
-                EndTime = DateTime.Now.AddHours(1),
+                StartTime = DateTime.Parse(DateTime.Now.ToShortDateString()),
+                EndTime = DateTime.Parse(DateTime.Now.AddDays(1).ToShortDateString()),
                 Title = "Test Task 3"
             };
             mod.Add(taskModel2);

@@ -41,7 +41,7 @@ namespace PresentationLayer.Presenters
             //    EndTime = DateTime.Now.AddHours(0),
             //    Title = "Test Task 2"
             //};
-            //TaskModel taskModel3 = new TaskModel()
+            //TaskModel taskModel3 = ()
             //{
             //    TaskId = 3,
             //    Description = "Test Description 10",
@@ -91,19 +91,24 @@ namespace PresentationLayer.Presenters
             string[] arrayOfTasks = new string[daysInMonth];
 
             string finalTask = null;
+            var taskModels = _monthTaskModel.GetCurrentMonthTasks();
+
             for (int i = 0; i < arrayOfTasks.Length; i++)
             {
-                List<TaskModel> taskModelsPerDay = _monthTaskModel.GetCurrentMonthTasks().
-                    SelectMany(x => x.Value).Where(y => y.EndTime.Day == i).ToList();
+                List<TaskModel> taskModelsPerDay = taskModels.
+                    FirstOrDefault(y => y.Key.Day == (i + 1)).
+                    Value;
 
-                foreach (var taskModel in taskModelsPerDay)
+                if (taskModelsPerDay != null)
                 {
-                    finalTask += taskModel.Title + Environment.NewLine;
-                }
+                    foreach (var taskModel in taskModelsPerDay)
+                    {
+                        finalTask += taskModel.Title + Environment.NewLine;
+                    }
 
-                //if (Regex.Matches(finalTask, @"[a-zA-Z]").Count > 0)
-                arrayOfTasks[i] = finalTask;
-                finalTask = null;
+                    arrayOfTasks[i] = finalTask;
+                    finalTask = null;
+                }
             }
             return arrayOfTasks;
         }

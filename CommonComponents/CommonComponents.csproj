@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="AccessTypeEventArgs.cs" />
     <Compile Include="EventHelpers.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="IAccessTypeEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
