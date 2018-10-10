@@ -7,6 +7,6 @@ namespace ServiceLayer.Tests
     {
         // write here nunit tests to test 2 classes
         // ITaskServices
-        // Ical.Net.CalendarComponents.RecurringComponent
+        // Ical.Net.CalendarComponents.IRecurringComponent
     }
 }

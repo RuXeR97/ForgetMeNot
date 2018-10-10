@@ -55,17 +55,17 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
             return null;
         }
 
-        public void Add(Ical.Net.CalendarComponents.RecurringComponent taskModel)
+        public void Add(Ical.Net.CalendarComponents.IRecurringComponent taskModel)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Ical.Net.CalendarComponents.RecurringComponent taskModel)
+        public void Update(Ical.Net.CalendarComponents.IRecurringComponent taskModel)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Ical.Net.CalendarComponents.RecurringComponent taskModel)
+        public void Delete(Ical.Net.CalendarComponents.IRecurringComponent taskModel)
         {
             throw new NotImplementedException();
         }

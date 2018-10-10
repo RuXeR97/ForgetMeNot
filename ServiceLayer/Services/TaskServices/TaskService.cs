@@ -16,13 +16,13 @@ namespace ServiceLayer.Services.TaskServices
             _modelDataAnnotationCheck = modelDataAnnotationCheck;
         }
 
-        public void Add(RecurringComponent taskModel)
+        public void Add(IRecurringComponent taskModel)
         {
             // method to validate model
             _taskRepository.Add(taskModel);
         }
 
-        public void Delete(RecurringComponent taskModel)
+        public void Delete(IRecurringComponent taskModel)
         {
             // method to validate model
             _taskRepository.Delete(taskModel);
@@ -43,23 +43,23 @@ namespace ServiceLayer.Services.TaskServices
             return _taskRepository.GetByMonth(month);
         }
 
-        public void Update(RecurringComponent taskModel)
+        public void Update(IRecurringComponent taskModel)
         {
             _taskRepository.Update(taskModel);
         }
 
-        public void ValidateModel(RecurringComponent taskModel)
+        public void ValidateModel(IRecurringComponent taskModel)
         {
             _modelDataAnnotationCheck.ValidateModelDataAnnotations(taskModel);
             ValidateTaskTimeOfCreation(taskModel);
         }
 
-        public void ValidateModelDataAnnotations(RecurringComponent taskModel)
+        public void ValidateModelDataAnnotations(IRecurringComponent taskModel)
         {
             _modelDataAnnotationCheck.ValidateModelDataAnnotations(taskModel);
         }
 
-        public void ValidateTaskTimeOfCreation(RecurringComponent taskModel)
+        public void ValidateTaskTimeOfCreation(IRecurringComponent taskModel)
         {
             // some code to validate timeofcreation
         }

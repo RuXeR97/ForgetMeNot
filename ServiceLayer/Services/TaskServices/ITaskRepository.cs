@@ -6,10 +6,10 @@ namespace ServiceLayer.Services.TaskServices
 {
     public interface ITaskRepository
     {
-        void Add(RecurringComponent taskModel);
-        void Update(RecurringComponent taskModel);
-        void Delete(RecurringComponent taskModel);
-        void DeleteById(int taskModelId);
+        void Add(IRecurringComponent calendarEvent);
+        void Update(IRecurringComponent calendarEvent, IRecurringComponent newCalendarEvent);
+        void Delete(IRecurringComponent calendarEvent);
+        void DeleteById(int calendarEventId);
         IUniqueComponentList<CalendarEvent> GetAll();
         IUniqueComponentList<CalendarEvent> GetByMonth(DateTime month);
 

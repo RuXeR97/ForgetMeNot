@@ -6,15 +6,15 @@ namespace ServiceLayer.Services.TaskServices
 {
     public interface ITaskService
     {
-        void Add(RecurringComponent taskModel);
-        void Update(RecurringComponent taskModel);
-        void Delete(RecurringComponent taskModel);
+        void Add(IRecurringComponent taskModel);
+        void Update(IRecurringComponent taskModel);
+        void Delete(IRecurringComponent taskModel);
         void DeleteById(int taskModelId);
         IUniqueComponentList<CalendarEvent> GetAll();
         IUniqueComponentList<CalendarEvent> GetByMonth(DateTime month);
 
-        void ValidateModel(RecurringComponent taskModel);
-        void ValidateModelDataAnnotations(RecurringComponent taskModel);
-        void ValidateTaskTimeOfCreation(RecurringComponent taskModel);
+        void ValidateModel(IRecurringComponent taskModel);
+        void ValidateModelDataAnnotations(IRecurringComponent taskModel);
+        void ValidateTaskTimeOfCreation(IRecurringComponent taskModel);
     }
 }
