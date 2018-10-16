@@ -15,6 +15,8 @@ namespace PresentationLayer
         public event MouseEventHandler ButtonOfArrowLeftMouseClickEventRaised;
         public event MouseEventHandler ButtonOfArrowRightMouseClickEventRaised;
 
+        public event EventHandler AddEventToolStripButtonClickEventRaised;
+
         private Button[] DayButtons;
         private Label[] DaysLabels;
         private Button ArrowLeftButton;
@@ -267,6 +269,7 @@ namespace PresentationLayer
 
                         ToolStripMenuItem menuItem = new ToolStripMenuItem("Add task");
                         menuItem.Name = "Add task";
+                        menuItem.Click += AddEventButton_Click;
                         contextMenuStrip.Items.Add(menuItem);
                         Button button = sender as Button;
                         Point screenPoint = button.PointToScreen(new Point(button.Left, button.Bottom));
@@ -315,6 +318,11 @@ namespace PresentationLayer
         private void ArrowRightButton_Click(object sender, MouseEventArgs e)
         {
             EventHelpers.RaiseEvent(objectRaisingEvent: this, eventHandlerRaised: ButtonOfArrowRightMouseClickEventRaised, eventArgs: e);
+        }
+
+        private void AddEventButton_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(objectRaisingEvent: this, eventHandlerRaised: AddEventToolStripButtonClickEventRaised, eventArgs: e);
         }
 
         #endregion
