@@ -7,10 +7,9 @@ namespace ServiceLayer.Services.TaskServices
 {
     public interface ITaskRepository
     {
-        void Add(IDirectResponseSchema calendarEvent);
-        void Update(IDirectResponseSchema calendarEvent, IDirectResponseSchema newCalendarEvent);
-        void Delete(IDirectResponseSchema calendarEvent);
-        void DeleteById(int calendarEventId);
+        void Add(string calendarId, string text);
+        void Update(IDirectResponseSchema newCalendarEvent, string calendarId, string oldEventId);
+        void Delete(string calendarId, string eventId);
         IDirectResponseSchema GetAllEvents();
         IDirectResponseSchema GetEventsByMonth(DateTime? month);
 

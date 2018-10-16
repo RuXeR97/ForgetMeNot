@@ -41,22 +41,27 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
 
         }
 
-        public void Add(IDirectResponseSchema calendarEvent)
+        public void Add(string calendarId, string text)
         {
-            throw new NotImplementedException();
+            EventsResource.QuickAddRequest request = service.Events.QuickAdd(calendarId, text);
         }
 
-        public void Delete(IDirectResponseSchema calendarEvent)
+        public void Update(IDirectResponseSchema newCalendarEvent, string calendarId, string oldEventId)
         {
-            throw new NotImplementedException();
+            var _newCalendarEvent = newCalendarEvent as Event;
+            EventsResource.UpdateRequest request = service.Events.Update(_newCalendarEvent, calendarId, oldEventId);
         }
 
-        public void DeleteById(int calendarEventId)
+        public void Delete(string calendarId, string eventId)
         {
-            throw new NotImplementedException();
+            EventsResource.DeleteRequest request = service.Events.Delete(calendarId, eventId);
+        }
+
+        public void DeleteById(string calendarId, string eventId)
+        {
+            service.Events.Delete(calendarId, eventId);
         }
         
-        // done
         public IDirectResponseSchema GetAllEvents()
 
         {
@@ -86,7 +91,6 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
             }
         }
 
-        // done
         public IDirectResponseSchema GetEventsByMonth(DateTime? month)
         {
             EventsResource.ListRequest request = service.Events.List("primary");
@@ -114,11 +118,6 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
             {
                 return null;
             }
-        }
-
-        public void Update(IDirectResponseSchema calendarEvent, IDirectResponseSchema newCalendarEvent)
-        {
-            throw new NotImplementedException();
         }
     }
 

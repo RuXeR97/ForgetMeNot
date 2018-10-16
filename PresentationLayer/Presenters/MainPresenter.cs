@@ -13,7 +13,6 @@ namespace PresentationLayer.Presenters
     {
         #region Data
         private IMainView _mainView;
-        public event EventHandler TaskDetailViewBindingDoneEventRaised;
 
         private IDirectResponseSchema _calendarEvents;
         private ITaskService _eventGoogleService;

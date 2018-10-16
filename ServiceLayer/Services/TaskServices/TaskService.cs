@@ -15,21 +15,22 @@ namespace ServiceLayer.Services.TaskServices
             _modelDataAnnotationCheck = modelDataAnnotationCheck;
         }
 
-        public void Add(IDirectResponseSchema taskModel)
+        public void Add(string calendarId, string text)
         {
             // method to validate model
-            _taskRepository.Add(taskModel);
+            _taskRepository.Add(calendarId, text);
         }
 
-        public void Delete(IDirectResponseSchema taskModel)
+        public void Update(IDirectResponseSchema newCalendarEvent, string calendarId, string oldEventId)
+        {
+            _taskRepository.Update(newCalendarEvent, calendarId, oldEventId);
+        }
+
+
+        public void Delete(string calendarId, string eventId)
         {
             // method to validate model
-            _taskRepository.Delete(taskModel);
-        }
-
-        public void DeleteById(int taskModelId)
-        {
-            _taskRepository.DeleteById(taskModelId);
+            _taskRepository.Delete(calendarId, eventId);
         }
 
         public IDirectResponseSchema GetAllEvents()
