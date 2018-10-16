@@ -105,7 +105,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\Repositories\Local\Task\TaskLocalRepository.cs" />
     <Compile Include="DataAccess\Repositories\Specific\BaseSpecificRepository.cs" />
     <Compile Include="DataAccess\Repositories\Specific\Task\TaskGoogleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -12,7 +12,7 @@ namespace ServiceLayer.Services.TaskServices
         void Delete(IDirectResponseSchema calendarEvent);
         void DeleteById(int calendarEventId);
         IDirectResponseSchema GetAllEvents();
-        IDirectResponseSchema GetByMonth(DateTime? month);
+        IDirectResponseSchema GetEventsByMonth(DateTime? month);
 
     }
 }

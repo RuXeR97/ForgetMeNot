@@ -87,7 +87,7 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
         }
 
         // done
-        public IDirectResponseSchema GetByMonth(DateTime? month)
+        public IDirectResponseSchema GetEventsByMonth(DateTime? month)
         {
             EventsResource.ListRequest request = service.Events.List("primary");
             request.TimeMin = DateTime.MinValue;

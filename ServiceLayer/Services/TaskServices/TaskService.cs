@@ -39,7 +39,7 @@ namespace ServiceLayer.Services.TaskServices
 
         public IDirectResponseSchema GetEventsByMonth(DateTime month)
         {
-            return _taskRepository.GetByMonth(month);
+            return _taskRepository.GetEventsByMonth(month);
         }
 
         public void ValidateModel(IDirectResponseSchema taskModel)
