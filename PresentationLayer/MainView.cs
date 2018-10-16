@@ -2,7 +2,6 @@
 using PresentationLayer.Common;
 using PresentationLayer.Views.CustomControls;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -21,12 +20,10 @@ namespace PresentationLayer
         private Button ArrowLeftButton;
         private Button ArrowRightButton;
         private Label[] DateLabels;
-        private List<string> TasksStrings;
 
         private bool dragging = false;
         private Point dragCursorPoint;
         private Point dragFormPoint;
-
 
 
         public MainView()
@@ -35,12 +32,10 @@ namespace PresentationLayer
             SetMenuProperties(true, AutoSizeMode.GrowAndShrink, Color.LimeGreen, Color.LimeGreen,
                DockStyle.Fill, FormBorderStyle.None, false);
         }
-
         public void ShowMainView()
         {
             Show();
         }
-
         private void SetMenuProperties(bool autoSize, AutoSizeMode autoSizeMode, Color backColor,
             Color transparencyKeyColor, DockStyle dock, FormBorderStyle formBorderStyle, bool showInTaskBar)
         {

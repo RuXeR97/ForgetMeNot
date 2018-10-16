@@ -9,7 +9,6 @@ namespace PresentationLayer.Views.CustomControls
         #region Custom data
         private readonly int _width;
         private readonly int _height;
-        private string _text;
         #endregion
 
         #region Constructors

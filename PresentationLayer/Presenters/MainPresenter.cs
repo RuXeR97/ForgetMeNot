@@ -1,10 +1,10 @@
-﻿using Ical.Net;
-using Ical.Net.CalendarComponents;
-using Ical.Net.Proxies;
-using InfrastructureLayer.DataAccess.Repositories.Local.Task;
+﻿using Google.Apis.Calendar.v3.Data;
+using Google.Apis.Requests;
+using InfrastructureLayer.DataAccess.Repositories.Specific.Task;
 using PresentationLayer.Other;
 using ServiceLayer.Services.TaskServices;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Presenters
@@ -15,8 +15,8 @@ namespace PresentationLayer.Presenters
         private IMainView _mainView;
         public event EventHandler TaskDetailViewBindingDoneEventRaised;
 
-        private IUniqueComponentList<CalendarEvent> _calendarEvents;
-        private ITaskService _taskService;
+        private IDirectResponseSchema _calendarEvents;
+        private ITaskService _eventGoogleService;
         private ICalendarEventsParser _calendarEventsParser;
 
 
@@ -26,6 +26,7 @@ namespace PresentationLayer.Presenters
         private readonly int sizeY = 30;
         private const int countOfDaysInWeek = 7;
         string[] tasksArray;
+
         public DateTime CurrentDate { get; set; }
         #endregion
 
@@ -33,7 +34,8 @@ namespace PresentationLayer.Presenters
         {
             CurrentDate = DateTime.Now;
             _mainView = mainView;
-            _taskService = new TaskService(new TaskLocalRepository("ruxer"), null);
+            _eventGoogleService = new TaskService(new TaskGoogleRepository(), null);
+
             _calendarEventsParser = new CalendarEventsParser();
             CurrentDate = DateTime.Now;
 
@@ -59,10 +61,9 @@ namespace PresentationLayer.Presenters
             _mainView.ButtonOfArrowLeftMouseClickEventRaised += new MouseEventHandler(OnButtonOfArrowLeftMouseDownEventRaised);
             _mainView.ButtonOfArrowRightMouseClickEventRaised += new MouseEventHandler(OnButtonOfArrowRightMouseDownEventRaised);
         }
-        private IUniqueComponentList<CalendarEvent> GetDataFromLocalRepository()
+        private IDirectResponseSchema GetDataFromLocalRepository()
         {
-            ICalendarComponent _calendar = new Calendar();
-            IUniqueComponentList<CalendarEvent> calendarEvents = _taskService.GetAll();
+            var calendarEvents = _eventGoogleService.GetAllEvents();
 
             return calendarEvents;
         }
@@ -85,7 +86,12 @@ namespace PresentationLayer.Presenters
 
         private void LoadTasksArray()
         {
-            tasksArray = _calendarEventsParser.ConvertCalendarEventsToArray(CurrentDate, _calendarEvents);
+            var currentMonthEvents = (_calendarEvents as Events).Items.
+                Where(i => i.Start.DateTime != null && 
+                i.Start.DateTime.Value.Year == CurrentDate.Year && 
+                i.Start.DateTime.Value.Month == CurrentDate.Month).ToList();
+
+            tasksArray = _calendarEventsParser.ConvertCalendarEventsToArray(CurrentDate, currentMonthEvents);
         }
 
         private void HighlightButtons()

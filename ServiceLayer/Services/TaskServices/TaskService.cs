@@ -1,5 +1,4 @@
-﻿using Ical.Net.CalendarComponents;
-using Ical.Net.Proxies;
+﻿using Google.Apis.Requests;
 using ServiceLayer.CommonServices;
 using System;
 
@@ -16,13 +15,13 @@ namespace ServiceLayer.Services.TaskServices
             _modelDataAnnotationCheck = modelDataAnnotationCheck;
         }
 
-        public void Add(IRecurringComponent taskModel)
+        public void Add(IDirectResponseSchema taskModel)
         {
             // method to validate model
             _taskRepository.Add(taskModel);
         }
 
-        public void Delete(IRecurringComponent taskModel)
+        public void Delete(IDirectResponseSchema taskModel)
         {
             // method to validate model
             _taskRepository.Delete(taskModel);
@@ -33,33 +32,28 @@ namespace ServiceLayer.Services.TaskServices
             _taskRepository.DeleteById(taskModelId);
         }
 
-        public IUniqueComponentList<CalendarEvent> GetAll()
+        public IDirectResponseSchema GetAllEvents()
         {
-            return _taskRepository.GetAll();
+            return _taskRepository.GetAllEvents();
         }
 
-        public IUniqueComponentList<CalendarEvent> GetByMonth(DateTime month)
+        public IDirectResponseSchema GetEventsByMonth(DateTime month)
         {
             return _taskRepository.GetByMonth(month);
         }
 
-        public void Update(IRecurringComponent taskModel)
-        {
-            //_taskRepository.Update(taskModel);
-        }
-
-        public void ValidateModel(IRecurringComponent taskModel)
+        public void ValidateModel(IDirectResponseSchema taskModel)
         {
             _modelDataAnnotationCheck.ValidateModelDataAnnotations(taskModel);
             ValidateTaskTimeOfCreation(taskModel);
         }
 
-        public void ValidateModelDataAnnotations(IRecurringComponent taskModel)
+        public void ValidateModelDataAnnotations(IDirectResponseSchema taskModel)
         {
             _modelDataAnnotationCheck.ValidateModelDataAnnotations(taskModel);
         }
 
-        public void ValidateTaskTimeOfCreation(IRecurringComponent taskModel)
+        public void ValidateTaskTimeOfCreation(IDirectResponseSchema taskModel)
         {
             // some code to validate timeofcreation
         }

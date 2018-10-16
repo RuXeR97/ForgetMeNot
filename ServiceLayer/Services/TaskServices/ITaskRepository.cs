@@ -1,17 +1,18 @@
-﻿using Ical.Net.CalendarComponents;
-using Ical.Net.Proxies;
+﻿using Google.Apis.Calendar.v3.Data;
+using Google.Apis.Requests;
 using System;
+using System.Collections.Generic;
 
 namespace ServiceLayer.Services.TaskServices
 {
     public interface ITaskRepository
     {
-        void Add(IRecurringComponent calendarEvent);
-        void Update(IRecurringComponent calendarEvent, IRecurringComponent newCalendarEvent);
-        void Delete(IRecurringComponent calendarEvent);
+        void Add(IDirectResponseSchema calendarEvent);
+        void Update(IDirectResponseSchema calendarEvent, IDirectResponseSchema newCalendarEvent);
+        void Delete(IDirectResponseSchema calendarEvent);
         void DeleteById(int calendarEventId);
-        IUniqueComponentList<CalendarEvent> GetAll();
-        IUniqueComponentList<CalendarEvent> GetByMonth(DateTime month);
+        IDirectResponseSchema GetAllEvents();
+        IDirectResponseSchema GetByMonth(DateTime? month);
 
     }
 }

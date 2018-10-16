@@ -1,20 +1,18 @@
-﻿using Ical.Net.CalendarComponents;
-using Ical.Net.Proxies;
+﻿using Google.Apis.Requests;
 using System;
 
 namespace ServiceLayer.Services.TaskServices
 {
     public interface ITaskService
     {
-        void Add(IRecurringComponent taskModel);
-        void Update(IRecurringComponent taskModel);
-        void Delete(IRecurringComponent taskModel);
+        void Add(IDirectResponseSchema taskModel);
+        void Delete(IDirectResponseSchema taskModel);
         void DeleteById(int taskModelId);
-        IUniqueComponentList<CalendarEvent> GetAll();
-        IUniqueComponentList<CalendarEvent> GetByMonth(DateTime month);
+        IDirectResponseSchema GetAllEvents();
+        IDirectResponseSchema GetEventsByMonth(DateTime month);
 
-        void ValidateModel(IRecurringComponent taskModel);
-        void ValidateModelDataAnnotations(IRecurringComponent taskModel);
-        void ValidateTaskTimeOfCreation(IRecurringComponent taskModel);
+        void ValidateModel(IDirectResponseSchema taskModel);
+        void ValidateModelDataAnnotations(IDirectResponseSchema taskModel);
+        void ValidateTaskTimeOfCreation(IDirectResponseSchema taskModel);
     }
 }

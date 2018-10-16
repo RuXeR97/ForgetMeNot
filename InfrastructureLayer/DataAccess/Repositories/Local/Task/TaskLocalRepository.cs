@@ -1,69 +1,105 @@
-﻿using Ical.Net;
-using Ical.Net.CalendarComponents;
-using Ical.Net.Proxies;
-using ServiceLayer.Services.TaskServices;
+﻿using ServiceLayer.Services.TaskServices;
 using System;
 using System.IO;
 using System.Linq;
 namespace InfrastructureLayer.DataAccess.Repositories.Local.Task
 {
-    public class TaskLocalRepository : ITaskRepository
+    public class TaskLocalRepository
     {
-        private string path;
-        private string fileName;
+        //private string path;
+        //private string fileName;
+        //private string textFromFile;
 
-        public TaskLocalRepository(string userLogin)
-        {
-            fileName = userLogin + "Tasks.ics";
+        //public TaskLocalRepository(string userLogin)
+        //{
+        //    fileName = userLogin + "Tasks.ics";
 
-            // change later
-            path = fileName;
-        }
+        //    // change later
+        //    path = fileName;
+        //}
 
-        public void Add(IRecurringComponent taskModel)
-        {
-            throw new NotImplementedException();
-        }
+        //public void Add(IRecurringComponent taskModel)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public void AddRange()
-        {
+        //public void AddRange()
+        //{
 
-        }
+        //}
 
-        // done
-        public void Delete(IRecurringComponent calendarEvent)
-        {
-            var calendarEvents = GetAll().Remove((CalendarEvent)calendarEvent);
-            //Calendar calendar;
-            //var veventTest = File.WriteAllText(path);
-            //var calendar = Calendar.
-        }
+        //// done
+        //public void Delete(IRecurringComponent calendarEvent)
+        //{
+        //    string[] lines = textFromFile
+        //    .Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
 
-        public void DeleteById(int taskModelId)
-        {
-            throw new NotImplementedException();
-        }
+        //    int counter = 11;
+        //    string[] newArray = new string[lines.Length - counter];
 
-        // done
-        public IUniqueComponentList<CalendarEvent> GetAll()
-        {
-            var veventTest = File.ReadAllText(path);
-            var calendar = Calendar.Load(veventTest);
-            var calendarEvents = calendar.Events;
+        //    int idOfRowToDelete = Array.FindIndex(lines, i => i.Contains(calendarEvent.Uid.ToString()));
+        //    int minIndex = idOfRowToDelete - 4;
 
-            return calendarEvents;
-        }
+        //    bool omitLines = false;
 
-        // done
-        public IUniqueComponentList<CalendarEvent> GetByMonth(DateTime date)
-        {
-            var taskModels = GetAll().Where(i => i.DtStart.Month == date.Month);
-            return (UniqueComponentListProxy<CalendarEvent>)taskModels;
-        }
+        //    // creating new array without specified event
+        //    textFromFile = null;
+        //    for (int i = 0; i < lines.Length; i++)
+        //    {
+        //        if (i == minIndex)
+        //        {
+        //            omitLines = true;
+        //        }
 
-        public void Update(IRecurringComponent calendarEvent, IRecurringComponent newCalendarEvent)
-        {
-            throw new NotImplementedException();
-        }
+        //        if (omitLines)
+        //        {
+        //            if (i == lines.Length - 11)
+        //            {
+        //                break;
+        //            }
+
+        //            textFromFile += lines[i + 11] + Environment.NewLine;
+        //            newArray[i] = lines[i + 11];
+        //        }
+        //        else
+        //        {
+        //            textFromFile += lines[i] + Environment.NewLine;
+        //            newArray[i] = lines[i];
+        //        }
+        //    }
+        //    var calendar = Calendar.Load(textFromFile);
+        //    var calendarEvents = calendar.Events;
+        //    lines = newArray;
+        //}
+
+        //public void DeleteById(int taskModelId)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //// done
+        //public IUniqueComponentList<CalendarEvent> GetAll()
+        //{
+        //    textFromFile = File.ReadAllText(path);
+        //    var calendar = Calendar.Load(textFromFile);
+        //    var calendarEvents = calendar.Events;
+
+        //    var test = calendarEvents.FirstOrDefault();
+        //    Delete(test);
+
+        //    return calendarEvents;
+        //}
+
+        //// done
+        //public IUniqueComponentList<CalendarEvent> GetByMonth(DateTime date)
+        //{
+        //    var taskModels = GetAll().Where(i => i.DtStart.Month == date.Month);
+        //    return (UniqueComponentListProxy<CalendarEvent>)taskModels;
+        //}
+
+        //public void Update(IRecurringComponent calendarEvent, IRecurringComponent newCalendarEvent)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
