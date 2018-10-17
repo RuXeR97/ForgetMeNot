@@ -23,10 +23,12 @@ namespace PresentationLayer
         private Button ArrowLeftButton;
         private Button ArrowRightButton;
         private Label[] DateLabels;
+        private NotifyIcon NotifyIcon;
 
         private bool dragging = false;
         private Point dragCursorPoint;
         private Point dragFormPoint;
+        private readonly string path;
 
 
         public MainView()
@@ -34,6 +36,8 @@ namespace PresentationLayer
             InitializeComponent();
             SetMenuProperties(true, AutoSizeMode.GrowAndShrink, Color.LimeGreen, Color.LimeGreen,
                DockStyle.Fill, FormBorderStyle.None, false);
+
+            path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
         }
         public void ShowMainView()
         {
@@ -43,21 +47,11 @@ namespace PresentationLayer
         {
             this.Location = new Point(Properties.Settings.Default.LocationX, Properties.Settings.Default.LocationY);
         }
-
         public void SaveMenuPosition()
         {
             Properties.Settings.Default.LocationX = this.Location.X;
             Properties.Settings.Default.LocationY = this.Location.Y;
             Properties.Settings.Default.Save();
-        }
-        private void SetMenuProperties(bool autoSize, AutoSizeMode autoSizeMode, Color backColor,
-            Color transparencyKeyColor, DockStyle dock, FormBorderStyle formBorderStyle, bool showInTaskBar)
-        {
-            this.AutoSize = autoSize;
-            this.AutoSizeMode = autoSizeMode;
-            this.Dock = dock;
-            this.ShowInTaskbar = showInTaskBar;
-            FormBorderStyle = formBorderStyle;
         }
 
         #region Public initialization methods
@@ -137,7 +131,6 @@ namespace PresentationLayer
         }
         public Button InitializeLeftArrow(int sizeX, int sizeY)
         {
-            string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             Bitmap bitmap = (Bitmap)Bitmap.FromFile(path + @"\Resources\leftArrow.png");
 
             ArrowLeftButton = new Button
@@ -154,7 +147,6 @@ namespace PresentationLayer
         }
         public Button InitializeRightArrow(int sizeX, int sizeY)
         {
-            string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             Bitmap bitmap = (Bitmap)Bitmap.FromFile(path + @"\Resources\rightArrow.png");
 
             ArrowRightButton = new Button
@@ -191,6 +183,14 @@ namespace PresentationLayer
                 }
             }
         }
+
+        public void InitializeNotifyIcon()
+        {
+            NotifyIcon = new NotifyIcon();
+            NotifyIcon.Visible = true;
+            NotifyIcon.Icon = Icon.ExtractAssociatedIcon(path + @"\Resources\icon.ico");
+        }
+
         #endregion
 
         #region Private initialization methods
@@ -228,6 +228,16 @@ namespace PresentationLayer
             }
 
             return days;
+        }
+
+        private void SetMenuProperties(bool autoSize, AutoSizeMode autoSizeMode, Color backColor,
+    Color transparencyKeyColor, DockStyle dock, FormBorderStyle formBorderStyle, bool showInTaskBar)
+        {
+            this.AutoSize = autoSize;
+            this.AutoSizeMode = autoSizeMode;
+            this.Dock = dock;
+            this.ShowInTaskbar = showInTaskBar;
+            FormBorderStyle = formBorderStyle;
         }
 
         #endregion

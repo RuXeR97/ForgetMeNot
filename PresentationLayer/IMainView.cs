@@ -19,6 +19,7 @@ namespace PresentationLayer
         void HighlightDaysButtonsWithTasks(string[] text);
         Button InitializeLeftArrow(int sizeX, int sizeY);
         Button InitializeRightArrow(int sizeX, int sizeY);
+        void InitializeNotifyIcon();
         void ShowMainView();
         void SetMenuPosition();
         void SaveMenuPosition();

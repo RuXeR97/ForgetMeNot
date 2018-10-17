@@ -49,6 +49,7 @@ namespace PresentationLayer.Presenters
             _mainView.InitializeRightArrow(sizeX, sizeY);
             _mainView.InitializeToolTips(tasksArray);
             _mainView.HighlightDaysButtonsWithTasks(tasksArray);
+            _mainView.InitializeNotifyIcon();
             SubscribeToEventsSetup();
         }
 
