@@ -9,5 +9,15 @@ namespace PresentationLayer.Presenters
     public class AddEventPresenter
     {
 
+
+
+        //public IAddEventView GetAddEventView()
+        //{
+        //    return _addEventView;
+        //}
+        private void SubscribeToEventsSetup()
+        {
+            
+        }
     }
 }

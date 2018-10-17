@@ -2,6 +2,7 @@
 using Google.Apis.Requests;
 using InfrastructureLayer.DataAccess.Repositories.Specific.Task;
 using PresentationLayer.Other;
+using PresentationLayer.Views.UserControls;
 using ServiceLayer.Services.TaskServices;
 using System;
 using System.Linq;
@@ -59,6 +60,8 @@ namespace PresentationLayer.Presenters
         {
             _mainView.ButtonOfArrowLeftMouseClickEventRaised += new MouseEventHandler(OnButtonOfArrowLeftMouseDownEventRaised);
             _mainView.ButtonOfArrowRightMouseClickEventRaised += new MouseEventHandler(OnButtonOfArrowRightMouseDownEventRaised);
+            _mainView.AddEventToolStripButtonClickEventRaised += new EventHandler(OnAddEventButtonClickEventRaised);
+            _mainView.MainViewLoadEventRaised += new EventHandler(OnMainViewLoadEventRaised);
         }
         private IDirectResponseSchema GetDataFromLocalRepository()
         {
@@ -126,6 +129,22 @@ namespace PresentationLayer.Presenters
             LoadMonthAndYearLabels();
             LoadToolTips();
             HighlightButtons();
+        }
+
+        private void OnAddEventButtonClickEventRaised(object sender, EventArgs e)
+        {
+            var addEventView = new AddEventView();
+            addEventView.Show();
+        }
+
+        private void OnMainViewLoadEventRaised(object sender, EventArgs e)
+        {
+            _mainView.SetMenuPosition();
+        }
+
+        private void OnMainViewFormClosingEventRaised(object sender, FormClosingEventArgs e)
+        {
+            _mainView.SaveMenuPosition();
         }
         #endregion
     }

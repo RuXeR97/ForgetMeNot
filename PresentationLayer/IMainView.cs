@@ -7,6 +7,9 @@ namespace PresentationLayer
     {
         event MouseEventHandler ButtonOfArrowLeftMouseClickEventRaised;
         event MouseEventHandler ButtonOfArrowRightMouseClickEventRaised;
+        event EventHandler AddEventToolStripButtonClickEventRaised;
+        event EventHandler MainViewLoadEventRaised;
+        event EventHandler MainViewFormClosingEventRaised;
 
         Label[] InitializeDateLabels(int width, int height, int sizeX, int sizeY, DateTime date);
         Button[] InitializeDays(DateTime currentDate, int width, int height, int sizeX, int sizeY);
@@ -17,5 +20,7 @@ namespace PresentationLayer
         Button InitializeLeftArrow(int sizeX, int sizeY);
         Button InitializeRightArrow(int sizeX, int sizeY);
         void ShowMainView();
+        void SetMenuPosition();
+        void SaveMenuPosition();
     }
 }

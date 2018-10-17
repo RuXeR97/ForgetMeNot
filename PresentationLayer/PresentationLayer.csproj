@@ -167,18 +167,13 @@
     </Compile>
     <Compile Include="Other\CalendarEventsParser.cs" />
     <Compile Include="Other\ICalendarEventsParser.cs" />
+    <Compile Include="Presenters\AddEventPresenter.cs" />
     <Compile Include="Presenters\BasePresenter.cs" />
     <Compile Include="Presenters\IBasePresenter.cs" />
     <Compile Include="Presenters\IMainPresenter.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\AddEventView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\AddEventView.Designer.cs">
-      <DependentUpon>AddEventView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\CustomControls\CustomToolTip.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -189,6 +184,12 @@
       <DependentUpon>ErrorMessageView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\IErrorMessageView.cs" />
+    <Compile Include="Views\UserControls\AddEventView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\AddEventView.Designer.cs">
+      <DependentUpon>AddEventView.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
@@ -202,9 +203,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Views\AddEventView.resx">
-      <DependentUpon>AddEventView.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\ErrorMessageView.resx">
       <DependentUpon>ErrorMessageView.cs</DependentUpon>
     </EmbeddedResource>
@@ -222,9 +220,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\UserControls\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\icon.ico" />
   </ItemGroup>

@@ -41,6 +41,7 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainView_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainView_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainView_MouseUp);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainView_FormClosing);
             this.ResumeLayout(false);
 
         }

@@ -14,7 +14,8 @@ namespace PresentationLayer
 
         public event MouseEventHandler ButtonOfArrowLeftMouseClickEventRaised;
         public event MouseEventHandler ButtonOfArrowRightMouseClickEventRaised;
-
+        public event EventHandler MainViewLoadEventRaised;
+        public event EventHandler MainViewFormClosingEventRaised;
         public event EventHandler AddEventToolStripButtonClickEventRaised;
 
         private Button[] DayButtons;
@@ -37,6 +38,17 @@ namespace PresentationLayer
         public void ShowMainView()
         {
             Show();
+        }
+        public void SetMenuPosition()
+        {
+            this.Location = new Point(Properties.Settings.Default.LocationX, Properties.Settings.Default.LocationY);
+        }
+
+        public void SaveMenuPosition()
+        {
+            Properties.Settings.Default.LocationX = this.Location.X;
+            Properties.Settings.Default.LocationY = this.Location.Y;
+            Properties.Settings.Default.Save();
         }
         private void SetMenuProperties(bool autoSize, AutoSizeMode autoSizeMode, Color backColor,
             Color transparencyKeyColor, DockStyle dock, FormBorderStyle formBorderStyle, bool showInTaskBar)
@@ -227,6 +239,8 @@ namespace PresentationLayer
             {
                 MainViewButtonsHelper.SetButtonOfDayMouseBehaviour(button);
             }
+
+            EventHelpers.RaiseEvent(objectRaisingEvent: this, eventHandlerRaised: MainViewLoadEventRaised, eventArgs: e);
         }
         private void MainView_MouseMove(object sender, MouseEventArgs e)
         {
@@ -245,6 +259,10 @@ namespace PresentationLayer
             dragging = true;
             dragCursorPoint = Cursor.Position;
             dragFormPoint = this.Location;
+        }
+        private void MainView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            EventHelpers.RaiseEvent(objectRaisingEvent: this, eventHandlerRaised: MainViewFormClosingEventRaised, eventArgs: e);
         }
 
         #endregion
@@ -267,8 +285,8 @@ namespace PresentationLayer
                     {
                         ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
 
-                        ToolStripMenuItem menuItem = new ToolStripMenuItem("Add task");
-                        menuItem.Name = "Add task";
+                        ToolStripMenuItem menuItem = new ToolStripMenuItem("Add event");
+                        menuItem.Name = "Add event";
                         menuItem.Click += AddEventButton_Click;
                         contextMenuStrip.Items.Add(menuItem);
                         Button button = sender as Button;
