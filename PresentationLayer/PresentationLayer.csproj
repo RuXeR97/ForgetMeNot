@@ -35,7 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icons8_nadgodziny_48_Jkx_icon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
@@ -224,8 +225,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="icons8_nadgodziny_48_Jkx_icon.ico" />
+    <Content Include="Resources\exitIcon.ico" />
     <Content Include="Resources\icon.ico" />
+    <Content Include="Resources\settingsIcon.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\leftArrow.png" />

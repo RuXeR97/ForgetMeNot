@@ -189,6 +189,25 @@ namespace PresentationLayer
             NotifyIcon = new NotifyIcon();
             NotifyIcon.Visible = true;
             NotifyIcon.Icon = Icon.ExtractAssociatedIcon(path + @"\Resources\icon.ico");
+            ContextMenuStrip menuStrip = new ContextMenuStrip();
+
+            ToolStripMenuItem exitMenuItem = new ToolStripMenuItem("Exit")
+            {
+                Image = (Bitmap)Bitmap.FromFile(path + @"\Resources\exitIcon.ico")
+            };
+            //exitMenuItem.Click += new EventHandler(exitMenuItem_Click);
+            exitMenuItem.Name = "Exit";
+            menuStrip.Items.Add(exitMenuItem);
+
+            ToolStripMenuItem settingsMenuItem = new ToolStripMenuItem("Settings")
+            {
+                Image = (Bitmap)Bitmap.FromFile(path + @"\Resources\settingsIcon.ico")
+        };
+            //settingsMenuItem.Click += new EventHandler(settingsMenuItemClick);
+            settingsMenuItem.Name = "Settings";
+            menuStrip.Items.Add(settingsMenuItem);
+
+            NotifyIcon.ContextMenuStrip = menuStrip;
         }
 
         #endregion
