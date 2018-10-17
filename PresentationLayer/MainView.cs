@@ -285,10 +285,15 @@ namespace PresentationLayer
                     {
                         ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
 
-                        ToolStripMenuItem menuItem = new ToolStripMenuItem("Add event");
-                        menuItem.Name = "Add event";
-                        menuItem.Click += AddEventButton_Click;
-                        contextMenuStrip.Items.Add(menuItem);
+                        ToolStripMenuItem addEventMenuItem = new ToolStripMenuItem("Add event");
+                        addEventMenuItem.Name = "Add event";
+                        addEventMenuItem.Click += AddEventButton_Click;
+                        contextMenuStrip.Items.Add(addEventMenuItem);
+
+                        ToolStripMenuItem closeApplicationMenuItem = new ToolStripMenuItem("Close application");
+                        closeApplicationMenuItem.Name = "Close application";
+                        closeApplicationMenuItem.Click += CloseApplicationButton_Click;
+                        contextMenuStrip.Items.Add(closeApplicationMenuItem);
                         Button button = sender as Button;
                         Point screenPoint = button.PointToScreen(new Point(button.Left, button.Bottom));
                         if (screenPoint.Y + contextMenuStrip.Size.Height > Screen.PrimaryScreen.WorkingArea.Height)
@@ -337,10 +342,17 @@ namespace PresentationLayer
         {
             EventHelpers.RaiseEvent(objectRaisingEvent: this, eventHandlerRaised: ButtonOfArrowRightMouseClickEventRaised, eventArgs: e);
         }
+        #endregion
 
+        #region ToolStripButtons' events
         private void AddEventButton_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(objectRaisingEvent: this, eventHandlerRaised: AddEventToolStripButtonClickEventRaised, eventArgs: e);
+        }
+
+        private void CloseApplicationButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         #endregion

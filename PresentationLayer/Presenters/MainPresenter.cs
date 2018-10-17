@@ -62,6 +62,7 @@ namespace PresentationLayer.Presenters
             _mainView.ButtonOfArrowRightMouseClickEventRaised += new MouseEventHandler(OnButtonOfArrowRightMouseDownEventRaised);
             _mainView.AddEventToolStripButtonClickEventRaised += new EventHandler(OnAddEventButtonClickEventRaised);
             _mainView.MainViewLoadEventRaised += new EventHandler(OnMainViewLoadEventRaised);
+            _mainView.MainViewFormClosingEventRaised += new EventHandler(OnMainViewFormClosingEventRaised);
         }
         private IDirectResponseSchema GetDataFromLocalRepository()
         {
@@ -142,7 +143,7 @@ namespace PresentationLayer.Presenters
             _mainView.SetMenuPosition();
         }
 
-        private void OnMainViewFormClosingEventRaised(object sender, FormClosingEventArgs e)
+        private void OnMainViewFormClosingEventRaised(object sender, EventArgs e)
         {
             _mainView.SaveMenuPosition();
         }
