@@ -195,7 +195,7 @@ namespace PresentationLayer
             {
                 Image = (Bitmap)Bitmap.FromFile(path + @"\Resources\exitIcon.ico")
             };
-            //exitMenuItem.Click += new EventHandler(exitMenuItem_Click);
+            exitMenuItem.Click += new EventHandler(CloseApplicationButton_Click);
             exitMenuItem.Name = "Exit";
             menuStrip.Items.Add(exitMenuItem);
 
