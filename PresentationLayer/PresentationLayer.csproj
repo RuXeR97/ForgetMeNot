@@ -216,6 +216,9 @@
     <EmbeddedResource Include="Views\ErrorMessageView.resx">
       <DependentUpon>ErrorMessageView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\AddEventView.resx">
+      <DependentUpon>AddEventView.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

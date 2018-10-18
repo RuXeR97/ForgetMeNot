@@ -61,7 +61,7 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
         {
             service.Events.Delete(calendarId, eventId);
         }
-        
+
         public IDirectResponseSchema GetAllEvents()
 
         {
@@ -118,6 +118,19 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
             {
                 return null;
             }
+        }
+
+        public List<string> GetCalendarsList()
+        {
+            var calendars = service.CalendarList.List().Execute().Items;
+            List<string> calendarsNames = new List<string>();
+            foreach (CalendarListEntry entry in calendars)
+            {
+                calendarsNames.Add(entry.Summary);
+            }
+            //Console.WriteLine(entry.Summary + " - " + entry.Id);
+
+            return calendarsNames;
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using Google.Apis.Requests;
 using ServiceLayer.CommonServices;
 using System;
+using System.Collections.Generic;
 
 namespace ServiceLayer.Services.TaskServices
 {
@@ -41,6 +42,11 @@ namespace ServiceLayer.Services.TaskServices
         public IDirectResponseSchema GetEventsByMonth(DateTime month)
         {
             return _taskRepository.GetEventsByMonth(month);
+        }
+
+        public List<string> GetCalendarsList()
+        {
+            return _taskRepository.GetCalendarsList();
         }
 
         public void ValidateModel(IDirectResponseSchema taskModel)
