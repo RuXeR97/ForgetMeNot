@@ -128,7 +128,6 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
             {
                 calendarsNames.Add(entry.Summary);
             }
-            //Console.WriteLine(entry.Summary + " - " + entry.Id);
 
             return calendarsNames;
         }

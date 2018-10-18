@@ -30,29 +30,29 @@
         {
             this.kryptonDockableNavigator1 = new ComponentFactory.Krypton.Docking.KryptonDockableNavigator();
             this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.descriptionKryptonLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.locationKryptonLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.endHourKryptonDateTimePicker = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
+            this.startHourKryptonDateTimePicker = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
+            this.calendarsComboBox = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.calendarKryptonLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.cancelKryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.confirmKryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.endTimeKryptonDateTimePicker = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
+            this.startTimeKryptonDateTimePicker = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
+            this.locationKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.descriptionKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
             this.endTimeKryptonLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.startTimeKryptonLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.descriptionKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
-            this.locationKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.startTimeKryptonDateTimePicker = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
-            this.endTimeKryptonDateTimePicker = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
-            this.confirmKryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.cancelKryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.calendarKryptonLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.calendarsComboBox = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.startHourKryptonDateTimePicker = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
-            this.endHourKryptonDateTimePicker = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
+            this.locationKryptonLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.descriptionKryptonLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDockableNavigator1)).BeginInit();
             this.kryptonDockableNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
             this.kryptonPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.calendarsComboBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonDockableNavigator1
@@ -80,18 +80,6 @@
             this.kryptonPage1.ToolTipTitle = "Page ToolTip";
             this.kryptonPage1.UniqueName = "1AD4F24E4F69413334810AAD3B461ECB";
             // 
-            // kryptonPage2
-            // 
-            this.kryptonPage2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.kryptonPage2.Flags = 65534;
-            this.kryptonPage2.LastVisibleSet = true;
-            this.kryptonPage2.MinimumSize = new System.Drawing.Size(50, 50);
-            this.kryptonPage2.Name = "kryptonPage2";
-            this.kryptonPage2.Size = new System.Drawing.Size(439, 367);
-            this.kryptonPage2.Text = "Unimplemented";
-            this.kryptonPage2.ToolTipTitle = "Page ToolTip";
-            this.kryptonPage2.UniqueName = "390D76CE5CE14952ABBA9DF3764EE80E";
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.endHourKryptonDateTimePicker);
@@ -113,21 +101,97 @@
             this.panel1.Size = new System.Drawing.Size(564, 348);
             this.panel1.TabIndex = 0;
             // 
-            // descriptionKryptonLabel
+            // endHourKryptonDateTimePicker
             // 
-            this.descriptionKryptonLabel.Location = new System.Drawing.Point(27, 26);
-            this.descriptionKryptonLabel.Name = "descriptionKryptonLabel";
-            this.descriptionKryptonLabel.Size = new System.Drawing.Size(92, 24);
-            this.descriptionKryptonLabel.TabIndex = 0;
-            this.descriptionKryptonLabel.Values.Text = "Description:";
+            this.endHourKryptonDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.endHourKryptonDateTimePicker.Location = new System.Drawing.Point(424, 195);
+            this.endHourKryptonDateTimePicker.Name = "endHourKryptonDateTimePicker";
+            this.endHourKryptonDateTimePicker.ShowUpDown = true;
+            this.endHourKryptonDateTimePicker.Size = new System.Drawing.Size(107, 25);
+            this.endHourKryptonDateTimePicker.TabIndex = 15;
+            this.endHourKryptonDateTimePicker.ValueChanged += new System.EventHandler(this.endHourKryptonDateTimePicker_ValueChanged);
             // 
-            // locationKryptonLabel
+            // startHourKryptonDateTimePicker
             // 
-            this.locationKryptonLabel.Location = new System.Drawing.Point(27, 109);
-            this.locationKryptonLabel.Name = "locationKryptonLabel";
-            this.locationKryptonLabel.Size = new System.Drawing.Size(73, 24);
-            this.locationKryptonLabel.TabIndex = 1;
-            this.locationKryptonLabel.Values.Text = "Location:";
+            this.startHourKryptonDateTimePicker.CustomFormat = "Time";
+            this.startHourKryptonDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.startHourKryptonDateTimePicker.Location = new System.Drawing.Point(424, 153);
+            this.startHourKryptonDateTimePicker.Name = "startHourKryptonDateTimePicker";
+            this.startHourKryptonDateTimePicker.ShowUpDown = true;
+            this.startHourKryptonDateTimePicker.Size = new System.Drawing.Size(107, 25);
+            this.startHourKryptonDateTimePicker.TabIndex = 14;
+            this.startHourKryptonDateTimePicker.ValueChanged += new System.EventHandler(this.startHourKryptonDateTimePicker_ValueChanged);
+            // 
+            // calendarsComboBox
+            // 
+            this.calendarsComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.calendarsComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.calendarsComboBox.DropDownWidth = 260;
+            this.calendarsComboBox.Location = new System.Drawing.Point(135, 237);
+            this.calendarsComboBox.Name = "calendarsComboBox";
+            this.calendarsComboBox.Size = new System.Drawing.Size(260, 25);
+            this.calendarsComboBox.TabIndex = 13;
+            // 
+            // calendarKryptonLabel
+            // 
+            this.calendarKryptonLabel.Location = new System.Drawing.Point(28, 238);
+            this.calendarKryptonLabel.Name = "calendarKryptonLabel";
+            this.calendarKryptonLabel.Size = new System.Drawing.Size(75, 24);
+            this.calendarKryptonLabel.TabIndex = 12;
+            this.calendarKryptonLabel.Values.Text = "Calendar:";
+            // 
+            // cancelKryptonButton
+            // 
+            this.cancelKryptonButton.AutoSize = true;
+            this.cancelKryptonButton.Location = new System.Drawing.Point(424, 296);
+            this.cancelKryptonButton.Name = "cancelKryptonButton";
+            this.cancelKryptonButton.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Silver;
+            this.cancelKryptonButton.Size = new System.Drawing.Size(90, 28);
+            this.cancelKryptonButton.TabIndex = 11;
+            this.cancelKryptonButton.Values.Text = "Cancel";
+            // 
+            // confirmKryptonButton
+            // 
+            this.confirmKryptonButton.AutoSize = true;
+            this.confirmKryptonButton.Location = new System.Drawing.Point(298, 296);
+            this.confirmKryptonButton.Name = "confirmKryptonButton";
+            this.confirmKryptonButton.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Silver;
+            this.confirmKryptonButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.confirmKryptonButton.Size = new System.Drawing.Size(97, 28);
+            this.confirmKryptonButton.TabIndex = 10;
+            this.confirmKryptonButton.Values.Text = "Confirm";
+            this.confirmKryptonButton.Click += new System.EventHandler(this.confirmKryptonButton_Click);
+            // 
+            // endTimeKryptonDateTimePicker
+            // 
+            this.endTimeKryptonDateTimePicker.Location = new System.Drawing.Point(135, 195);
+            this.endTimeKryptonDateTimePicker.Name = "endTimeKryptonDateTimePicker";
+            this.endTimeKryptonDateTimePicker.Size = new System.Drawing.Size(260, 25);
+            this.endTimeKryptonDateTimePicker.TabIndex = 9;
+            this.endTimeKryptonDateTimePicker.ValueChanged += new System.EventHandler(this.endTimeKryptonDateTimePicker_ValueChanged);
+            // 
+            // startTimeKryptonDateTimePicker
+            // 
+            this.startTimeKryptonDateTimePicker.Location = new System.Drawing.Point(135, 152);
+            this.startTimeKryptonDateTimePicker.Name = "startTimeKryptonDateTimePicker";
+            this.startTimeKryptonDateTimePicker.Size = new System.Drawing.Size(260, 25);
+            this.startTimeKryptonDateTimePicker.TabIndex = 8;
+            this.startTimeKryptonDateTimePicker.ValueChanged += new System.EventHandler(this.startTimeKryptonDateTimePicker_ValueChanged);
+            // 
+            // locationKryptonTextBox
+            // 
+            this.locationKryptonTextBox.Location = new System.Drawing.Point(135, 110);
+            this.locationKryptonTextBox.Name = "locationKryptonTextBox";
+            this.locationKryptonTextBox.Size = new System.Drawing.Size(396, 27);
+            this.locationKryptonTextBox.TabIndex = 6;
+            // 
+            // descriptionKryptonTextBox
+            // 
+            this.descriptionKryptonTextBox.Location = new System.Drawing.Point(135, 26);
+            this.descriptionKryptonTextBox.Name = "descriptionKryptonTextBox";
+            this.descriptionKryptonTextBox.Size = new System.Drawing.Size(396, 75);
+            this.descriptionKryptonTextBox.TabIndex = 5;
+            this.descriptionKryptonTextBox.Text = "";
             // 
             // endTimeKryptonLabel
             // 
@@ -145,85 +209,33 @@
             this.startTimeKryptonLabel.TabIndex = 2;
             this.startTimeKryptonLabel.Values.Text = "Start time:";
             // 
-            // descriptionKryptonTextBox
+            // locationKryptonLabel
             // 
-            this.descriptionKryptonTextBox.Location = new System.Drawing.Point(135, 26);
-            this.descriptionKryptonTextBox.Name = "descriptionKryptonTextBox";
-            this.descriptionKryptonTextBox.Size = new System.Drawing.Size(396, 75);
-            this.descriptionKryptonTextBox.TabIndex = 5;
-            this.descriptionKryptonTextBox.Text = "";
+            this.locationKryptonLabel.Location = new System.Drawing.Point(27, 109);
+            this.locationKryptonLabel.Name = "locationKryptonLabel";
+            this.locationKryptonLabel.Size = new System.Drawing.Size(73, 24);
+            this.locationKryptonLabel.TabIndex = 1;
+            this.locationKryptonLabel.Values.Text = "Location:";
             // 
-            // locationKryptonTextBox
+            // descriptionKryptonLabel
             // 
-            this.locationKryptonTextBox.Location = new System.Drawing.Point(135, 110);
-            this.locationKryptonTextBox.Name = "locationKryptonTextBox";
-            this.locationKryptonTextBox.Size = new System.Drawing.Size(396, 27);
-            this.locationKryptonTextBox.TabIndex = 6;
+            this.descriptionKryptonLabel.Location = new System.Drawing.Point(27, 26);
+            this.descriptionKryptonLabel.Name = "descriptionKryptonLabel";
+            this.descriptionKryptonLabel.Size = new System.Drawing.Size(92, 24);
+            this.descriptionKryptonLabel.TabIndex = 0;
+            this.descriptionKryptonLabel.Values.Text = "Description:";
             // 
-            // startTimeKryptonDateTimePicker
+            // kryptonPage2
             // 
-            this.startTimeKryptonDateTimePicker.Location = new System.Drawing.Point(135, 152);
-            this.startTimeKryptonDateTimePicker.Name = "startTimeKryptonDateTimePicker";
-            this.startTimeKryptonDateTimePicker.Size = new System.Drawing.Size(260, 25);
-            this.startTimeKryptonDateTimePicker.TabIndex = 8;
-            // 
-            // endTimeKryptonDateTimePicker
-            // 
-            this.endTimeKryptonDateTimePicker.Location = new System.Drawing.Point(135, 195);
-            this.endTimeKryptonDateTimePicker.Name = "endTimeKryptonDateTimePicker";
-            this.endTimeKryptonDateTimePicker.Size = new System.Drawing.Size(260, 25);
-            this.endTimeKryptonDateTimePicker.TabIndex = 9;
-            // 
-            // confirmKryptonButton
-            // 
-            this.confirmKryptonButton.Location = new System.Drawing.Point(305, 296);
-            this.confirmKryptonButton.Name = "confirmKryptonButton";
-            this.confirmKryptonButton.Size = new System.Drawing.Size(90, 25);
-            this.confirmKryptonButton.TabIndex = 10;
-            this.confirmKryptonButton.Values.Text = "Confirm";
-            // 
-            // cancelKryptonButton
-            // 
-            this.cancelKryptonButton.Location = new System.Drawing.Point(424, 296);
-            this.cancelKryptonButton.Name = "cancelKryptonButton";
-            this.cancelKryptonButton.Size = new System.Drawing.Size(90, 25);
-            this.cancelKryptonButton.TabIndex = 11;
-            this.cancelKryptonButton.Values.Text = "Cancel";
-            // 
-            // calendarKryptonLabel
-            // 
-            this.calendarKryptonLabel.Location = new System.Drawing.Point(28, 238);
-            this.calendarKryptonLabel.Name = "calendarKryptonLabel";
-            this.calendarKryptonLabel.Size = new System.Drawing.Size(75, 24);
-            this.calendarKryptonLabel.TabIndex = 12;
-            this.calendarKryptonLabel.Values.Text = "Calendar:";
-            // 
-            // calendarsComboBox
-            // 
-            this.calendarsComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.calendarsComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.calendarsComboBox.DropDownWidth = 260;
-            this.calendarsComboBox.Location = new System.Drawing.Point(135, 237);
-            this.calendarsComboBox.Name = "calendarsComboBox";
-            this.calendarsComboBox.Size = new System.Drawing.Size(260, 25);
-            this.calendarsComboBox.TabIndex = 13;
-            // 
-            // startHourKryptonDateTimePicker
-            // 
-            this.startHourKryptonDateTimePicker.CustomFormat = "Time";
-            this.startHourKryptonDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.startHourKryptonDateTimePicker.Location = new System.Drawing.Point(424, 153);
-            this.startHourKryptonDateTimePicker.Name = "startHourKryptonDateTimePicker";
-            this.startHourKryptonDateTimePicker.Size = new System.Drawing.Size(107, 25);
-            this.startHourKryptonDateTimePicker.TabIndex = 14;
-            // 
-            // endHourKryptonDateTimePicker
-            // 
-            this.endHourKryptonDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.endHourKryptonDateTimePicker.Location = new System.Drawing.Point(424, 195);
-            this.endHourKryptonDateTimePicker.Name = "endHourKryptonDateTimePicker";
-            this.endHourKryptonDateTimePicker.Size = new System.Drawing.Size(107, 25);
-            this.endHourKryptonDateTimePicker.TabIndex = 15;
+            this.kryptonPage2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.kryptonPage2.Flags = 65534;
+            this.kryptonPage2.LastVisibleSet = true;
+            this.kryptonPage2.MinimumSize = new System.Drawing.Size(50, 50);
+            this.kryptonPage2.Name = "kryptonPage2";
+            this.kryptonPage2.Size = new System.Drawing.Size(439, 367);
+            this.kryptonPage2.Text = "Unimplemented";
+            this.kryptonPage2.ToolTipTitle = "Page ToolTip";
+            this.kryptonPage2.UniqueName = "390D76CE5CE14952ABBA9DF3764EE80E";
             // 
             // AddEventView
             // 
@@ -232,15 +244,15 @@
             this.ClientSize = new System.Drawing.Size(566, 377);
             this.Controls.Add(this.kryptonDockableNavigator1);
             this.Name = "AddEventView";
-            this.Text = "AddEventView";
+            this.Text = "Add event";
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDockableNavigator1)).EndInit();
             this.kryptonDockableNavigator1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();
             this.kryptonPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.calendarsComboBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).EndInit();
             this.ResumeLayout(false);
 
         }

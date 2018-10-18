@@ -57,5 +57,77 @@ namespace PresentationLayer.Views.UserControls
 
         }
         #endregion
+
+        private void startHourKryptonDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            if (startHourKryptonDateTimePicker.Value > endHourKryptonDateTimePicker.Value)
+            {
+                endHourKryptonDateTimePicker.Value = startHourKryptonDateTimePicker.Value.AddMinutes(30);
+            }
+        }
+
+        private void endHourKryptonDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            if (startHourKryptonDateTimePicker.Value > endHourKryptonDateTimePicker.Value)
+            {
+                startHourKryptonDateTimePicker.Value = endHourKryptonDateTimePicker.Value.AddMinutes(-30);
+            }
+        }
+
+        private void confirmKryptonButton_Click(object sender, EventArgs e)
+        {
+            ValidateStartHour();
+            ValidateEndHour();
+            ValidateStartTime();
+            ValidateEndTime();
+            ValidateLocation();
+            ValidateDescription();
+        }
+
+        private void ValidateDescription()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ValidateLocation()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ValidateEndTime()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ValidateStartTime()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ValidateEndHour()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ValidateStartHour()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void startTimeKryptonDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            if(startTimeKryptonDateTimePicker.Value > endTimeKryptonDateTimePicker.Value)
+            {
+                endTimeKryptonDateTimePicker.Value = startTimeKryptonDateTimePicker.Value;
+            }
+        }
+
+        private void endTimeKryptonDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            if(startTimeKryptonDateTimePicker.Value > endTimeKryptonDateTimePicker.Value)
+            {
+                startTimeKryptonDateTimePicker.Value = endTimeKryptonDateTimePicker.Value;
+            }
+        }
     }
 }
