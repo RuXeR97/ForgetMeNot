@@ -194,6 +194,12 @@
     <Compile Include="Views\UserControls\AddEventView.Designer.cs">
       <DependentUpon>AddEventView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\SettingsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\SettingsView.Designer.cs">
+      <DependentUpon>SettingsView.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
@@ -225,8 +231,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\addIcon.ico" />
     <Content Include="Resources\exitIcon.ico" />
     <Content Include="Resources\icon.ico" />
+    <Content Include="Resources\minimizeIcon.ico" />
     <Content Include="Resources\settingsIcon.ico" />
   </ItemGroup>
   <ItemGroup>

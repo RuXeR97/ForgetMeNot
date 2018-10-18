@@ -64,6 +64,7 @@ namespace PresentationLayer.Presenters
             _mainView.AddEventToolStripButtonClickEventRaised += new EventHandler(OnAddEventButtonClickEventRaised);
             _mainView.MainViewLoadEventRaised += new EventHandler(OnMainViewLoadEventRaised);
             _mainView.MainViewFormClosingEventRaised += new EventHandler(OnMainViewFormClosingEventRaised);
+            _mainView.SettingsToolStripButtonClickEventRaised += new EventHandler(OnSettingsButtonClickEventRaised);
         }
         private IDirectResponseSchema GetDataFromLocalRepository()
         {
@@ -147,6 +148,12 @@ namespace PresentationLayer.Presenters
         private void OnMainViewFormClosingEventRaised(object sender, EventArgs e)
         {
             _mainView.SaveMenuPosition();
+        }
+
+        private void OnSettingsButtonClickEventRaised(object sender, EventArgs e)
+        {
+            var settingsView = new SettingsView();
+            settingsView.Show();
         }
         #endregion
     }

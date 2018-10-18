@@ -10,6 +10,7 @@ namespace PresentationLayer
         event EventHandler AddEventToolStripButtonClickEventRaised;
         event EventHandler MainViewLoadEventRaised;
         event EventHandler MainViewFormClosingEventRaised;
+        event EventHandler SettingsToolStripButtonClickEventRaised;
 
         Label[] InitializeDateLabels(int width, int height, int sizeX, int sizeY, DateTime date);
         Button[] InitializeDays(DateTime currentDate, int width, int height, int sizeX, int sizeY);

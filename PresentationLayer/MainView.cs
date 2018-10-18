@@ -17,6 +17,7 @@ namespace PresentationLayer
         public event EventHandler MainViewLoadEventRaised;
         public event EventHandler MainViewFormClosingEventRaised;
         public event EventHandler AddEventToolStripButtonClickEventRaised;
+        public event EventHandler SettingsToolStripButtonClickEventRaised;
 
         private Button[] DayButtons;
         private Label[] DaysLabels;
@@ -258,7 +259,7 @@ namespace PresentationLayer
             {
                 Image = (Bitmap)Bitmap.FromFile(path + @"\Resources\settingsIcon.ico")
             };
-            //settingsMenuItem.Click += new EventHandler(settingsMenuItemClick);
+            settingsMenuItem.Click += new EventHandler(SettingsButton_Click);
             settingsMenuItem.Name = "Settings";
             contextMenuStrip.Items.Add(settingsMenuItem);
 
@@ -268,17 +269,26 @@ namespace PresentationLayer
         {
             ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
 
-            ToolStripMenuItem addEventMenuItem = new ToolStripMenuItem("Add event");
+            ToolStripMenuItem addEventMenuItem = new ToolStripMenuItem("Add event")
+            {
+                Image = (Bitmap)Bitmap.FromFile(path + @"\Resources\addIcon.ico")
+            };
             addEventMenuItem.Name = "Add event";
             addEventMenuItem.Click += AddEventButton_Click;
             contextMenuStrip.Items.Add(addEventMenuItem);
 
-            ToolStripMenuItem minimizeApplicationMenuItem = new ToolStripMenuItem("Minimize");
+            ToolStripMenuItem minimizeApplicationMenuItem = new ToolStripMenuItem("Minimize")
+            {
+                Image = (Bitmap)Bitmap.FromFile(path + @"\Resources\minimizeIcon.ico")
+            };
             minimizeApplicationMenuItem.Name = "Minimize to tray";
             minimizeApplicationMenuItem.Click += MinimizeApplicationButton_Click;
             contextMenuStrip.Items.Add(minimizeApplicationMenuItem);
 
-            ToolStripMenuItem closeApplicationMenuItem = new ToolStripMenuItem("Exit");
+            ToolStripMenuItem closeApplicationMenuItem = new ToolStripMenuItem("Exit")
+            {
+                Image = (Bitmap)Bitmap.FromFile(path + @"\Resources\exitIcon.ico")
+            };
             closeApplicationMenuItem.Name = "Exit";
             closeApplicationMenuItem.Click += ExitApplicationButton_Click;
             contextMenuStrip.Items.Add(closeApplicationMenuItem);
@@ -395,6 +405,11 @@ namespace PresentationLayer
         private void AddEventButton_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(objectRaisingEvent: this, eventHandlerRaised: AddEventToolStripButtonClickEventRaised, eventArgs: e);
+        }
+
+        private void SettingsButton_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(objectRaisingEvent: this, eventHandlerRaised: SettingsToolStripButtonClickEventRaised, eventArgs: e);
         }
 
         private void ExitApplicationButton_Click(object sender, EventArgs e)
