@@ -191,6 +191,7 @@ namespace PresentationLayer
             NotifyIcon.Icon = Icon.ExtractAssociatedIcon(path + @"\Resources\icon.ico");
 
             NotifyIcon.ContextMenuStrip = SetNotifyIconContextMenuStrip();
+            NotifyIcon.DoubleClick += MaximizeApplicationButton_Click;
         }
 
         #endregion
@@ -407,5 +408,10 @@ namespace PresentationLayer
         }
 
         #endregion
+
+        private void MaximizeApplicationButton_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Normal;
+        }
     }
 }
