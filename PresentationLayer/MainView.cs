@@ -189,25 +189,8 @@ namespace PresentationLayer
             NotifyIcon = new NotifyIcon();
             NotifyIcon.Visible = true;
             NotifyIcon.Icon = Icon.ExtractAssociatedIcon(path + @"\Resources\icon.ico");
-            ContextMenuStrip menuStrip = new ContextMenuStrip();
 
-            ToolStripMenuItem exitMenuItem = new ToolStripMenuItem("Exit")
-            {
-                Image = (Bitmap)Bitmap.FromFile(path + @"\Resources\exitIcon.ico")
-            };
-            exitMenuItem.Click += new EventHandler(CloseApplicationButton_Click);
-            exitMenuItem.Name = "Exit";
-            menuStrip.Items.Add(exitMenuItem);
-
-            ToolStripMenuItem settingsMenuItem = new ToolStripMenuItem("Settings")
-            {
-                Image = (Bitmap)Bitmap.FromFile(path + @"\Resources\settingsIcon.ico")
-        };
-            //settingsMenuItem.Click += new EventHandler(settingsMenuItemClick);
-            settingsMenuItem.Name = "Settings";
-            menuStrip.Items.Add(settingsMenuItem);
-
-            NotifyIcon.ContextMenuStrip = menuStrip;
+            NotifyIcon.ContextMenuStrip = SetNotifyIconContextMenuStrip();
         }
 
         #endregion
@@ -257,6 +240,49 @@ namespace PresentationLayer
             this.Dock = dock;
             this.ShowInTaskbar = showInTaskBar;
             FormBorderStyle = formBorderStyle;
+        }
+        private ContextMenuStrip SetNotifyIconContextMenuStrip()
+        {
+            ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+
+            ToolStripMenuItem exitMenuItem = new ToolStripMenuItem("Exit")
+            {
+                Image = (Bitmap)Bitmap.FromFile(path + @"\Resources\exitIcon.ico")
+            };
+            exitMenuItem.Click += new EventHandler(ExitApplicationButton_Click);
+            exitMenuItem.Name = "Exit";
+            contextMenuStrip.Items.Add(exitMenuItem);
+
+            ToolStripMenuItem settingsMenuItem = new ToolStripMenuItem("Settings")
+            {
+                Image = (Bitmap)Bitmap.FromFile(path + @"\Resources\settingsIcon.ico")
+            };
+            //settingsMenuItem.Click += new EventHandler(settingsMenuItemClick);
+            settingsMenuItem.Name = "Settings";
+            contextMenuStrip.Items.Add(settingsMenuItem);
+
+            return contextMenuStrip;
+        }
+        private ContextMenuStrip SetMainViewContextMenuStrip()
+        {
+            ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+
+            ToolStripMenuItem addEventMenuItem = new ToolStripMenuItem("Add event");
+            addEventMenuItem.Name = "Add event";
+            addEventMenuItem.Click += AddEventButton_Click;
+            contextMenuStrip.Items.Add(addEventMenuItem);
+
+            ToolStripMenuItem minimizeApplicationMenuItem = new ToolStripMenuItem("Minimize");
+            minimizeApplicationMenuItem.Name = "Minimize to tray";
+            minimizeApplicationMenuItem.Click += MinimizeApplicationButton_Click;
+            contextMenuStrip.Items.Add(minimizeApplicationMenuItem);
+
+            ToolStripMenuItem closeApplicationMenuItem = new ToolStripMenuItem("Exit");
+            closeApplicationMenuItem.Name = "Exit";
+            closeApplicationMenuItem.Click += ExitApplicationButton_Click;
+            contextMenuStrip.Items.Add(closeApplicationMenuItem);
+
+            return contextMenuStrip;
         }
 
         #endregion
@@ -312,17 +338,8 @@ namespace PresentationLayer
 
                 case MouseButtons.Right:
                     {
-                        ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
-
-                        ToolStripMenuItem addEventMenuItem = new ToolStripMenuItem("Add event");
-                        addEventMenuItem.Name = "Add event";
-                        addEventMenuItem.Click += AddEventButton_Click;
-                        contextMenuStrip.Items.Add(addEventMenuItem);
-
-                        ToolStripMenuItem closeApplicationMenuItem = new ToolStripMenuItem("Close application");
-                        closeApplicationMenuItem.Name = "Close application";
-                        closeApplicationMenuItem.Click += CloseApplicationButton_Click;
-                        contextMenuStrip.Items.Add(closeApplicationMenuItem);
+                        ContextMenuStrip contextMenuStrip = SetMainViewContextMenuStrip();
+                        
                         Button button = sender as Button;
                         Point screenPoint = button.PointToScreen(new Point(button.Left, button.Bottom));
                         if (screenPoint.Y + contextMenuStrip.Size.Height > Screen.PrimaryScreen.WorkingArea.Height)
@@ -379,9 +396,14 @@ namespace PresentationLayer
             EventHelpers.RaiseEvent(objectRaisingEvent: this, eventHandlerRaised: AddEventToolStripButtonClickEventRaised, eventArgs: e);
         }
 
-        private void CloseApplicationButton_Click(object sender, EventArgs e)
+        private void ExitApplicationButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void MinimizeApplicationButton_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
 
         #endregion
