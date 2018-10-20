@@ -16,10 +16,10 @@ namespace ServiceLayer.Services.TaskServices
             _modelDataAnnotationCheck = modelDataAnnotationCheck;
         }
 
-        public void Add(string calendarId, string text)
+        public void Add(string calendarId, IDirectResponseSchema body)
         {
             // method to validate model
-            _taskRepository.Add(calendarId, text);
+            _taskRepository.Add(calendarId, body);
         }
 
         public void Update(IDirectResponseSchema newCalendarEvent, string calendarId, string oldEventId)

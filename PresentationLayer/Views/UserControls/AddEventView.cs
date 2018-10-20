@@ -1,4 +1,6 @@
-﻿using InfrastructureLayer.DataAccess.Repositories.Specific.Task;
+﻿using CommonComponents;
+using Google.Apis.Calendar.v3.Data;
+using InfrastructureLayer.DataAccess.Repositories.Specific.Task;
 using ServiceLayer.Services.TaskServices;
 using System;
 using System.Collections.Generic;
@@ -12,8 +14,21 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class AddEventView : Form
+    public partial class AddEventView : Form, IAddEventView
     {
+        public string EventDescription { get; set; }
+        public string EventLocation { get; set; }
+        public EventDateTime EventStartTime { get; set; }
+        public EventDateTime EventEndTime { get; set; }
+        public string EventCalendar { get; set; }
+
+        public event EventHandler ConfirmKryptonButtonClickEventRaised;
+        public event EventHandler CancelKryptonButtonClickEventRaised;
+
+        public event EventHandler StartHourKryptonDateTimePickerValueChangedEventRaised;
+        public event EventHandler EndHourKryptonDateTimePickerValueChangedEventRaised;
+        public event EventHandler StartTimeKryptonDateTimePickerValueChangedEventRaised;
+        public event EventHandler EndTimeKryptonDateTimePickerValueChangedEventRaised;
         public AddEventView()
         {
             InitializeComponent();
@@ -58,76 +73,39 @@ namespace PresentationLayer.Views.UserControls
         }
         #endregion
 
-        private void startHourKryptonDateTimePicker_ValueChanged(object sender, EventArgs e)
-        {
-            if (startHourKryptonDateTimePicker.Value > endHourKryptonDateTimePicker.Value)
-            {
-                endHourKryptonDateTimePicker.Value = startHourKryptonDateTimePicker.Value.AddMinutes(30);
-            }
-        }
-
-        private void endHourKryptonDateTimePicker_ValueChanged(object sender, EventArgs e)
-        {
-            if (startHourKryptonDateTimePicker.Value > endHourKryptonDateTimePicker.Value)
-            {
-                startHourKryptonDateTimePicker.Value = endHourKryptonDateTimePicker.Value.AddMinutes(-30);
-            }
-        }
-
         private void confirmKryptonButton_Click(object sender, EventArgs e)
         {
-            ValidateStartHour();
-            ValidateEndHour();
-            ValidateStartTime();
-            ValidateEndTime();
-            ValidateLocation();
-            ValidateDescription();
-        }
-
-        private void ValidateDescription()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ValidateLocation()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ValidateEndTime()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ValidateStartTime()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ValidateEndHour()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ValidateStartHour()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void startTimeKryptonDateTimePicker_ValueChanged(object sender, EventArgs e)
-        {
-            if(startTimeKryptonDateTimePicker.Value > endTimeKryptonDateTimePicker.Value)
+            EventDescription = descriptionKryptonTextBox.Text;
+            EventLocation = locationKryptonTextBox.Text;
+            EventCalendar = calendarsComboBox.Text;
+            EventStartTime = new EventDateTime()
             {
-                endTimeKryptonDateTimePicker.Value = startTimeKryptonDateTimePicker.Value;
-            }
+                // still to edit
+                DateTime = startTimeKryptonDateTimePicker.Value
+            };
+            EventEndTime = new EventDateTime()
+            {
+                // still to edit
+                DateTime = endTimeKryptonDateTimePicker.Value
+            };
+
+            EventHelpers.RaiseEvent(objectRaisingEvent: confirmKryptonButton, eventHandlerRaised: ConfirmKryptonButtonClickEventRaised, eventArgs: e);
+            
         }
 
-        private void endTimeKryptonDateTimePicker_ValueChanged(object sender, EventArgs e)
+        private void cancelKryptonButton_Click(object sender, EventArgs e)
         {
-            if(startTimeKryptonDateTimePicker.Value > endTimeKryptonDateTimePicker.Value)
-            {
-                startTimeKryptonDateTimePicker.Value = endTimeKryptonDateTimePicker.Value;
-            }
+            EventHelpers.RaiseEvent(objectRaisingEvent: cancelKryptonButton, eventHandlerRaised: CancelKryptonButtonClickEventRaised, eventArgs: e);
+        }
+
+        public void CloseWindow()
+        {
+            this.Close();
+        }
+
+        public void ShowWindow()
+        {
+            this.Show();
         }
     }
 }

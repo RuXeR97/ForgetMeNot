@@ -1,5 +1,6 @@
 ﻿using PresentationLayer.Presenters;
 using PresentationLayer.Views;
+using PresentationLayer.Views.UserControls;
 using System;
 using System.Windows.Forms;
 using Unity;
@@ -20,7 +21,10 @@ namespace PresentationLayer
             UnityC = new UnityContainer()
                 .RegisterType<IMainView, MainView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMainPresenter, MainPresenter>(new ContainerControlledLifetimeManager())
-                .RegisterType<IErrorMessageView, ErrorMessageView>(new ContainerControlledLifetimeManager());
+                .RegisterType<IErrorMessageView, ErrorMessageView>(new ContainerControlledLifetimeManager())
+                .RegisterType<IAddEventView, AddEventView>(new ContainerControlledLifetimeManager())
+                .RegisterType<IAddEventPresenter, AddEventPresenter>(new ContainerControlledLifetimeManager());
+
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

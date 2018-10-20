@@ -136,8 +136,9 @@ namespace PresentationLayer.Presenters
 
         private void OnAddEventButtonClickEventRaised(object sender, EventArgs e)
         {
-            var addEventView = new AddEventView();
-            addEventView.Show();
+            IAddEventPresenter addEventPresenter = new AddEventPresenter(new AddEventView());
+            IAddEventView addEventView = addEventPresenter.GetAddEventView();
+            addEventView.ShowWindow();
         }
 
         private void OnMainViewLoadEventRaised(object sender, EventArgs e)

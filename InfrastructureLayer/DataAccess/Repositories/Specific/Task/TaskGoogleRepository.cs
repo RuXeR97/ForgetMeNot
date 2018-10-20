@@ -41,9 +41,10 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
 
         }
 
-        public void Add(string calendarId, string text)
+        public void Add(string calendarId, IDirectResponseSchema newCalendarEvent)
         {
-            EventsResource.QuickAddRequest request = service.Events.QuickAdd(calendarId, text);
+            var body = newCalendarEvent as Event;
+            EventsResource.InsertRequest request = service.Events.Insert(body, calendarId);
         }
 
         public void Update(IDirectResponseSchema newCalendarEvent, string calendarId, string oldEventId)

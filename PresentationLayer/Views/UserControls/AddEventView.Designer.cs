@@ -109,7 +109,6 @@
             this.endHourKryptonDateTimePicker.ShowUpDown = true;
             this.endHourKryptonDateTimePicker.Size = new System.Drawing.Size(107, 25);
             this.endHourKryptonDateTimePicker.TabIndex = 15;
-            this.endHourKryptonDateTimePicker.ValueChanged += new System.EventHandler(this.endHourKryptonDateTimePicker_ValueChanged);
             // 
             // startHourKryptonDateTimePicker
             // 
@@ -120,7 +119,6 @@
             this.startHourKryptonDateTimePicker.ShowUpDown = true;
             this.startHourKryptonDateTimePicker.Size = new System.Drawing.Size(107, 25);
             this.startHourKryptonDateTimePicker.TabIndex = 14;
-            this.startHourKryptonDateTimePicker.ValueChanged += new System.EventHandler(this.startHourKryptonDateTimePicker_ValueChanged);
             // 
             // calendarsComboBox
             // 
@@ -149,6 +147,7 @@
             this.cancelKryptonButton.Size = new System.Drawing.Size(90, 28);
             this.cancelKryptonButton.TabIndex = 11;
             this.cancelKryptonButton.Values.Text = "Cancel";
+            this.cancelKryptonButton.Click += new System.EventHandler(this.cancelKryptonButton_Click);
             // 
             // confirmKryptonButton
             // 
@@ -168,7 +167,6 @@
             this.endTimeKryptonDateTimePicker.Name = "endTimeKryptonDateTimePicker";
             this.endTimeKryptonDateTimePicker.Size = new System.Drawing.Size(260, 25);
             this.endTimeKryptonDateTimePicker.TabIndex = 9;
-            this.endTimeKryptonDateTimePicker.ValueChanged += new System.EventHandler(this.endTimeKryptonDateTimePicker_ValueChanged);
             // 
             // startTimeKryptonDateTimePicker
             // 
@@ -176,7 +174,6 @@
             this.startTimeKryptonDateTimePicker.Name = "startTimeKryptonDateTimePicker";
             this.startTimeKryptonDateTimePicker.Size = new System.Drawing.Size(260, 25);
             this.startTimeKryptonDateTimePicker.TabIndex = 8;
-            this.startTimeKryptonDateTimePicker.ValueChanged += new System.EventHandler(this.startTimeKryptonDateTimePicker_ValueChanged);
             // 
             // locationKryptonTextBox
             // 
