@@ -11,8 +11,20 @@ Till the end of the August 2019 I would like to present you working prototypes o
 
 The first part of the system which I'm creating is Windows Application (Windows Forms). I've done many small WPF projects but I think that finally the time has come for Windows Forms, then I would switch to Xamarin and finally to ASP.NET. Feel free to ask any questions or suggest ideas.
 
-Trello board with whole plan of Windows Project:
-t
+Implemented things:
+- basic UI,
+- showing user's main calendar,
+- basic communicatan with Google API
+
+In progress:
+- adding new event to calendar defined by user,
+- deleting events,
+
+Unimplemented things
+- editing existing events,
+- prettier UI,
+- basic user settings (like defining color of calendar's events, specifing if we want notifications (via mail/desktop)
+
 
 Way to contact me:
 * Mail: ruxer0097@gmail.com
