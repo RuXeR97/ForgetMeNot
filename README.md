@@ -1,7 +1,7 @@
 # ForgetMeNot
 Calendar app on windows &amp; android platform allowing to add tasks, events. Everything is synchronised.
 
-The purpose of this application is to make system which allow user to add meetings/tasks on every possible platform 
+The purpose of this application is to make system which allows user to add meetings/tasks on every possible platform 
 - by computer (windows, maybe linux in the future)
 - by telephone (android, ios)
 - by website
