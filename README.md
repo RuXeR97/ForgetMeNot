@@ -25,6 +25,10 @@ Unimplemented things
 - prettier UI,
 - basic user settings (like defining color of calendar's events, specifing if we want notifications (via mail/desktop)
 
+# Instruction to run application
+
+To run application you have to copy "credentials.json" from main folder to debug or release folder after building.
+
 
 Way to contact me:
 * Mail: ruxer0097@gmail.com
