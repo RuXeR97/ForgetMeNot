@@ -27,7 +27,7 @@ Unimplemented things
 
 # Instruction to run application
 
-To run application you have to copy "credentials.json" from main folder to debug or release folder after building.
+To run application you have to copy "credentials.json" from main folder to PresentationLayer/bin/debug or release folder after building app.
 
 
 Way to contact me:
