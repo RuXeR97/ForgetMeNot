@@ -14,7 +14,7 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
 {
     public class TaskGoogleRepository : BaseSpecificRepository, ITaskRepository
     {
-        static string[] Scopes = { CalendarService.Scope.CalendarReadonly };
+        static string[] Scopes = { CalendarService.Scope.CalendarEvents };
         private string credentialsFileName = "credentials.json";
         private CalendarService service;
         public TaskGoogleRepository()
@@ -45,6 +45,7 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
         {
             var body = newCalendarEvent as Event;
             EventsResource.InsertRequest request = service.Events.Insert(body, calendarId);
+            var test = request.Execute();
         }
 
         public void Update(IDirectResponseSchema newCalendarEvent, string calendarId, string oldEventId)

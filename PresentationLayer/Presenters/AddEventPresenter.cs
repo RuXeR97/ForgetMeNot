@@ -3,6 +3,7 @@ using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Requests;
 using InfrastructureLayer.DataAccess.Repositories.Specific.Task;
 using PresentationLayer.Other;
+using PresentationLayer.Views;
 using PresentationLayer.Views.UserControls;
 using ServiceLayer.Services.TaskServices;
 using System;
@@ -18,12 +19,14 @@ namespace PresentationLayer.Presenters
         private IAddEventView _addEventView;
         private IEventDataValidation _eventDataValidation;
         private ITaskService _taskService;
+        private IErrorMessageView _errorMessageView;
 
         public AddEventPresenter(IAddEventView addEventView)
         {
             _addEventView = addEventView;
             _eventDataValidation = new DataValidation();
             _taskService = new TaskService(new TaskGoogleRepository(), null);
+            _errorMessageView = new ErrorMessageView();
             SubscribeToEventsSetup();
         }
 
@@ -57,11 +60,24 @@ namespace PresentationLayer.Presenters
                     Start = _addEventView.EventStartTime,
                     End = _addEventView.EventEndTime
                 };
-                _taskService.Add(eventCalendar, eventBody);
+
+                Event myEvent = new Event
+                {
+                    Description = _addEventView.EventDescription,
+                    Summary = "Appointment",
+                    Location = _addEventView.EventLocation,
+                    Start = _addEventView.EventStartTime,
+                    End = _addEventView.EventEndTime,
+                    Recurrence = new String[] {
+                                                "RRULE:FREQ=WEEKLY;BYDAY=MO"
+                                               },
+                    Attendees = new List<EventAttendee>()
+                };
+                _taskService.Add(eventCalendar, myEvent);
             }
             catch(InvalidEventDataException ex)
             {
-
+                _errorMessageView.ShowErrorMessageView("Error", ex.Message);
             }
         }
 
