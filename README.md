@@ -16,14 +16,6 @@ Implemented things:
 - showing user's main calendar,
 - basic communicatan with Google API (adding/viewing events)
 
-In progress:
-- deleting events,
-
-Unimplemented things
-- editing existing events,
-- prettier UI,
-- basic user settings (like defining color of calendar's events, specifing if we want notifications (via mail/desktop)
-
 # Instruction to run application
 
 To run application you have to copy "credentials.json" from main folder to PresentationLayer/bin/debug or release folder after building app.
