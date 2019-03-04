@@ -136,7 +136,9 @@ namespace PresentationLayer.Presenters
 
         private void OnAddEventButtonClickEventRaised(object sender, EventArgs e)
         {
-            IAddEventPresenter addEventPresenter = new AddEventPresenter(new AddEventView());
+            int whatDay = Convert.ToInt32((sender as Button).Text);
+            DateTime whatDate = new DateTime(CurrentDate.Year, CurrentDate.Month, whatDay);
+            IAddEventPresenter addEventPresenter = new AddEventPresenter(new AddEventView(whatDate));
             IAddEventView addEventView = addEventPresenter.GetAddEventView();
             addEventView.ShowWindow();
         }

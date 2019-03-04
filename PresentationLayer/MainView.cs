@@ -30,6 +30,7 @@ namespace PresentationLayer
         private Point dragCursorPoint;
         private Point dragFormPoint;
         private readonly string path;
+        private Button chosenDayButton;
 
 
         public MainView()
@@ -352,6 +353,7 @@ namespace PresentationLayer
                         ContextMenuStrip contextMenuStrip = SetMainViewContextMenuStrip();
                         
                         Button button = sender as Button;
+                        chosenDayButton = button;
                         Point screenPoint = button.PointToScreen(new Point(button.Left, button.Bottom));
                         if (screenPoint.Y + contextMenuStrip.Size.Height > Screen.PrimaryScreen.WorkingArea.Height)
                         {
@@ -397,6 +399,7 @@ namespace PresentationLayer
 
         private void ArrowRightButton_Click(object sender, MouseEventArgs e)
         {
+            var asd = sender as Button;
             EventHelpers.RaiseEvent(objectRaisingEvent: this, eventHandlerRaised: ButtonOfArrowRightMouseClickEventRaised, eventArgs: e);
         }
         #endregion
@@ -404,7 +407,7 @@ namespace PresentationLayer
         #region ToolStripButtons' events
         private void AddEventButton_Click(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(objectRaisingEvent: this, eventHandlerRaised: AddEventToolStripButtonClickEventRaised, eventArgs: e);
+            EventHelpers.RaiseEvent(objectRaisingEvent: chosenDayButton, eventHandlerRaised: AddEventToolStripButtonClickEventRaised, eventArgs: e);
         }
 
         private void SettingsButton_Click(object sender, EventArgs e)

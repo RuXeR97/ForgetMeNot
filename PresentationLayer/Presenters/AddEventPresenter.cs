@@ -47,35 +47,23 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                //_eventDataValidation.ValidateDescription();
-                //_eventDataValidation.ValidateLocation();
-                //_eventDataValidation.ValidateHours();
-                //_eventDataValidation.ValidateTimes();
-
                 string eventCalendar = _addEventView.EventCalendar;
-                IDirectResponseSchema eventBody = new Event()
-                {
-                    Description = _addEventView.EventDescription,
-                    Location = _addEventView.EventLocation,
-                    Start = _addEventView.EventStartTime,
-                    End = _addEventView.EventEndTime
-                };
 
                 Event myEvent = new Event
                 {
-                    Description = _addEventView.EventDescription,
-                    Summary = "Appointment",
+                    Summary = _addEventView.EventDescription,
                     Location = _addEventView.EventLocation,
                     Start = _addEventView.EventStartTime,
                     End = _addEventView.EventEndTime,
-                    Recurrence = new String[] {
-                                                "RRULE:FREQ=WEEKLY;BYDAY=MO"
-                                               },
-                    Attendees = new List<EventAttendee>()
                 };
                 _taskService.Add(eventCalendar, myEvent);
+                _addEventView.CloseWindow();
             }
             catch(InvalidEventDataException ex)
+            {
+                _errorMessageView.ShowErrorMessageView("Error", ex.Message);
+            }
+            catch(Exception ex)
             {
                 _errorMessageView.ShowErrorMessageView("Error", ex.Message);
             }

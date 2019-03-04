@@ -161,7 +161,6 @@
   <ItemGroup>
     <Compile Include="Common\MainViewButtonsHelper.cs" />
     <Compile Include="Common\FormHelper.cs" />
-    <Compile Include="Common\MainFormHelper.cs" />
     <Compile Include="IMainView.cs" />
     <Compile Include="MainView.cs">
       <SubType>Form</SubType>

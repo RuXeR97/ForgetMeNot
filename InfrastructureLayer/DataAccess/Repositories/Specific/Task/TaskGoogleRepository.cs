@@ -14,7 +14,7 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
 {
     public class TaskGoogleRepository : BaseSpecificRepository, ITaskRepository
     {
-        static string[] Scopes = { CalendarService.Scope.CalendarEvents };
+        static string[] Scopes = { CalendarService.Scope.Calendar };
         private string credentialsFileName = "credentials.json";
         private CalendarService service;
         public TaskGoogleRepository()
@@ -43,9 +43,16 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
 
         public void Add(string calendarId, IDirectResponseSchema newCalendarEvent)
         {
-            var body = newCalendarEvent as Event;
-            EventsResource.InsertRequest request = service.Events.Insert(body, calendarId);
-            var test = request.Execute();
+            try
+            {
+                var body = newCalendarEvent as Event;
+                EventsResource.InsertRequest request = service.Events.Insert(body, calendarId);
+                request.Execute();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void Update(IDirectResponseSchema newCalendarEvent, string calendarId, string oldEventId)
@@ -67,29 +74,36 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
         public IDirectResponseSchema GetAllEvents()
 
         {
-            EventsResource.ListRequest request = service.Events.List("primary");
-            request.TimeMin = DateTime.MinValue;
-            request.ShowDeleted = false;
-            request.SingleEvents = true;
-            request.MaxResults = 1000;
-            request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
+            try
+            {
+                EventsResource.ListRequest request = service.Events.List("primary");
+                request.TimeMin = DateTime.MinValue;
+                request.ShowDeleted = false;
+                request.SingleEvents = true;
+                request.MaxResults = 1000;
+                request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
 
-            Events events = request.Execute();
-            if (events.Items != null && events.Items.Count > 0)
-            {
-                foreach (var eventItem in events.Items)
+                Events events = request.Execute();
+                if (events.Items != null && events.Items.Count > 0)
                 {
-                    string when = eventItem.Start.DateTime.ToString();
-                    if (String.IsNullOrEmpty(when))
+                    foreach (var eventItem in events.Items)
                     {
-                        when = eventItem.Start.Date;
+                        string when = eventItem.Start.DateTime.ToString();
+                        if (String.IsNullOrEmpty(when))
+                        {
+                            when = eventItem.Start.Date;
+                        }
                     }
+                    return events;
                 }
-                return events;
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch(Exception ex)
             {
-                return null;
+                throw ex;
             }
         }
 
@@ -124,14 +138,22 @@ namespace InfrastructureLayer.DataAccess.Repositories.Specific.Task
 
         public List<string> GetCalendarsList()
         {
-            var calendars = service.CalendarList.List().Execute().Items;
-            List<string> calendarsNames = new List<string>();
-            foreach (CalendarListEntry entry in calendars)
-            {
-                calendarsNames.Add(entry.Summary);
-            }
+            try
+            { 
+                var calendars = service.CalendarList.List().Execute().Items;
+                List<string> calendarsNames = new List<string>();
+                foreach (CalendarListEntry entry in calendars)
+                {
+                    calendarsNames.Add(entry.Summary);
+                }
 
-            return calendarsNames;
+                return calendarsNames;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
     }
 

@@ -18,20 +18,39 @@ namespace ServiceLayer.Services.TaskServices
 
         public void Add(string calendarId, IDirectResponseSchema body)
         {
-            // method to validate model
-            _taskRepository.Add(calendarId, body);
+            try
+            {
+                _taskRepository.Add(calendarId, body);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void Update(IDirectResponseSchema newCalendarEvent, string calendarId, string oldEventId)
         {
-            _taskRepository.Update(newCalendarEvent, calendarId, oldEventId);
+            try
+            {
+                _taskRepository.Update(newCalendarEvent, calendarId, oldEventId);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
 
         public void Delete(string calendarId, string eventId)
         {
-            // method to validate model
-            _taskRepository.Delete(calendarId, eventId);
+            try
+            {
+                _taskRepository.Delete(calendarId, eventId);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public IDirectResponseSchema GetAllEvents()
@@ -41,12 +60,26 @@ namespace ServiceLayer.Services.TaskServices
 
         public IDirectResponseSchema GetEventsByMonth(DateTime month)
         {
-            return _taskRepository.GetEventsByMonth(month);
+            try
+            {
+                return _taskRepository.GetEventsByMonth(month);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<string> GetCalendarsList()
         {
-            return _taskRepository.GetCalendarsList();
+            try
+            {
+                return _taskRepository.GetCalendarsList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void ValidateModel(IDirectResponseSchema taskModel)

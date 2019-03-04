@@ -7,7 +7,6 @@ namespace PresentationLayer.Common
         static public void SetDialogAppearance(Form form)
         {
             form.FormBorderStyle = FormBorderStyle.FixedDialog;
-            //form.Icon = PresentationLayer.Properties.Resources.Ikonka
             form.MinimizeBox = false;
             form.MaximizeBox = false;
         }

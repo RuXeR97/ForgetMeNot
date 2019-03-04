@@ -29,16 +29,18 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler EndHourKryptonDateTimePickerValueChangedEventRaised;
         public event EventHandler StartTimeKryptonDateTimePickerValueChangedEventRaised;
         public event EventHandler EndTimeKryptonDateTimePickerValueChangedEventRaised;
-        public AddEventView()
+
+        private DateTime _whatDate;
+        public AddEventView(DateTime whatDate)
         {
             InitializeComponent();
 
+            _whatDate = whatDate;
             var service = new TaskService(new TaskGoogleRepository(), null);
             var calendarsNames = service.GetCalendarsList();
 
             calendarsComboBox.DataSource = calendarsNames;
 
-            SetCalendarsComboBox();
             SetStartTimeKryptonDateTimePicker();
             SetEndTimeKryptonDateTimePicker();
             SetStartHourKryptonDateTimePicker();
@@ -47,29 +49,25 @@ namespace PresentationLayer.Views.UserControls
 
 
         #region Setting krypton controls
-        private void SetCalendarsComboBox()
-        {
-
-        }
 
         private void SetStartTimeKryptonDateTimePicker()
         {
-
+            startTimeKryptonDateTimePicker.Value = _whatDate;
         }
 
         private void SetEndTimeKryptonDateTimePicker()
         {
-
+            endTimeKryptonDateTimePicker.Value = _whatDate;
         }
 
         private void SetStartHourKryptonDateTimePicker()
         {
-
+            startHourKryptonDateTimePicker.Value = DateTime.Now;
         }
 
         private void SetEndHourKryptonDateTimePicker()
         {
-
+            endHourKryptonDateTimePicker.Value = DateTime.Now.AddHours(1);
         }
         #endregion
 
@@ -80,13 +78,13 @@ namespace PresentationLayer.Views.UserControls
             EventCalendar = calendarsComboBox.Text;
             EventStartTime = new EventDateTime()
             {
-                // still to edit
-                DateTime = startTimeKryptonDateTimePicker.Value
+                DateTime = startTimeKryptonDateTimePicker.Value,
+                TimeZone = "Europe/Warsaw",
             };
             EventEndTime = new EventDateTime()
             {
-                // still to edit
-                DateTime = endTimeKryptonDateTimePicker.Value
+                DateTime = endTimeKryptonDateTimePicker.Value,
+                TimeZone = "Europe/Warsaw",
             };
 
             EventHelpers.RaiseEvent(objectRaisingEvent: confirmKryptonButton, eventHandlerRaised: ConfirmKryptonButtonClickEventRaised, eventArgs: e);
