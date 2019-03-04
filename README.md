@@ -14,10 +14,9 @@ The first part of the system which I'm creating is Windows Application (Windows 
 Implemented things:
 - basic UI,
 - showing user's main calendar,
-- basic communicatan with Google API
+- basic communicatan with Google API (adding/viewing events)
 
 In progress:
-- adding new event to calendar defined by user,
 - deleting events,
 
 Unimplemented things
